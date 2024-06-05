@@ -4,6 +4,7 @@ import HeaderMegaMenu from '@/components/Header/Header';
 import PhotoCarousel from '@/components/PhotoCarousel/PhotoCarousel';
 import Discount from '@/components/Discount/Discount';
 import Cardlist from '@/components/Cardlist/Cardlist';
+import Postlist from '@/components/Postlist/Postlist';
 
 export default function Home() {
   const [opened, { toggle }] = useDisclosure();
@@ -28,6 +29,8 @@ export default function Home() {
         <Discount />
         <br />
         <Cardlist />
+        <br />
+        <Postlist />
       </AppShell.Main>
     </AppShell>
   );
