@@ -3,7 +3,7 @@ import { Card, Image, Text, Badge, Button, Group } from '@mantine/core';
 
 export default function Cardlist() {
   return (
-    <Group grow spacing="md" style={{ overflow: 'auto', padding: '20px' }}>
+    <Group grow style={{ overflow: 'auto', padding: '20px' }}>
       <Card shadow="sm" padding="lg" radius="md" withBorder style={{ flex: 1 }}>
         <Card.Section>
           <Image
