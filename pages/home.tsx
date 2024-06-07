@@ -1,10 +1,11 @@
-import { AppShell, Burger } from '@mantine/core';
+import { AppShell, Burger, Container } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import HeaderMegaMenu from '@/components/Header/Header';
 import PhotoCarousel from '@/components/PhotoCarousel/PhotoCarousel';
 import Discount from '@/components/Discount/Discount';
 import Cardlist from '@/components/Cardlist/Cardlist';
 import Postlist from '@/components/Postlist/Postlist';
+import Campaignblog from '@/components/Campaignblog/Campaignblog';
 
 export default function Home() {
   const [opened, { toggle }] = useDisclosure();
@@ -31,6 +32,8 @@ export default function Home() {
         <Cardlist />
         <br />
         <Postlist />
+        <br />
+        <Campaignblog />
       </AppShell.Main>
     </AppShell>
   );

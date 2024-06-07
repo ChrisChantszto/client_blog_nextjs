@@ -9,7 +9,7 @@ export default function Postlist() {
             <Divider size="sm" />
             <br />
             <Stack
-                h={300}
+                h={1000}
                 bg="var(--mantine-color-body)"
                 align="stretch"
                 justify="flex-start"
