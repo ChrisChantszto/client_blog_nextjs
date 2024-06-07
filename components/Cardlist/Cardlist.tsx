@@ -38,7 +38,7 @@ export default function Cardlist() {
         </Card.Section>
 
         <Group justify="space-between" mt="md" mb="xs">
-          <Text weight={500}>Norway Fjord Adventures</Text>
+          <Text fw={500}>Norway Fjord Adventures</Text>
           <Badge color="pink">On Sale</Badge>
         </Group>
 
@@ -62,7 +62,7 @@ export default function Cardlist() {
         </Card.Section>
 
         <Group justify="space-between" mt="md" mb="xs">
-          <Text weight={500}>Norway Fjord Adventures</Text>
+          <Text fw={500}>Norway Fjord Adventures</Text>
           <Badge color="pink">On Sale</Badge>
         </Group>
 
