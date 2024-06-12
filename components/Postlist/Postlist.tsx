@@ -1,4 +1,5 @@
-import { Text, Title, Divider, Image, Stack, Button, Grid, Badge } from "@mantine/core";
+import { Text, Title, Divider, Image, Stack, Button, Grid, Badge, Center } from "@mantine/core";
+import { IconPlus } from "@tabler/icons-react";
 
 export default function Postlist() {
     return(
@@ -80,6 +81,7 @@ export default function Postlist() {
                     </Grid.Col>
                 </Grid>
             </Stack>
+            <Center><Button variant="filled" color="#FF6031" radius="xl"><Text size="xl">更多文章</Text><IconPlus /></Button></Center>
         </>
     )
 }
