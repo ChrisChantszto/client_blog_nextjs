@@ -2,6 +2,7 @@ import { AppShell, Burger, Container } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import HeaderMegaMenu from '@/components/Header/Header';
 import PhotoCarousel from '@/components/PhotoCarousel/PhotoCarousel';
+import Footer from '@/components/Footer/Footer';
 import Discount from '@/components/Discount/Discount';
 import Cardlist from '@/components/Cardlist/Cardlist';
 import Postlist from '@/components/Postlist/Postlist';
@@ -34,7 +35,12 @@ export default function Home() {
         <Postlist />
         <br />
         <Campaignblog />
+        <br />
+        <br />
+        <br />
+        <br />
       </AppShell.Main>
+      <AppShell.Footer><Footer /></AppShell.Footer>
     </AppShell>
   );
 }
