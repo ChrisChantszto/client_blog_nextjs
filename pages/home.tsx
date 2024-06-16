@@ -1,10 +1,11 @@
-import { AppShell, Burger, Container } from '@mantine/core';
+import { AppShell, Image, Burger, Text, Container } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import HeaderMegaMenu from '@/components/Header/Header';
 import PhotoCarousel from '@/components/PhotoCarousel/PhotoCarousel';
 import Footer from '@/components/Footer/Footer';
 import Discount from '@/components/Discount/Discount';
 import Cardlist from '@/components/Cardlist/Cardlist';
+import Instagram from '@/components/Instagram/Instagram';
 import Postlist from '@/components/Postlist/Postlist';
 import Campaignblog from '@/components/Campaignblog/Campaignblog';
 import Youtube from '@/components/Youtube/Youtube';
@@ -46,6 +47,7 @@ export default function Home() {
         <br />
         <br />
         <br />
+        <Instagram />
       </AppShell.Main>
       <AppShell.Footer><Footer /></AppShell.Footer>
     </AppShell>
