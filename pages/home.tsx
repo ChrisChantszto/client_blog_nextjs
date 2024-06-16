@@ -7,6 +7,7 @@ import Discount from '@/components/Discount/Discount';
 import Cardlist from '@/components/Cardlist/Cardlist';
 import Postlist from '@/components/Postlist/Postlist';
 import Campaignblog from '@/components/Campaignblog/Campaignblog';
+import Youtube from '@/components/Youtube/Youtube';
 
 export default function Home() {
   const [opened, { toggle }] = useDisclosure();
@@ -30,11 +31,17 @@ export default function Home() {
         <br />
         <Discount />
         <br />
+        <br />
         <Cardlist />
         <br />
         <Postlist />
         <br />
         <Campaignblog />
+        <br />
+        <br />
+        <br />
+        <br />
+        <Youtube />
         <br />
         <br />
         <br />
