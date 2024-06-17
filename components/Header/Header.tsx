@@ -63,6 +63,8 @@ import {
     },
   ];
 
+  const logoUrl = 'https://staging-2015-sismapblog.wpcomstaging.com/wp-content/uploads/2024/05/cropped-cropped-play-eat-easy-logo.png';
+
   export default function HeaderMegaMenu() {
     const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] = useDisclosure(false);
     const [linksOpened, { toggle: toggleLinks }] = useDisclosure(false);
@@ -90,7 +92,9 @@ import {
       <Box pb={120}>
         <header className={classes.header}>
           <Group justify="space-between" h="100%">
-            <MantineLogo size={30} />
+            {/* <MantineLogo size={30} /> */}
+            
+            <img src={logoUrl} alt="Your Logo" style={{ height: 30, cursor: 'pointer' }} />
   
             <Group h="100%" gap={0} visibleFrom="sm">
               <a href="#" className={classes.link}>

@@ -1,4 +1,4 @@
-import { AppShell, Image, Burger, Text, Container } from '@mantine/core';
+import { AppShell, Image, Burger, Text, Container, Center } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import HeaderMegaMenu from '@/components/Header/Header';
 import PhotoCarousel from '@/components/PhotoCarousel/PhotoCarousel';
@@ -9,6 +9,7 @@ import Instagram from '@/components/Instagram/Instagram';
 import Postlist from '@/components/Postlist/Postlist';
 import Campaignblog from '@/components/Campaignblog/Campaignblog';
 import Youtube from '@/components/Youtube/Youtube';
+import banner from './banner.png';
 
 export default function Home() {
   const [opened, { toggle }] = useDisclosure();
@@ -48,6 +49,17 @@ export default function Home() {
         <br />
         <br />
         <Instagram />
+          <Image
+            src="https://i.ibb.co/tYKrKxJ/banner.png"
+            alt="Banner"
+            radius="md"
+            fit="cover"
+            style={{ width: '100%', height: 'auto', marginBottom: '1rem' }}
+          />
+        <br />
+        <br />
+        <br />
+        <br />
       </AppShell.Main>
       <AppShell.Footer><Footer /></AppShell.Footer>
     </AppShell>
