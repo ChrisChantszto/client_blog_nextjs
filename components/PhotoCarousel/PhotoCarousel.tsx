@@ -18,7 +18,7 @@ export default function PhotoCarousel() {
         );
         const posts = response.data.posts;
         const fetchedImages = posts
-          .map((post: { featured_image: string }) => post.featured_image)
+          .map((post: { featured_image: string; title: string }) => post.featured_image)
           .filter((img: string | null) => img !== null)
           .slice(0, 5); // Take the first 5 images
 
