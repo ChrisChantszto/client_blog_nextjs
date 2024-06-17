@@ -1,80 +1,94 @@
-import { Card, Image, Text, Badge, Button, Group } from '@mantine/core';
+import '@mantine/carousel/styles.css';
+import { useEffect, useState } from 'react';
+import { Carousel } from '@mantine/carousel';
+import { Progress, Image, Loader } from '@mantine/core';
+import axios from 'axios';
 
+export default function PhotoCarousel() {
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const [images, setImages] = useState<{ url: string; title: string }[]>([]);
+  const [embla, setEmbla] = useState<any>(null); // Adjust Embla type as per Mantine documentation or typings
+  const [loading, setLoading] = useState(true); // State to track loading state
 
-export default function Cardlist() {
+  useEffect(() => {
+    const fetchImages = async () => {
+      try {
+        const response = await axios.get(
+          'https://public-api.wordpress.com/rest/v1.1/sites/playeateasy.com/posts/?category=%e5%84%aa%e6%83%a0%e6%b8%9b%e5%83%b9'
+        );
+        const posts = response.data.posts;
+        const fetchedImages = posts
+          .map((post: any) => ({
+            url: post.featured_image,
+            title: post.title, // Retrieve title of the post
+          }))
+          .filter((item: { url: string; title: string }) => item.url && item.title)
+          .slice(0, 5); // Take the first 5 images
+
+        setImages(fetchedImages);
+        setLoading(false); // Update loading state once images are fetched
+      } catch (error) {
+        console.error('Error fetching images:', error);
+        setLoading(false); // Update loading state in case of error
+      }
+    };
+
+    fetchImages();
+  }, []);
+
+  const handleScroll = () => {
+    if (embla) {
+      const progress = Math.max(0, Math.min(1, embla.scrollProgress()));
+      setScrollProgress(progress * 100);
+    }
+  };
+
+  useEffect(() => {
+    if (embla) {
+      embla.on('scroll', handleScroll);
+      handleScroll();
+    }
+  }, [embla]);
+
+  const slides = images.map((item, index) => (
+    <Carousel.Slide key={index} style={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <Image src={item.url} alt={`Image ${index}`} />
+      <div
+        style={{
+          position: 'absolute',
+          bottom: '10px',
+          top: '230px',
+          left: '15px',
+          right: '15px',
+          color: 'white',
+          fontSize: '18px',
+          fontWeight: 'bold',
+          textShadow: '1px 1px 2px rgba(0, 0, 0, 0.6)',
+        }}
+      >
+        {item.title}
+      </div>
+    </Carousel.Slide>
+  ));
+
+  if (loading) {
+    return <Loader />; // Display loader while images are being fetched
+  }
+
   return (
-    <Group grow style={{ overflow: 'auto', padding: '20px' }}>
-      <Card shadow="sm" padding="lg" radius="md" withBorder style={{ flex: 1 }}>
-        <Card.Section>
-          <Image
-            src="https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/images/bg-8.png"
-            height={160}
-            alt="Norway"
-          />
-        </Card.Section>
-
-        <Group justify="space-between" mt="md" mb="xs">
-          <Text fw={500}>Norway Fjord Adventures</Text>
-          <Badge color="pink">On Sale</Badge>
-        </Group>
-
-        <Text size="sm" color="dimmed">
-          With Fjord Tours you can explore more of the magical fjord landscapes with tours and
-          activities on and around the fjords of Norway
-        </Text>
-
-        <Button variant="outline" color="blue" fullWidth mt="md" radius="lg">
-          立即登記
-        </Button>
-      </Card>
-
-      <Card shadow="sm" padding="lg" radius="md" withBorder style={{ flex: 1 }}>
-        <Card.Section>
-          <Image
-            src="https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/images/bg-8.png"
-            height={160}
-            alt="Norway"
-          />
-        </Card.Section>
-
-        <Group justify="space-between" mt="md" mb="xs">
-          <Text fw={500}>Norway Fjord Adventures</Text>
-          <Badge color="pink">On Sale</Badge>
-        </Group>
-
-        <Text size="sm" color="dimmed">
-          With Fjord Tours you can explore more of the magical fjord landscapes with tours and
-          activities on and around the fjords of Norway
-        </Text>
-
-        <Button variant="outline" color="blue" fullWidth mt="md" radius="lg">
-          立即登記
-        </Button>
-      </Card>
-
-      <Card shadow="sm" padding="lg" radius="md" withBorder style={{ flex: 1 }}>
-        <Card.Section>
-          <Image
-            src="https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/images/bg-8.png"
-            height={160}
-            alt="Norway"
-          />
-        </Card.Section>
-
-        <Group justify="space-between" mt="md" mb="xs">
-          <Text fw={500}>Norway Fjord Adventures</Text>
-          <Badge color="pink">On Sale</Badge>
-        </Group>
-
-        <Text size="sm" color="dimmed">
-          With Fjord Tours you can explore more of the magical fjord landscapes with tours and
-          activities on and around the fjords of Norway
-        </Text>
-
-        <Button variant="outline" color="blue" fullWidth mt="md" radius="lg">
-          立即登記
-        </Button>
-      </Card>
-    </Group>
+    <>
+      <Carousel
+        dragFree
+        slideSize="30%"
+        slideGap="md"
+        height={350} // Adjust the height as needed
+        getEmblaApi={setEmbla}
+        loop
+        initialSlide={2}
+      >
+        {slides}
+      </Carousel>
+      <Progress value={scrollProgress} max={100} size="sm" mt="xl" mx="auto" />
+    </>
   );
 }
