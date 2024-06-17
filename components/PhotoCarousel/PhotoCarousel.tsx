@@ -2,25 +2,34 @@ import '@mantine/carousel/styles.css';
 import { useCallback, useEffect, useState } from 'react';
 import { Carousel, Embla } from '@mantine/carousel';
 import { Progress, Image } from '@mantine/core';
+import axios from 'axios';
 
 export default function PhotoCarousel() {
   const [scrollProgress, setScrollProgress] = useState(0);
-
-  const images = [
-    'https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/images/bg-1.png',
-    'https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/images/bg-2.png',
-    'https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/images/bg-3.png',
-    'https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/images/bg-4.png',
-    'https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/images/bg-5.png',
-  ];
-
-  const slides = images.map((url) => (
-    <Carousel.Slide key={url}>
-      <Image src={url} />
-    </Carousel.Slide>
-  ));
-
+  const [images, setImages] = useState<string[]>([]);
   const [embla, setEmbla] = useState<Embla | null>(null);
+
+  useEffect(() => {
+    // Fetch images from the API
+    const fetchImages = async () => {
+      try {
+        const response = await axios.get(
+          'https://public-api.wordpress.com/rest/v1.1/sites/playeateasy.com/posts/'
+        );
+        const posts = response.data.posts;
+        const fetchedImages = posts
+          .map((post: { featured_image: string }) => post.featured_image)
+          .filter((img: string | null) => img !== null)
+          .slice(0, 5); // Take the first 5 images
+
+        setImages(fetchedImages);
+      } catch (error) {
+        console.error('Error fetching images:', error);
+      }
+    };
+
+    fetchImages();
+  }, []);
 
   const handleScroll = useCallback(() => {
     if (!embla) return;
@@ -35,13 +44,19 @@ export default function PhotoCarousel() {
     }
   }, [embla]);
 
+  const slides = images.map((url) => (
+    <Carousel.Slide key={url} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <Image src={url} />
+    </Carousel.Slide>
+  ));
+
   return (
     <>
       <Carousel
         dragFree
         slideSize="50%"
         slideGap="md"
-        height={200}
+        height={400} // Adjust the height as needed
         getEmblaApi={setEmbla}
         initialSlide={2}
       >
