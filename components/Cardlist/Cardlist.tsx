@@ -51,19 +51,45 @@ export default function PhotoCarousel() {
   }, [embla]);
 
   const slides = images.map((item, index) => (
-    <Carousel.Slide key={index} style={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-      <Image src={item.url} alt={`Image ${index}`} />
+    <Carousel.Slide
+      key={index}
+      style={{
+        position: 'relative',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
+      <div
+        style={{
+          position: 'relative',
+          width: '100%',
+          paddingTop: '75%', // 4:3 Aspect Ratio
+        }}
+      >
+        <Image
+          src={item.url}
+          alt={`Image ${index}`}
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+          }}
+        />
+      </div>
       <div
         style={{
           position: 'absolute',
-          bottom: '10px',
-          top: '230px',
+          bottom: '58px',
           left: '15px',
           right: '15px',
           color: 'white',
-          fontSize: '18px',
+          fontSize: '22px',
           fontWeight: 'bold',
-          textShadow: '1px 1px 2px rgba(0, 0, 0, 0.6)',
+          textShadow: '1px 1px 2px rgba(0.5, 0.5, 0.5, 0.6)',
         }}
       >
         {item.title}

@@ -1,41 +1,47 @@
 import '@mantine/carousel/styles.css';
-import { useCallback, useEffect, useState } from 'react';
-import { Carousel, Embla } from '@mantine/carousel';
-import { Progress, Image } from '@mantine/core';
+import { useEffect, useState } from 'react';
+import { Carousel } from '@mantine/carousel';
+import { Progress, Image, Loader } from '@mantine/core';
 import axios from 'axios';
 
 export default function PhotoCarousel() {
   const [scrollProgress, setScrollProgress] = useState(0);
-  const [images, setImages] = useState<string[]>([]);
-  const [embla, setEmbla] = useState<Embla | null>(null);
+  const [images, setImages] = useState<{ url: string; title: string }[]>([]);
+  const [embla, setEmbla] = useState<any>(null); // Adjust Embla type as per Mantine documentation or typings
+  const [loading, setLoading] = useState(true); // State to track loading state
 
   useEffect(() => {
-    // Fetch images from the API
     const fetchImages = async () => {
       try {
         const response = await axios.get(
-          'https://public-api.wordpress.com/rest/v1.1/sites/playeateasy.com/posts/'
+          'https://public-api.wordpress.com/rest/v1.1/sites/playeateasy.com/posts/?category=%e5%84%aa%e6%83%a0%e6%b8%9b%e5%83%b9'
         );
         const posts = response.data.posts;
         const fetchedImages = posts
-          .map((post: { featured_image: string; title: string }) => post.featured_image)
-          .filter((img: string | null) => img !== null)
+          .map((post: any) => ({
+            url: post.featured_image,
+            title: post.title, // Retrieve title of the post
+          }))
+          .filter((item: { url: string; title: string }) => item.url && item.title)
           .slice(0, 5); // Take the first 5 images
 
         setImages(fetchedImages);
+        setLoading(false); // Update loading state once images are fetched
       } catch (error) {
         console.error('Error fetching images:', error);
+        setLoading(false); // Update loading state in case of error
       }
     };
 
     fetchImages();
   }, []);
 
-  const handleScroll = useCallback(() => {
-    if (!embla) return;
-    const progress = Math.max(0, Math.min(1, embla.scrollProgress()));
-    setScrollProgress(progress * 100);
-  }, [embla, setScrollProgress]);
+  const handleScroll = () => {
+    if (embla) {
+      const progress = Math.max(0, Math.min(1, embla.scrollProgress()));
+      setScrollProgress(progress * 100);
+    }
+  };
 
   useEffect(() => {
     if (embla) {
@@ -44,15 +50,36 @@ export default function PhotoCarousel() {
     }
   }, [embla]);
 
-  const slides = images.map((url) => (
-    <Carousel.Slide key={url} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-      <Image src={url} />
+  const slides = images.map((item, index) => (
+    <Carousel.Slide key={index} style={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <div className="image-wrapper">
+        <Image src={item.url} alt={`Image ${index}`} />
+      </div>
+      <div
+        style={{
+          position: 'absolute',
+          bottom: '10px',
+          left: '15px',
+          right: '15px',
+          color: 'white',
+          fontSize: '29px',
+          fontWeight: 'bold',
+          textShadow: '1px 1px 2px rgba(0.5, 0.5, 0.5, 0.6)',
+        }}
+      >
+        {item.title}
+      </div>
     </Carousel.Slide>
   ));
+
+  if (loading) {
+    return <Loader />; // Display loader while images are being fetched
+  }
 
   return (
     <>
       <Carousel
+        loop
         dragFree
         slideSize="50%"
         slideGap="md"
@@ -62,13 +89,27 @@ export default function PhotoCarousel() {
       >
         {slides}
       </Carousel>
-      <Progress
-        value={scrollProgress}
-        maw={320}
-        size="sm"
-        mt="xl"
-        mx="auto"
-      />
+      <Progress value={scrollProgress} max={100} size="sm" mt="xl" mx="auto" />
     </>
   );
 }
+
+// Add the CSS for aspect ratio
+const styles = document.createElement('style');
+styles.innerHTML = `
+  .image-wrapper {
+    position: relative;
+    width: 100%;
+    padding-top: 75%; /* 4:3 Aspect Ratio */
+  }
+
+  .image-wrapper img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+`;
+document.head.appendChild(styles);
