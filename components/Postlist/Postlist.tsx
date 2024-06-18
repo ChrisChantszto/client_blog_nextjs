@@ -3,17 +3,17 @@ import { Text, Title, Divider, Image, Stack, Button, Grid, Badge, Center } from 
 import { IconPlus } from "@tabler/icons-react";
 import axios from "axios";
 
-interface Post {
-  featured_image: string;
-  title: string;
-  author: {
-    name: string;
-  };
-  date: string;
-}
+// interface Post {
+//   featured_image: string;
+//   title: string;
+//   author: {
+//     name: string;
+//   };
+//   date: string;
+// }
 
 export default function Postlist() {
-  const [posts, setPosts] = useState<Post[]>([]);
+  const [posts, setPosts] = useState([]);
 
   useEffect(() => {
     // Fetch posts from the API
