@@ -116,7 +116,7 @@ export default function PhotoCarousel() {
       >
         {slides}
       </Carousel>
-      <Progress value={scrollProgress} max={100} size="sm" mt="xl" mx="auto" />
+      <Progress value={scrollProgress} size="sm" mt="xl" mx="auto" />
     </>
   );
 }
