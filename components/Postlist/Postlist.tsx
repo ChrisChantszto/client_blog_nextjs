@@ -3,17 +3,17 @@ import { Text, Title, Divider, Image, Stack, Button, Grid, Badge, Center } from 
 import { IconPlus } from "@tabler/icons-react";
 import axios from "axios";
 
-// interface Post {
-//   featured_image: string;
-//   title: string;
-//   author: {
-//     name: string;
-//   };
-//   date: string;
-// }
+interface Post {
+  featured_image: string;
+  title: string;
+  author: {
+    name: string;
+  };
+  date: string;
+}
 
 export default function Postlist() {
-  const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState<Post[]>([]);
 
   useEffect(() => {
     // Fetch posts from the API
@@ -22,13 +22,16 @@ export default function Postlist() {
         const response = await axios.get(
           'https://public-api.wordpress.com/rest/v1.1/sites/playeateasy.com/posts/'
         );
-        const posts = response.data.posts.slice(0, 4).map((post: any) => ({
+        const fetchedPosts = response.data.posts.slice(0, 4).map((post: any) => ({
           featured_image: post.featured_image,
           title: post.title,
-          author: post.author.name,
+          author: {
+            name: post.author.name
+          },
           date: post.date,
-        }));
-        setPosts(posts);
+        })) as Post[]; // Type assertion to ensure TypeScript understands this is an array of Post objects
+
+        setPosts(fetchedPosts);
       } catch (error) {
         console.error('Error fetching posts:', error);
       }
@@ -85,7 +88,7 @@ export default function Postlist() {
                   style={styles.hideOnSmall}
                 >
                   <Badge color="#FF6031">最新</Badge>
-                  <Title order={5}>{new Date(post.date).toLocaleDateString()} / By {post.author}</Title>
+                  <Title order={5}>{new Date(post.date).toLocaleDateString()} / By {post.author.name}</Title>
                   <Title order={2}>{post.title}</Title>
                 </Grid.Col>
               </Grid>
