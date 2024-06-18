@@ -1,7 +1,7 @@
 import '@mantine/carousel/styles.css';
 import { useEffect, useState } from 'react';
-import { Carousel } from '@mantine/carousel';
 import { Progress, Image, Loader } from '@mantine/core';
+import { Carousel } from '@mantine/carousel';
 import axios from 'axios';
 
 export default function PhotoCarousel() {
@@ -72,6 +72,33 @@ export default function PhotoCarousel() {
     </Carousel.Slide>
   ));
 
+  useEffect(() => {
+    // This code will run only on the client side
+    const styles = document.createElement('style');
+    styles.innerHTML = `
+      .image-wrapper {
+        position: relative;
+        width: 100%;
+        padding-top: 75%; /* 4:3 Aspect Ratio */
+      }
+
+      .image-wrapper img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    `;
+    document.head.appendChild(styles);
+
+    // Cleanup function to remove the style tag if component unmounts
+    return () => {
+      document.head.removeChild(styles);
+    };
+  }, []); // Empty dependency array ensures this effect runs only once
+
   if (loading) {
     return <Loader />; // Display loader while images are being fetched
   }
@@ -93,23 +120,3 @@ export default function PhotoCarousel() {
     </>
   );
 }
-
-// Add the CSS for aspect ratio
-const styles = document.createElement('style');
-styles.innerHTML = `
-  .image-wrapper {
-    position: relative;
-    width: 100%;
-    padding-top: 75%; /* 4:3 Aspect Ratio */
-  }
-
-  .image-wrapper img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-`;
-document.head.appendChild(styles);
