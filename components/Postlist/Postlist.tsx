@@ -69,8 +69,8 @@ export default function Postlist() {
             justify="flex-start"
             gap="lg"
           >
-            {posts.map((post) => (
-              <Grid key={post.title}>
+            {posts.map((post, index) => (
+              <Grid key={index}>
                 <Grid.Col span={4}>
                   <Image
                     radius="md"
