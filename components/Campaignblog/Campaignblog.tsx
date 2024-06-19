@@ -16,7 +16,7 @@
           title: post.title,
           link: post.URL,
           featured_image: post.featured_image,
-        })) as Post[];
+        }));
 
         setPosts(fetchedPosts);
       } catch (error) {

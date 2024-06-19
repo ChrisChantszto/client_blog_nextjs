@@ -1,4 +1,4 @@
-import { AppShell, Image, Burger, Text, Container, Center } from '@mantine/core';
+import { AppShell, Burger } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import HeaderMegaMenu from '@/components/Header/Header';
 import PhotoCarousel from '@/components/PhotoCarousel/PhotoCarousel';
@@ -8,8 +8,8 @@ import Cardlist from '@/components/Cardlist/Cardlist';
 import Instagram from '@/components/Instagram/Instagram';
 import Postlist from '@/components/Postlist/Postlist';
 import Campaignblog from '@/components/Campaignblog/Campaignblog';
+import { IconBrandFacebook, IconBrandInstagram, IconBrandYoutube } from '@tabler/icons-react';
 import Youtube from '@/components/Youtube/Youtube';
-import banner from './banner.png';
 
 export default function Home() {
   const [opened, { toggle }] = useDisclosure();
@@ -58,13 +58,24 @@ export default function Home() {
         <br />
         <br />
         <Instagram />
-          <Image
-            src="https://i.ibb.co/tYKrKxJ/banner.png"
+        <div style={{ position: 'relative', width: '100%', height: 'auto' }}>
+          <img
+            src="https://iili.io/dH2SmEg.jpg"
             alt="Banner"
-            radius="md"
-            fit="cover"
-            style={{ width: '100%', height: 'auto', marginBottom: '1rem' }}
+            style={{ width: '100%', height: 'auto', borderRadius: '8px' }}
           />
+          <div style={{ position: 'absolute', bottom: '60px', right: '60px', display: 'flex', gap: '2.5rem' }}>
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
+              <IconBrandFacebook size={60} color="white" style={{ filter: 'drop-shadow(0 0 5px rgba(0,0,0,0.5))' }} />
+            </a>
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
+              <IconBrandInstagram size={60} color="white" style={{ filter: 'drop-shadow(0 0 5px rgba(0,0,0,0.5))' }} />
+            </a>
+            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer">
+              <IconBrandYoutube size={60} color="white" style={{ filter: 'drop-shadow(0 0 5px rgba(0,0,0,0.5))' }} />
+            </a>
+          </div>
+        </div>
         <br />
         <br />
         <br />
