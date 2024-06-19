@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, CSSProperties } from "react";
 import { Text, Title, Divider, Image, Stack, Button, Grid, Badge, Center } from "@mantine/core";
 import { IconPlus } from "@tabler/icons-react";
 import axios from "axios";
@@ -41,8 +41,9 @@ export default function Postlist() {
   }, []);
 
   // Inline styles with media queries
-  const styles = {
+  const styles: { [key: string]: CSSProperties } = {
     hideOnSmall: {
+      display: 'none',
       '@media (max-width: 600px)': {
         display: 'none',
       },
