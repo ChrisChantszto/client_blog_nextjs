@@ -51,6 +51,20 @@ export default function Postlist() {
       width: '70%',
       height: 'auto',
     },
+    imageContainer: {
+      position: 'relative',
+      width: '100%',
+      paddingTop: '56.25%', // 16:9 Aspect Ratio (adjust as needed)
+      overflow: 'hidden',
+    },
+    image: {
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      width: '100%',
+      height: '100%',
+      objectFit: 'cover',
+    }
   };
 
   return (
@@ -72,27 +86,21 @@ export default function Postlist() {
             {posts.map((post, index) => (
               <Grid key={index}>
                 <Grid.Col span={4}>
-                  <Image
-                    radius="md"
-                    h={200}
-                    w="auto"
-                    fit="contain"
-                    src={post.featured_image}
-                  />
+                  <div style={{ ...styles.imageContainer, paddingTop: '56.25%' }}>
+                    <Image
+                      radius="md"
+                      src={post.featured_image}
+                      alt={post.title}
+                      style={styles.image}
+                    />
+                  </div>
                 </Grid.Col>
                 <Grid.Col span={8}>
                   <Badge color="#FF6031">最新</Badge>
                   <Title order={5}>{new Date(post.date).toLocaleDateString()} / By {post.author.name}</Title>
-                  <Title
-                    order={2}
-                    component="a"  // Make title a link
-                    // href={post.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{ textDecoration: 'none', color: 'inherit' }}
-                  >
-                    {post.title}
-                  </Title>
+                  <a href={post.link} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'inherit' }}>
+                    <Title order={2}>{post.title}</Title>
+                  </a>
                 </Grid.Col>
               </Grid>
             ))}

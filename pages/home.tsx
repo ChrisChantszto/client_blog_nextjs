@@ -38,6 +38,15 @@ export default function Home() {
         <br />
         <Postlist />
         <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
         <Campaignblog />
         <br />
         <br />
