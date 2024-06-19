@@ -86,7 +86,7 @@ export default function Postlist() {
                   <Title
                     order={2}
                     component="a"  // Make title a link
-                    href={post.link}
+                    // href={post.link}
                     target="_blank"
                     rel="noopener noreferrer"
                     style={{ textDecoration: 'none', color: 'inherit' }}
