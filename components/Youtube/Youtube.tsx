@@ -12,6 +12,10 @@ export default function Youtube() {
  
     };
 
+    const handleButtonClick = () => {
+        window.open('https://www.youtube.com/channel/UCAs4cR685Txuk3zSvhMsnEA', '_blank');
+    };
+
     return (
         <Container fluid style={{ backgroundColor: '#e8e2e2', minHeight: '700px' }}>
             <br />
@@ -40,7 +44,7 @@ export default function Youtube() {
                     <Carousel.Slide><YouTube videoId="D7Lzyjh-nNs" opts={opts} /></Carousel.Slide>
                 </Carousel>
             </Center>
-            <Center><Button variant="filled" color="#FF6031" radius="xl"><Text size="xl">更多影片</Text><IconArrowRight /></Button></Center>
+            <Center><Button variant="filled" color="#FF6031" radius="xl" onClick={handleButtonClick}><Text size="xl">更多影片</Text><IconArrowRight /></Button></Center>
         </Container>
     );
 }
