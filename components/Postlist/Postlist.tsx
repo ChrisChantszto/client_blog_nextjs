@@ -6,6 +6,7 @@ import axios from "axios";
 interface Post {
   featured_image: string;
   title: string;
+  link: string;  // Added link property
   author: {
     name: string;
   };
@@ -25,6 +26,7 @@ export default function Postlist() {
         const fetchedPosts = response.data.posts.slice(0, 4).map((post: any) => ({
           featured_image: post.featured_image,
           title: post.title,
+          link: post.URL,  // Extract link from the API response
           author: {
             name: post.author.name
           },
@@ -40,7 +42,7 @@ export default function Postlist() {
     fetchPosts();
   }, []);
 
-  // Inline styles with media queries
+  // Inline styles
   const styles: { [key: string]: CSSProperties } = {
     banner: {
       position: 'sticky',
@@ -78,13 +80,19 @@ export default function Postlist() {
                     src={post.featured_image}
                   />
                 </Grid.Col>
-                <Grid.Col
-                  span={8}
-                  style={styles.hideOnSmall}
-                >
+                <Grid.Col span={8}>
                   <Badge color="#FF6031">最新</Badge>
                   <Title order={5}>{new Date(post.date).toLocaleDateString()} / By {post.author.name}</Title>
-                  <Title order={2}>{post.title}</Title>
+                  <Title
+                    order={2}
+                    component="a"  // Make title a link
+                    href={post.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ textDecoration: 'none', color: 'inherit' }}
+                  >
+                    {post.title}
+                  </Title>
                 </Grid.Col>
               </Grid>
             ))}
