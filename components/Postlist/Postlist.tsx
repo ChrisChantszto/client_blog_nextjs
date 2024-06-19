@@ -44,9 +44,9 @@ export default function Postlist() {
   const styles: { [key: string]: CSSProperties } = {
     hideOnSmall: {
       display: 'none',
-      '@media (max-width: 600px)': {
-        display: 'none',
-      },
+      // '@media (max-width: 600px)': {
+      //   display: 'none',
+      // },
     },
     banner: {
       position: 'sticky',
