@@ -6,7 +6,7 @@ import axios from 'axios';
 
 export default function PhotoCarousel() {
   const [scrollProgress, setScrollProgress] = useState(0);
-  const [images, setImages] = useState<{ url: string; title: string }[]>([]);
+  const [images, setImages] = useState<{ url: string; title: string; link: string }[]>([]);
   const [embla, setEmbla] = useState<any>(null); // Adjust Embla type as per Mantine documentation or typings
   const [loading, setLoading] = useState(true); // State to track loading state
 
