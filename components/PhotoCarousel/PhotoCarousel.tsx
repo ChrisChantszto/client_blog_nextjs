@@ -14,15 +14,17 @@ export default function PhotoCarousel() {
     const fetchImages = async () => {
       try {
         const response = await axios.get(
-          'https://public-api.wordpress.com/rest/v1.1/sites/playeateasy.com/posts/?category=%e5%84%aa%e6%83%a0%e6%b8%9b%e5%83%b9'
+          'https://public-api.wordpress.com/rest/v1.1/sites/playeateasy.com/posts'
         );
         const posts = response.data.posts;
         const fetchedImages = posts
           .map((post: any) => ({
             url: post.featured_image,
             title: post.title, // Retrieve title of the post
+            link: post.URL,
           }))
-          .filter((item: { url: string; title: string }) => item.url && item.title)
+          .filter((item: { url: string; title: string; link: string }) => item.url && item.title 
+          && item.link)
           .slice(0, 5); // Take the first 5 images
 
         setImages(fetchedImages);
@@ -51,11 +53,12 @@ export default function PhotoCarousel() {
   }, [embla]);
 
   const slides = images.map((item, index) => (
-    <Carousel.Slide key={index} style={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+    <Carousel.Slide key={index} onClick={() => window.open(item.link, '_blank')} style={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
       <div className="image-wrapper">
         <Image src={item.url} alt={`Image ${index}`} />
       </div>
       <div
+        onClick={() => window.open(item.link, '_blank')}
         style={{
           position: 'absolute',
           bottom: '10px',
