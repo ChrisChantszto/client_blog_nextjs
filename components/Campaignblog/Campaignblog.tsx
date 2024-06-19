@@ -1,10 +1,18 @@
- import { Container, Title, Group, Card, Image, Text, Button, Badge } from '@mantine/core';
- import { useEffect, useState } from "react";
- import { Carousel } from '@mantine/carousel';
- import axios from 'axios';
+import { Container, Title, Group, Card, Image, Button, Badge } from '@mantine/core';
+import { useEffect, useState } from "react";
+import { Carousel } from '@mantine/carousel';
+import axios from 'axios';
 
- export default function Campaignblog() {
-  const [posts, setPosts] = useState([]);
+// Define a type for the post object
+interface Post {
+  title: string;
+  link: string;
+  featured_image: string;
+}
+
+export default function Campaignblog() {
+  // Use the Post type for the state variable
+  const [posts, setPosts] = useState<Post[]>([]);
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -28,28 +36,28 @@
   }, []);
 
   const cardStyle = {
-     width: '390px',
-     height: '400px',
-     display: 'flex',
-     flexDirection: 'column',
-     justifyContent: 'space-between'
-   };
+    width: '390px',
+    height: '400px',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between'
+  };
 
-   return (
-     <Container fluid h={800} style={{ backgroundColor: '#433D33', height: '50px' }}>
-       <br />
-       <Title fw={800} order={1} px={30} c="white">CAMPAIGN BLOG</Title>
-       <Title fw={800} order={1} px={30} c="white">最新活動</Title>
-       <br />
-       <Carousel
-         withIndicators
-         height={550}
-         slideSize={{ base: '100%', sm: '50%', md: '23%' }}
-         slideGap={{ base: 0, sm: 'md' }}
-         loop
-         align="start"
-       >
-         {posts.map((post, index) => (
+  return (
+    <Container fluid h={800} style={{ backgroundColor: '#433D33', height: '50px' }}>
+      <br />
+      <Title fw={800} order={1} px={30} c="white">CAMPAIGN BLOG</Title>
+      <Title fw={800} order={1} px={30} c="white">最新活動</Title>
+      <br />
+      <Carousel
+        withIndicators
+        height={550}
+        slideSize={{ base: '100%', sm: '50%', md: '23%' }}
+        slideGap={{ base: 0, sm: 'md' }}
+        loop
+        align="start"
+      >
+        {posts.map((post, index) => (
           <Carousel.Slide key={index}>
             <Card padding="xl" component='a' target="_blank" radius="md">
               <Card.Section component="a" href={post.link} target="_blank">
@@ -63,7 +71,7 @@
             </Card>
           </Carousel.Slide>
         ))}
-       </Carousel>
-     </Container>
-   );
+      </Carousel>
+    </Container>
+  );
 }
