@@ -21,8 +21,10 @@ export default function PhotoCarousel() {
           .map((post: any) => ({
             url: post.featured_image,
             title: post.title, // Retrieve title of the post
+            link: post.URL,
           }))
-          .filter((item: { url: string; title: string }) => item.url && item.title)
+          .filter((item: { url: string; title: string; link: string }) => item.url && item.title
+          && item.link)
           .slice(0, 5); // Take the first 5 images
 
         setImages(fetchedImages);
@@ -59,6 +61,7 @@ export default function PhotoCarousel() {
         alignItems: 'center',
         justifyContent: 'center',
       }}
+      onClick={() => window.open(item.link, '_blank')} // Open the post link in a new tab
     >
       <div
         style={{
@@ -90,6 +93,11 @@ export default function PhotoCarousel() {
           fontSize: '22px',
           fontWeight: 'bold',
           textShadow: '1px 1px 2px rgba(0.5, 0.5, 0.5, 0.6)',
+          cursor: 'pointer',
+        }}
+        onClick={(e) => {
+          e.stopPropagation(); // Prevent the event from bubbling up to the parent div
+          window.open(item.link, '_blank');
         }}
       >
         {item.title}
