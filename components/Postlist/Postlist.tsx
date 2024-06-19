@@ -1,5 +1,5 @@
 import { useEffect, useState, CSSProperties } from "react";
-import { Text, Title, Divider, Image, Stack, Button, Grid, Badge, Center } from "@mantine/core";
+import { Text, Title, Divider, Image, Stack, Button, Grid, Badge, Center, Space } from "@mantine/core";
 import { IconPlus } from "@tabler/icons-react";
 import axios from "axios";
 
@@ -118,6 +118,18 @@ export default function Postlist() {
           </div>
         </Grid.Col>
       </Grid>
+
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
       <Center>
         <Button variant="filled" color="#FF6031" radius="xl">
           <Text size="xl">更多文章</Text>
