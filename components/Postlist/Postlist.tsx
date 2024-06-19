@@ -42,12 +42,6 @@ export default function Postlist() {
 
   // Inline styles with media queries
   const styles: { [key: string]: CSSProperties } = {
-    hideOnSmall: {
-      display: 'none',
-      // '@media (max-width: 600px)': {
-      //   display: 'none',
-      // },
-    },
     banner: {
       position: 'sticky',
       top: '10px',
