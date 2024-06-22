@@ -18,6 +18,7 @@ export default function Home() {
     <AppShell
       header={{ height: 60 }}
       padding="md"
+      style={{ backgroundColor: '#F5F5F5' }}
     >
       <AppShell.Header>
         <Burger
@@ -37,6 +38,10 @@ export default function Home() {
         <Cardlist />
         <br />
         <Postlist />
+        <br />
+        <br />
+        <br />
+        <br />
         <br />
         <br />
         <br />

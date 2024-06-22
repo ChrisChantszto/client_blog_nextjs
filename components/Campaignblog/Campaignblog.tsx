@@ -65,7 +65,7 @@ export default function Campaignblog() {
               </Card.Section>
 
               <Group justify="space-between" mt="md" mb="xs">
-                <Badge color="orange">最新</Badge>
+                <Badge color="#FF6031">最新</Badge>
                 <Title order={4}>{post.title}</Title>
               </Group>
             </Card>

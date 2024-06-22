@@ -50,12 +50,14 @@ export default function Postlist() {
       marginTop: '1rem',
       width: '70%',
       height: 'auto',
+      backgroundColor: '#F5F5F5',
     },
     imageContainer: {
       position: 'relative',
       width: '100%',
       paddingTop: '56.25%', // 16:9 Aspect Ratio (adjust as needed)
       overflow: 'hidden',
+      backgroundColor: '#F5F5F5',
     },
     image: {
       position: 'absolute',
@@ -64,12 +66,13 @@ export default function Postlist() {
       width: '100%',
       height: '100%',
       objectFit: 'cover',
+      backgroundColor: '#F5F5F5',
     }
   };
 
   return (
     <>
-      <Title fw={800} order={1} c="orange">SELECTED POST</Title>
+      <Title fw={800} order={1} c="#FF6031">SELECTED POST</Title>
       <Title fw={800} order={2}>精選文章</Title>
       <br />
       <Divider size="sm" />
@@ -81,6 +84,7 @@ export default function Postlist() {
             bg="var(--mantine-color-body)"
             align="stretch"
             justify="flex-start"
+            style={{ backgroundColor: '#F5F5F5' }}
             gap="lg"
           >
             {posts.map((post, index) => (
@@ -119,6 +123,21 @@ export default function Postlist() {
         </Grid.Col>
       </Grid>
 
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />  
       <br />
       <br />
       <br />

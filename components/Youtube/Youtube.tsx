@@ -17,12 +17,12 @@ export default function Youtube() {
     };
 
     return (
-        <Container fluid style={{ backgroundColor: '#e8e2e2', minHeight: '700px' }}>
+        <Container fluid style={{ backgroundColor: '#F5F5F5', minHeight: '700px' }}>
             <br />
             <br />
             <br />
             <Center>
-                <Title fw={800} order={1} c="orange">Youtube Video</Title>
+                <Title fw={800} order={1} c="#FF6031">Youtube Video</Title>
             </Center>
             <Center>
                 <Title fw={800} order={2} c="black">更多影片</Title>

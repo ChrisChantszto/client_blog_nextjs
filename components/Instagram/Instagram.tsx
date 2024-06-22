@@ -15,7 +15,7 @@ export default function Instagram() {
     return (
         <Container fluid style={{ backgroundColor: 'white', minHeight: '700px' }}>
             <Center>
-                <Title fw={800} order={1} c="orange">INSTAGRAM</Title>
+                <Title fw={800} order={1} c="#FF6031">INSTAGRAM</Title>
             </Center>
             <Center>
                 <Title fw={800} order={2} c="black">最新貼文</Title>

@@ -76,31 +76,31 @@ export default function HeaderMegaMenu() {
           <img src={logoUrl} alt="Your Logo" style={{ height: 30, cursor: 'pointer' }} />
 
           <Group h="100%" gap={0} visibleFrom="sm">
-            <a href="https://playeateasy.com/category/%e5%84%aa%e6%83%a0%e6%b8%9b%e5%83%b9/" className={classes.link}>
+            <a href="https://playeateasy.com/category/%e5%84%aa%e6%83%a0%e6%b8%9b%e5%83%b9/" className={classes.link} color="#222222">
               優惠減價
             </a>
-            <a href="https://playeateasy.com/category/%e6%9c%83%e5%93%a1%e6%b4%bb%e5%8b%95/" className={classes.link}>
+            <a href="https://playeateasy.com/category/%e6%9c%83%e5%93%a1%e6%b4%bb%e5%8b%95/" className={classes.link} color="#222222">
               會員活動
             </a>
-            <a href="https://playeateasy.com/category/%e7%8e%a9%e6%a8%82/" className={classes.link}>
+            <a href="https://playeateasy.com/category/%e7%8e%a9%e6%a8%82/" className={classes.link} color="#222222">
               玩樂
             </a>
-            <a href="https://playeateasy.com/category/%e9%a3%b2%e9%a3%9f/" className={classes.link}>
+            <a href="https://playeateasy.com/category/%e9%a3%b2%e9%a3%9f/" className={classes.link} color="#222222">
               飲食
             </a>
-            <a href="https://playeateasy.com/category/%e8%b3%bc%e7%89%a9/" className={classes.link}>
+            <a href="https://playeateasy.com/category/%e8%b3%bc%e7%89%a9/" className={classes.link} color="#222222">
               購物
             </a>
-            <a href="#" className={classes.link}>
+            <a href="#" className={classes.link} color="#222222">
               娛樂熱話
             </a>
-            <a href="#" className={classes.link}>
+            <a href="#" className={classes.link} color="#222222">
               愛生活
             </a>
-            <a href="#" className={classes.link}>
+            <a href="#" className={classes.link} color="#222222">
               旅遊
             </a>
-            <a href="#" className={classes.link}>
+            <a href="#" className={classes.link} color="#222222">
               北上旅遊
             </a>
           </Group>
