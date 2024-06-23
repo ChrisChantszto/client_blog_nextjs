@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from 'react';
 import { AppShell, Burger } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import HeaderMegaMenu from '@/components/Header/Header';
@@ -13,6 +14,28 @@ import Youtube from '@/components/Youtube/Youtube';
 
 export default function Home() {
   const [opened, { toggle }] = useDisclosure();
+  const [footerVisible, setFooterVisible] = useState(false);
+  const sentinelRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const [entry] = entries;
+        setFooterVisible(entry.isIntersecting);
+      },
+      { root: null, rootMargin: '0px', threshold: 0.1 }
+    );
+
+    if (sentinelRef.current) {
+      observer.observe(sentinelRef.current);
+    }
+
+    return () => {
+      if (sentinelRef.current) {
+        observer.unobserve(sentinelRef.current);
+      }
+    };
+  }, []);
 
   return (
     <AppShell
@@ -38,7 +61,6 @@ export default function Home() {
         <Cardlist />
         <br />
         <Postlist />
-        <br />
         <br />
         <br />
         <br />
@@ -85,8 +107,9 @@ export default function Home() {
         <br />
         <br />
         <br />
+        <div ref={sentinelRef} style={{ height: '1px' }}></div> {/* Sentinel div */}
       </AppShell.Main>
-      <AppShell.Footer><Footer /></AppShell.Footer>
+      {footerVisible && <AppShell.Footer><Footer /></AppShell.Footer>}
     </AppShell>
   );
 }

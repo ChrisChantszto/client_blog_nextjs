@@ -13,7 +13,7 @@ export default function Instagram() {
     };
 
     return (
-        <Container fluid style={{ backgroundColor: 'white', minHeight: '700px' }}>
+        <Container fluid style={{ backgroundColor: '#F5F5F5', minHeight: '700px' }}>
             <Center>
                 <Title fw={800} order={1} c="#FF6031">INSTAGRAM</Title>
             </Center>

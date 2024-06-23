@@ -1,5 +1,5 @@
 import { useEffect, useState, CSSProperties } from "react";
-import { Text, Title, Divider, Image, Stack, Button, Grid, Badge, Center, Space } from "@mantine/core";
+import { Text, Title, Divider, Image, Stack, Button, Grid, Badge, Center } from "@mantine/core";
 import { IconPlus } from "@tabler/icons-react";
 import axios from "axios";
 
@@ -44,6 +44,11 @@ export default function Postlist() {
 
   // Inline styles
   const styles: { [key: string]: CSSProperties } = {
+    container: {
+      backgroundColor: '#F5F5F5',
+      padding: '1rem',
+      minHeight: '100vh', // Ensures the container fills the viewport height
+    },
     banner: {
       position: 'sticky',
       top: '10px',
@@ -67,11 +72,15 @@ export default function Postlist() {
       height: '100%',
       objectFit: 'cover',
       backgroundColor: '#F5F5F5',
-    }
+    },
+    postTitle: {
+      backgroundColor: '#F5F5F5', // Ensure consistent background color for titles
+      marginBottom: '0.5rem', // Adjust spacing as needed
+    },
   };
 
   return (
-    <>
+    <div style={styles.container}>
       <Title fw={800} order={1} c="#FF6031">SELECTED POST</Title>
       <Title fw={800} order={2}>精選文章</Title>
       <br />
@@ -101,9 +110,9 @@ export default function Postlist() {
                 </Grid.Col>
                 <Grid.Col span={8}>
                   <Badge color="#FF6031">最新</Badge>
-                  <Title order={5}>{new Date(post.date).toLocaleDateString()}</Title>
+                  <Title style={styles.postTitle} order={5}>{new Date(post.date).toLocaleDateString()}</Title>
                   <a href={post.link} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'inherit' }}>
-                    <Title order={2}>{post.title}</Title>
+                    <Title style={styles.postTitle} order={2}>{post.title}</Title>
                   </a>
                 </Grid.Col>
               </Grid>
@@ -123,38 +132,13 @@ export default function Postlist() {
         </Grid.Col>
       </Grid>
 
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />  
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <Center>
+      {/* Placeholder content to fill space for demonstration */}
+      <Center style={{ marginTop: '1rem' }}>
         <Button variant="filled" color="#FF6031" radius="xl">
           <Text size="xl">更多文章</Text>
           <IconPlus />
         </Button>
       </Center>
-    </>
+    </div>
   );
 }

@@ -50,7 +50,7 @@ export default function Campaignblog() {
       <Title fw={800} order={1} px={30} c="white">最新活動</Title>
       <br />
       <Carousel
-        withIndicators
+        // withIndicators
         height={550}
         slideSize={{ base: '100%', sm: '50%', md: '23%' }}
         slideGap={{ base: 0, sm: 'md' }}
