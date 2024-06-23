@@ -1,6 +1,6 @@
 import '@mantine/carousel/styles.css';
 import { useEffect, useState } from 'react';
-import { Progress, Image, Loader } from '@mantine/core';
+import { Progress, Image, Loader, Badge } from '@mantine/core';
 import { Carousel } from '@mantine/carousel';
 import axios from 'axios';
 
@@ -23,8 +23,7 @@ export default function PhotoCarousel() {
             title: post.title, // Retrieve title of the post
             link: post.URL,
           }))
-          .filter((item: { url: string; title: string; link: string }) => item.url && item.title 
-          && item.link)
+          .filter((item: { url: string; title: string; link: string }) => item.url && item.title && item.link)
           .slice(0, 5); // Take the first 5 images
 
         setImages(fetchedImages);
@@ -53,23 +52,41 @@ export default function PhotoCarousel() {
   }, [embla]);
 
   const slides = images.map((item, index) => (
-    <Carousel.Slide key={index} onClick={() => window.open(item.link, '_blank')} style={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+    <Carousel.Slide
+      key={index}
+      onClick={() => window.open(item.link, '_blank')}
+      style={{
+        position: 'relative',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: '5px',
+        overflow: 'hidden',
+      }}
+    >
       <div className="image-wrapper">
-        <Image src={item.url} alt={`Image ${index}`} />
+        <Image src={item.url} alt={`Image ${index}`} style={{ borderRadius: '5px' }} />
       </div>
+      <div className="gradient-overlay"></div>
       <div
-        onClick={() => window.open(item.link, '_blank')}
         style={{
           position: 'absolute',
-          bottom: '10px',
+          bottom: '30px',
           left: '15px',
           right: '15px',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'flex-start',
           color: 'white',
+          textAlign: 'left',
           fontSize: '29px',
           fontWeight: 'bold',
           textShadow: '1px 1px 2px rgba(0.5, 0.5, 0.5, 0.6)',
         }}
       >
+        <Badge color="#FF6031" variant="filled" size="lg" style={{ marginBottom: '10px' }}>
+          最新
+        </Badge>
         {item.title}
       </div>
     </Carousel.Slide>
@@ -92,6 +109,17 @@ export default function PhotoCarousel() {
         width: 100%;
         height: 100%;
         object-fit: cover;
+        border-radius: 5px; /* Ensure image has rounded corners */
+      }
+
+      .gradient-overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 80px;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0));
+        border-radius: 0 0 5px 5px; /* Ensure gradient overlay has rounded corners */
       }
     `;
     document.head.appendChild(styles);
@@ -119,7 +147,6 @@ export default function PhotoCarousel() {
       >
         {slides}
       </Carousel>
-      <Progress value={scrollProgress} size="sm" mt="xl" mx="auto" />
     </>
   );
 }

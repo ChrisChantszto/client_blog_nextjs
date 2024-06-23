@@ -101,7 +101,7 @@ export default function Postlist() {
                 </Grid.Col>
                 <Grid.Col span={8}>
                   <Badge color="#FF6031">最新</Badge>
-                  <Title order={5}>{new Date(post.date).toLocaleDateString()} / By {post.author.name}</Title>
+                  <Title order={5}>{new Date(post.date).toLocaleDateString()}</Title>
                   <a href={post.link} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'inherit' }}>
                     <Title order={2}>{post.title}</Title>
                   </a>
