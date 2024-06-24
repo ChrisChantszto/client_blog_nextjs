@@ -1,5 +1,5 @@
 import { useEffect, useState, CSSProperties } from "react";
-import { Text, Title, Divider, Image, Stack, Button, Grid, Badge, Center } from "@mantine/core";
+import { Text, Title, Divider, Image, Stack, Button, Grid, Container, Badge, Center } from "@mantine/core";
 import { IconPlus } from "@tabler/icons-react";
 import axios from "axios";
 
@@ -45,7 +45,7 @@ export default function Postlist() {
   // Inline styles
   const styles: { [key: string]: CSSProperties } = {
     container: {
-      backgroundColor: '#F5F5F5',
+      // backgroundColor: '#F5F5F5',
       padding: '1rem',
       minHeight: '100vh',
       marginBottom: '2rem', // Add a bottom margin
@@ -56,14 +56,14 @@ export default function Postlist() {
       marginTop: '1rem',
       width: '70%',
       height: 'auto',
-      backgroundColor: '#F5F5F5',
+      // backgroundColor: '#F5F5F5',
     },
     imageContainer: {
       position: 'relative',
       width: '100%',
       paddingTop: '56.25%', // 16:9 Aspect Ratio (adjust as needed)
       overflow: 'hidden',
-      backgroundColor: '#F5F5F5',
+      // backgroundColor: '#F5F5F5',
     },
     image: {
       position: 'absolute',
@@ -72,16 +72,16 @@ export default function Postlist() {
       width: '100%',
       height: '100%',
       objectFit: 'cover',
-      backgroundColor: '#F5F5F5',
+      // backgroundColor: '#F5F5F5',
     },
     postTitle: {
-      backgroundColor: '#F5F5F5', // Ensure consistent background color for titles
+      // backgroundColor: '#F5F5F5', // Ensure consistent background color for titles
       marginBottom: '0.5rem', // Adjust spacing as needed
     },
   };
 
   return (
-    <div style={styles.container}>
+    <Container fluid style={{ backgroundColor: '#F5F5F5' }}>
       <Title fw={800} order={1} c="#FF6031">SELECTED POST</Title>
       <Title fw={800} order={2}>精選文章</Title>
       <br />
@@ -94,7 +94,7 @@ export default function Postlist() {
             bg="var(--mantine-color-body)"
             align="stretch"
             justify="flex-start"
-            style={{ backgroundColor: '#F5F5F5', overflow: 'hidden' }}
+            style={{ overflow: 'hidden' }}
             gap="lg"
           >
             {posts.map((post, index) => (
@@ -139,6 +139,6 @@ export default function Postlist() {
           <IconPlus />
         </Button>
       </Center>
-    </div>
+    </Container>
   );
 }
