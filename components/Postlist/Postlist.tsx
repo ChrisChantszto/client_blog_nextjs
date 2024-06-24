@@ -23,7 +23,7 @@ export default function Postlist() {
         const response = await axios.get(
           'https://public-api.wordpress.com/rest/v1.1/sites/playeateasy.com/posts/'
         );
-        const fetchedPosts = response.data.posts.slice(0, 3).map((post: any) => ({
+        const fetchedPosts = response.data.posts.slice(0, 4).map((post: any) => ({
           featured_image: post.featured_image,
           title: post.title,
           link: post.URL,  // Extract link from the API response
@@ -47,7 +47,8 @@ export default function Postlist() {
     container: {
       backgroundColor: '#F5F5F5',
       padding: '1rem',
-      minHeight: '100vh', // Ensures the container fills the viewport height
+      minHeight: '100vh',
+      marginBottom: '2rem', // Add a bottom margin
     },
     banner: {
       position: 'sticky',
@@ -93,7 +94,7 @@ export default function Postlist() {
             bg="var(--mantine-color-body)"
             align="stretch"
             justify="flex-start"
-            style={{ backgroundColor: '#F5F5F5' }}
+            style={{ backgroundColor: '#F5F5F5', overflow: 'hidden' }}
             gap="lg"
           >
             {posts.map((post, index) => (

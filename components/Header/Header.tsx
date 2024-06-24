@@ -63,7 +63,7 @@ const mockdata = [
   },
 ];
 
-const logoUrl = 'https://staging-2015-sismapblog.wpcomstaging.com/wp-content/uploads/2024/05/cropped-cropped-play-eat-easy-logo.png';
+const logoUrl = 'https://playeateasy.com/wp-content/uploads/2022/10/橫pee-logo-1-1.gif';
 
 export default function HeaderMegaMenu() {
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] = useDisclosure(false);
