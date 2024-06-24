@@ -12,6 +12,14 @@ interface Post {
   author: string;
 }
 
+function truncateTitle(title: string, maxWords: number = 19): string {
+  const words = title.split(' ');
+  if (words.length > maxWords) {
+    return words.slice(0, maxWords).join(' ') + '...';
+  }
+  return title;
+}
+
 export default function CampaignBlog() {
   // Use the Post type for the state variable
   const [posts, setPosts] = useState<Post[]>([]);
@@ -26,7 +34,7 @@ export default function CampaignBlog() {
           title: post.title,
           link: post.URL,
           featured_image: post.featured_image,
-          date: post.date,  // Assuming 'date' and 'author' are available in the post object
+          date: post.date,
           author: post.author.name
         }));
 
@@ -59,13 +67,13 @@ export default function CampaignBlog() {
                 <Image src={post.featured_image} height={300} alt={post.title} />
               </Card.Section>
               
-              <Group position="apart" mt="md" mb="xs">
+              <Group mt="md" mb="xs">
                 <Badge color="#FF6031">最新</Badge>
               </Group>
               <Text size="sg" style={{ color: 'black' }} fw={500}>
                 {new Date(post.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })} / by {post.author}
               </Text>
-              <Title order={3}>{post.title}</Title>
+              <Title order={3}>{truncateTitle(post.title)}</Title>
             </Card>
           </Carousel.Slide>
         ))}
