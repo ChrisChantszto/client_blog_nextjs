@@ -23,7 +23,7 @@ export default function Postlist() {
         const response = await axios.get(
           'https://public-api.wordpress.com/rest/v1.1/sites/playeateasy.com/posts/'
         );
-        const fetchedPosts = response.data.posts.slice(0, 4).map((post: any) => ({
+        const fetchedPosts = response.data.posts.slice(0, 3).map((post: any) => ({
           featured_image: post.featured_image,
           title: post.title,
           link: post.URL,  // Extract link from the API response
@@ -98,7 +98,7 @@ export default function Postlist() {
           >
             {posts.map((post, index) => (
               <Grid key={index}>
-                <Grid.Col span={4}>
+                <Grid.Col span={6}>
                   <div style={{ ...styles.imageContainer, paddingTop: '56.25%' }}>
                     <Image
                       radius="md"
@@ -108,7 +108,7 @@ export default function Postlist() {
                     />
                   </div>
                 </Grid.Col>
-                <Grid.Col span={8}>
+                <Grid.Col span={6}>
                   <Badge color="#FF6031">最新</Badge>
                   <Title style={styles.postTitle} order={5}>{new Date(post.date).toLocaleDateString()}</Title>
                   <a href={post.link} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'inherit' }}>
@@ -132,7 +132,6 @@ export default function Postlist() {
         </Grid.Col>
       </Grid>
 
-      {/* Placeholder content to fill space for demonstration */}
       <Center style={{ marginTop: '1rem' }}>
         <Button variant="filled" color="#FF6031" radius="xl">
           <Text size="xl">更多文章</Text>

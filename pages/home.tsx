@@ -107,6 +107,12 @@ export default function Home() {
         <br />
         <br />
         <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
         <div ref={sentinelRef} style={{ height: '1px' }}></div> {/* Sentinel div */}
       </AppShell.Main>
       {footerVisible && <AppShell.Footer><Footer /></AppShell.Footer>}
