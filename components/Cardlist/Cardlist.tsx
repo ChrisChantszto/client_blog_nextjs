@@ -114,6 +114,7 @@ export default function PhotoCarousel() {
       <Carousel
         dragFree
         slideSize="30%"
+        withIndicators
         slideGap="md"
         height={350} // Adjust the height as needed
         getEmblaApi={setEmbla}
@@ -122,7 +123,6 @@ export default function PhotoCarousel() {
       >
         {slides}
       </Carousel>
-      <Progress value={scrollProgress} size="sm" mt="xl" mx="auto" />
     </>
   );
 }
