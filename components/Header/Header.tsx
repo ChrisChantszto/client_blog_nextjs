@@ -29,7 +29,6 @@ import {
   IconSearch,
 } from '@tabler/icons-react';
 import classes from './HeaderMegaMenu.module.css';
-import { ReactComponent as SearchIcon } from './icon=search.svg';
 
 const mockdata = [
   {
