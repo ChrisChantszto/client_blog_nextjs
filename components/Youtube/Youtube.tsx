@@ -7,8 +7,8 @@ import { IconArrowRight } from "@tabler/icons-react";
 export default function Youtube() {
 
     const opts = {
-        height: '280',
-        width: '520',
+        height: '190',
+        width: '350',
  
     };
 
@@ -17,12 +17,12 @@ export default function Youtube() {
     };
 
     return (
-        <Container fluid style={{ backgroundColor: '#F5F5F5', minHeight: '700px' }}>
+        <Container fluid style={{ backgroundColor: '#E9E3D9', minHeight: '700px', paddingLeft: '120px', paddingRight: '120px' }}>
             <br />
             <br />
             <br />
             <Center>
-                <Title fw={800} order={1} c="#FF6031">Youtube Video</Title>
+                <Title fw={800} order={1} c="#FF6031">YOUTUBE VIDEO</Title>
             </Center>
             <Center>
                 <Title fw={800} order={2} c="black">更多影片</Title>
@@ -31,8 +31,7 @@ export default function Youtube() {
             <br />
             <Center>
                 <Carousel
-                    withIndicators
-                    height={400}
+                    height={330}
                     slideSize={{ base: '100%', sm: '50%', md: '33.333333%' }}
                     slideGap={{ base: 0, sm: 'md' }}
                     loop
@@ -44,7 +43,7 @@ export default function Youtube() {
                     <Carousel.Slide><YouTube videoId="D7Lzyjh-nNs" opts={opts} /></Carousel.Slide>
                 </Carousel>
             </Center>
-            <Center><Button variant="filled" color="#FF6031" radius="xl" onClick={handleButtonClick}><Text size="xl">更多影片</Text><IconArrowRight /></Button></Center>
+            <Center><Button variant="filled" color="#FF6031" radius="xl" onClick={handleButtonClick} size="xl" ><Text size="xl">更多影片</Text><IconArrowRight /></Button></Center>
         </Container>
     );
 }

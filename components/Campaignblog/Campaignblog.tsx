@@ -1,4 +1,4 @@
-import { Container, Title, Group, Card, Image, Button, Badge } from '@mantine/core';
+import { Container, Title, Group, Card, Image, Button, Badge, Text } from '@mantine/core';
 import { useEffect, useState } from "react";
 import { Carousel } from '@mantine/carousel';
 import axios from 'axios';
@@ -8,9 +8,11 @@ interface Post {
   title: string;
   link: string;
   featured_image: string;
+  date: string;
+  author: string;
 }
 
-export default function Campaignblog() {
+export default function CampaignBlog() {
   // Use the Post type for the state variable
   const [posts, setPosts] = useState<Post[]>([]);
 
@@ -24,6 +26,8 @@ export default function Campaignblog() {
           title: post.title,
           link: post.URL,
           featured_image: post.featured_image,
+          date: post.date,  // Assuming 'date' and 'author' are available in the post object
+          author: post.author.name
         }));
 
         setPosts(fetchedPosts);
@@ -37,20 +41,19 @@ export default function Campaignblog() {
 
   const cardStyle = {
     width: '390px',
-    height: '400px',
+    height: '500px',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between'
   };
 
   return (
-    <Container fluid h={800} style={{ backgroundColor: '#433D33', height: '50px' }}>
+    <Container fluid style={{ backgroundColor: '#433D33' }}>
       <br />
-      <Title fw={800} order={1} px={30} c="white">CAMPAIGN BLOG</Title>
-      <Title fw={800} order={1} px={30} c="white">最新活動</Title>
+      <Title order={1} px={30} color="white" style={{ fontWeight: 800, color: 'white' }}>CAMPAIGN BLOG</Title>
+      <Title order={1} px={30} color="white" style={{ fontWeight: 800, color: 'white' }}>最新活動</Title>
       <br />
       <Carousel
-        // withIndicators
         height={550}
         slideSize={{ base: '100%', sm: '50%', md: '23%' }}
         slideGap={{ base: 0, sm: 'md' }}
@@ -59,15 +62,18 @@ export default function Campaignblog() {
       >
         {posts.map((post, index) => (
           <Carousel.Slide key={index}>
-            <Card padding="xl" component='a' target="_blank" radius="md">
+            <Card padding="xl" component='a' target="_blank" radius="md" style={cardStyle}>
               <Card.Section component="a" href={post.link} target="_blank">
-                <Image src={post.featured_image} h={300} alt={post.title} />
+                <Image src={post.featured_image} height={300} alt={post.title} />
               </Card.Section>
-
-              <Group justify="space-between" mt="md" mb="xs">
+              
+              <Group position="apart" mt="md" mb="xs">
                 <Badge color="#FF6031">最新</Badge>
-                <Title order={4}>{post.title}</Title>
               </Group>
+              <Text size="sg" style={{ color: 'black' }} fw={500}>
+                {new Date(post.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })} / by {post.author}
+              </Text>
+              <Title order={3}>{post.title}</Title>
             </Card>
           </Carousel.Slide>
         ))}

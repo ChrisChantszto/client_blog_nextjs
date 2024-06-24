@@ -28,7 +28,7 @@ export default function Instagram() {
             <br />
             <br />
             <br />
-            <Center><Button variant="filled" color="#FF6031" radius="xl"><Text size="xl">查看更多</Text><IconArrowRight /></Button></Center>
+            <Center><Button variant="filled" color="#FF6031" radius="xl" size="xl"><Text size="xl">查看更多</Text><IconArrowRight /></Button></Center>
         </Container>
     );
 }

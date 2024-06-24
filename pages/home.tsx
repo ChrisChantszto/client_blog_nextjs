@@ -91,6 +91,28 @@ export default function Home() {
             alt="Banner"
             style={{ width: '100%', height: 'auto', borderRadius: '8px' }}
           />
+          <div style={{
+            position: 'absolute',
+            top: '35px', // Adjust this value to move the text lower or higher
+            left: '60px', // Adjust this value to move the text more to the left or right
+            color: 'white', // Text color
+            fontSize: '50px', // Text size
+            fontWeight: 'bold', // Text weight
+            textShadow: '0px 0px 8px rgba(0, 0, 0, 0.6)' // Text shadow for better readability
+          }}>
+            FOLLOW US!
+          </div>
+          <div style={{
+            position: 'absolute',
+            top: '120px', // Adjust this value to move the text lower or higher
+            left: '60px', // Adjust this value to move the text more to the left or right
+            color: 'white', // Text color
+            fontSize: '19px', // Text size
+            fontWeight: 'bold', // Text weight
+            textShadow: '0px 0px 8px rgba(0, 0, 0, 0.6)' // Text shadow for better readability
+          }}>
+            立即追蹤我們緊貼最新資訊！
+          </div>
           <div style={{ position: 'absolute', bottom: '60px', right: '60px', display: 'flex', gap: '2.5rem' }}>
             <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
               <IconBrandFacebook size={60} color="white" style={{ filter: 'drop-shadow(0 0 5px rgba(0,0,0,0.5))' }} />

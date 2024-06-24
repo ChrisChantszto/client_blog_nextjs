@@ -109,11 +109,11 @@ export default function Postlist() {
                   </div>
                 </Grid.Col>
                 <Grid.Col span={6}>
-                  <Badge color="#FF6031">最新</Badge>
-                  <Title style={styles.postTitle} order={5}>{new Date(post.date).toLocaleDateString()}</Title>
                   <a href={post.link} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'inherit' }}>
                     <Title style={styles.postTitle} order={2}>{post.title}</Title>
                   </a>
+                  <Title style={styles.postTitle} order={5}>{new Date(post.date).toLocaleDateString()}</Title>
+                  <Badge color="#FF6031">最新</Badge>
                 </Grid.Col>
               </Grid>
             ))}
