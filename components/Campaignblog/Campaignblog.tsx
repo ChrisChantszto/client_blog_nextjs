@@ -54,7 +54,7 @@ export default function CampaignBlog() {
       <Title order={1} px={30} style={{ fontWeight: 800, color: 'white' }}>最新活動</Title>
       <br />
       <Carousel
-        height={550}
+        height={600}
         slideSize={{ base: '100%', sm: '50%', md: '23%' }}
         slideGap={{ base: 0, sm: 'md' }}
         loop

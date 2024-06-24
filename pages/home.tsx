@@ -84,7 +84,7 @@ export default function Home() {
         <br />
         <br />
         <br />
-        <Instagram />
+        {/* <Instagram /> */}
         <div style={{ position: 'relative', width: '100%', height: 'auto' }}>
           <Center>
           <img
