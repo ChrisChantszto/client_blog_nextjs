@@ -39,14 +39,6 @@ export default function CampaignBlog() {
     fetchPosts();
   }, []);
 
-  const cardStyle = {
-    width: '390px',
-    height: '500px',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'space-between'
-  };
-
   return (
     <Container fluid style={{ backgroundColor: '#433D33' }}>
       <br />
@@ -62,7 +54,7 @@ export default function CampaignBlog() {
       >
         {posts.map((post, index) => (
           <Carousel.Slide key={index}>
-            <Card padding="xl" component='a' target="_blank" radius="md" style={cardStyle}>
+            <Card padding="xl" component='a' target="_blank" radius="md">
               <Card.Section component="a" href={post.link} target="_blank">
                 <Image src={post.featured_image} height={300} alt={post.title} />
               </Card.Section>
