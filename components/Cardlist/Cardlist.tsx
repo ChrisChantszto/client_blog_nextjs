@@ -3,12 +3,14 @@ import { useEffect, useState } from 'react';
 import { Carousel } from '@mantine/carousel';
 import { Progress, Image, Loader } from '@mantine/core';
 import axios from 'axios';
+import { useMediaQuery } from '@mantine/hooks';
 
 export default function PhotoCarousel() {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [images, setImages] = useState<{ url: string; title: string; link: string }[]>([]);
   const [embla, setEmbla] = useState<any>(null); // Adjust Embla type as per Mantine documentation or typings
   const [loading, setLoading] = useState(true); // State to track loading state
+  const isMobile = useMediaQuery('(max-width: 768px)');
 
   useEffect(() => {
     const fetchImages = async () => {
@@ -100,7 +102,7 @@ export default function PhotoCarousel() {
           window.open(item.link, '_blank');
         }}
       >
-        {item.title}
+        {isMobile? null : item.title}
       </div>
     </Carousel.Slide>
   ));
