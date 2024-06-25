@@ -2,6 +2,7 @@ import { useEffect, useState, CSSProperties } from "react";
 import { Text, Title, Divider, Image, Stack, Button, Grid, Container, Badge, Center } from "@mantine/core";
 import { IconPlus } from "@tabler/icons-react";
 import axios from "axios";
+import { useMediaQuery } from "@mantine/hooks";
 
 interface Post {
   featured_image: string;
@@ -15,6 +16,7 @@ interface Post {
 
 export default function Postlist() {
   const [posts, setPosts] = useState<Post[]>([]);
+  const isMobile = useMediaQuery('(max-width: 768px)');
 
   useEffect(() => {
     // Fetch posts from the API
@@ -129,7 +131,7 @@ export default function Postlist() {
               style={{ width: '100%', height: 'auto' }}
             />
             <br />
-            <Title order={2}>FOLLOW US!</Title>
+            {isMobile ? null : <Title order={2}>FOLLOW US!</Title>}
             <br />
             <Stack gap="xs">
               <Grid>
@@ -141,7 +143,7 @@ export default function Postlist() {
                   </a>
                 </Grid.Col>
                 <Grid.Col span={9}>
-                  <Text fw={800}>Play Eat Easy 玩食易</Text>
+                  {isMobile ? null : <Text fw={800}>Play Eat Easy 玩食易</Text>}
                 </Grid.Col>
                 <Grid.Col span={3}>
                   <a href="https://www.instagram.com/playeateasy/?hl=en" target="_blank" rel="noopener noreferrer">
@@ -162,7 +164,7 @@ export default function Postlist() {
                   </a>
                 </Grid.Col>
                 <Grid.Col span={9}>
-                  <Text fw={800}>PLAYEATEASY</Text>
+                  {isMobile ? null : <Text fw={800}>PLAYEATEASY</Text>}
                 </Grid.Col>
                 <Grid.Col span={3}>
                   <a href="https://www.youtube.com/@playeateasy" target="_blank" rel="noopener noreferrer">
@@ -173,7 +175,7 @@ export default function Postlist() {
                   </a>
                 </Grid.Col>
                 <Grid.Col span={9}>
-                  <Text fw={800}>@PLAYEATEASY</Text>
+                  {isMobile ? null : <Text fw={800}>@PLAYEATEASY</Text>}
                 </Grid.Col>
                 <Grid.Col span={3}>
                   <a href="https://www.youtube.com/@playeateasy" target="_blank" rel="noopener noreferrer">
@@ -190,7 +192,7 @@ export default function Postlist() {
                   </a>
                 </Grid.Col>
                 <Grid.Col span={9}>
-                  <Text fw={800}>Play Eat Easy 玩食易</Text>
+                  {isMobile ? null : <Text fw={800}>Play Eat Easy 玩食易</Text>}
                 </Grid.Col>
                 <Grid.Col span={3}>
                   <a href="https://www.linkedin.com/company/lab-20?originalSubdomain=hk" target="_blank" rel="noopener noreferrer">
@@ -201,7 +203,7 @@ export default function Postlist() {
                   </a>
                 </Grid.Col>
                 <Grid.Col span={9}>
-                  <Text fw={800}>LAB20 MEDIA</Text>
+                  {isMobile ? null : <Text fw={800}>LAB20 MEDIA</Text>}
                 </Grid.Col>
                 </Grid>
             </Stack> 
