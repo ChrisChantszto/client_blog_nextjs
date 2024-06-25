@@ -110,7 +110,7 @@ export default function HeaderMegaMenu() {
           <Group gap="xl">
             {/* <IconSearch color='#FF6031' /> */}
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M21 21L17.5001 17.5M20 11.5C20 16.1944 16.1944 20 11.5 20C6.80558 20 3 16.1944 3 11.5C3 6.80558 6.80558 3 11.5 3C16.1944 3 20 6.80558 20 11.5Z" stroke="#FF6031" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+              <path d="M21 21L17.5001 17.5M20 11.5C20 16.1944 16.1944 20 11.5 20C6.80558 20 3 16.1944 3 11.5C3 6.80558 6.80558 3 11.5 3C16.1944 3 20 6.80558 20 11.5Z" stroke="#FF6031" strokeWidth="2" stroke-linecap="round" stroke-linejoin="round" />
             </svg>
             <Button color="#FF6031" radius="xl" leftSection={<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path fill-rule="evenodd" clip-rule="evenodd" d="M12 4C10.067 4 8.5 5.567 8.5 7.5C8.5 9.433 10.067 11 12 11C13.933 11 15.5 9.433 15.5 7.5C15.5 5.567 13.933 4 12 4ZM6.5 7.5C6.5 4.46243 8.96244 2 12 2C15.0376 2 17.5 4.46243 17.5 7.5C17.5 10.5376 15.0376 13 12 13C8.96244 13 6.5 10.5376 6.5 7.5ZM12 17C8.8088 17 5.89333 18.389 3.7276 20.686C3.34873 21.0878 2.71584 21.1065 2.314 20.7276C1.91216 20.3487 1.89353 19.7158 2.2724 19.314C4.77826 16.6562 8.20523 15 12 15C15.7948 15 19.2217 16.6562 21.7276 19.314C22.1065 19.7158 22.0878 20.3487 21.686 20.7276C21.2842 21.1065 20.6513 21.0878 20.2724 20.686C18.1067 18.389 15.1912 17 12 17Z" fill="white"/>
@@ -128,7 +128,7 @@ export default function HeaderMegaMenu() {
         onClose={closeDrawer}
         size="100%"
         padding="md"
-        title="Navigation"
+        title="Play Eat Easy - 玩食易"
         hiddenFrom="sm"
         zIndex={1000000}
       >
@@ -136,19 +136,9 @@ export default function HeaderMegaMenu() {
           <Divider my="sm" />
 
           <a href="#" className={classes.link}>
-            Home
+            主頁
           </a>
-          <UnstyledButton className={classes.link} onClick={toggleLinks}>
-            <Center inline>
-              <Box component="span" mr={5}>
-                Features
-              </Box>
-              <IconChevronDown
-                style={{ width: rem(16), height: rem(16) }}
-                color={theme.colors.blue[6]}
-              />
-            </Center>
-          </UnstyledButton>
+
           <Collapse in={linksOpened}>
             {mockdata.map((item) => (
               <UnstyledButton className={classes.subLink} key={item.title}>
@@ -169,18 +159,12 @@ export default function HeaderMegaMenu() {
             ))}
           </Collapse>
           <a href="#" className={classes.link}>
-            Learn
+            優惠活動
           </a>
           <a href="#" className={classes.link}>
-            Academy
+            購物
           </a>
 
-          <Divider my="sm" />
-
-          <Group justify="center" grow pb="xl" px="md">
-            <Button variant="default">Log in</Button>
-            <Button>Sign up</Button>
-          </Group>
         </ScrollArea>
       </Drawer>
     </Box>

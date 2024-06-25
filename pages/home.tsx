@@ -44,12 +44,7 @@ export default function Home() {
       style={{ backgroundColor: '#F5F5F5' }}
     >
       <AppShell.Header>
-        <Burger
-          opened={opened}
-          onClick={toggle}
-          hiddenFrom="sm"
-          size="sm"
-        />
+
         <HeaderMegaMenu />
       </AppShell.Header>
       <AppShell.Main>

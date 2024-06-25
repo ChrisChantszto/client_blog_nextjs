@@ -3,12 +3,14 @@ import { useEffect, useState } from 'react';
 import { Progress, Image, Loader, Badge } from '@mantine/core';
 import { Carousel } from '@mantine/carousel';
 import axios from 'axios';
+import { useMediaQuery } from '@mantine/hooks';
 
 export default function PhotoCarousel() {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [images, setImages] = useState<{ url: string; title: string; link: string }[]>([]);
   const [embla, setEmbla] = useState<any>(null); // Adjust Embla type as per Mantine documentation or typings
   const [loading, setLoading] = useState(true); // State to track loading state
+  const isMobile = useMediaQuery('(max-width: 768px)');
 
   useEffect(() => {
     const fetchImages = async () => {
@@ -87,7 +89,7 @@ export default function PhotoCarousel() {
         <Badge color="#FF6031" variant="filled" size="lg" style={{ marginBottom: '10px' }}>
           最新
         </Badge>
-        {item.title}
+        {isMobile ? null : item.title}
       </div>
     </Carousel.Slide>
   ));
@@ -113,7 +115,6 @@ export default function PhotoCarousel() {
       }
 
       .gradient-overlay {
-        position: absolute;
         bottom: 0;
         left: 0;
         right: 0;
