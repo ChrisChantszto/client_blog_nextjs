@@ -158,11 +158,32 @@ export default function HeaderMegaMenu() {
               </UnstyledButton>
             ))}
           </Collapse>
-          <a href="#" className={classes.link}>
-            優惠活動
+          <a href="https://playeateasy.com/category/%e5%84%aa%e6%83%a0%e6%b8%9b%e5%83%b9/" className={classes.link}>
+            優惠減價
+          </a>
+          <a href="https://playeateasy.com/category/%e6%9c%83%e5%93%a1%e6%b4%bb%e5%8b%95/" className={classes.link}>
+            會員活動
+          </a>
+          <a href="https://playeateasy.com/category/%e7%8e%a9%e6%a8%82/" className={classes.link}>
+            玩樂
+          </a>
+          <a href="https://playeateasy.com/category/%e9%a3%b2%e9%a3%9f/" className={classes.link}>
+            飲食
+          </a>
+          <a href="https://playeateasy.com/category/%e8%b3%bc%e7%89%a9/" className={classes.link}>
+            購物
           </a>
           <a href="#" className={classes.link}>
-            購物
+            娛樂熱話
+          </a>
+          <a href="#" className={classes.link}>
+            愛生活
+          </a>
+          <a href="#" className={classes.link}>
+            旅遊
+          </a>
+          <a href="#" className={classes.link}>
+            北上旅遊
           </a>
 
         </ScrollArea>
