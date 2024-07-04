@@ -82,7 +82,7 @@ export default function FoodPostlist() {
     },
     postTitle: {
       // backgroundColor: '#F5F5F5', // Ensure consistent background color for titles
-      marginBottom: '0.5rem', // Adjust spacing as needed
+      marginBottom: '0.5rem',
     },
   };
 
@@ -92,7 +92,7 @@ export default function FoodPostlist() {
       <br />
       <Divider size="sm" />
       <br />
-      <Group spacing="xs">
+      <Group gap="xs">
         {categories.map((category) => (
           <Button
             key={category}
