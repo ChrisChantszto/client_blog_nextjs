@@ -123,13 +123,13 @@ export default function Postlist() {
         </Grid.Col>
         <Grid.Col span={2}>
           <div style={styles.banner}>
-            <Image
+            {/* <Image
               radius="md"
               src="https://via.placeholder.com/200x400.png?text=Banner"
               alt="Banner"
               fit="contain"
               style={{ width: '100%', height: 'auto' }}
-            />
+            /> */}
             <br />
             {isMobile ? null : <Title order={2}>FOLLOW US!</Title>}
             <br />
