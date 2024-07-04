@@ -1,9 +1,10 @@
-import { Container, Title, Group, Card, Image, Button, Badge, Text } from '@mantine/core';
+import { Container, Title, Group, Badge, Text } from '@mantine/core';
 import { useEffect, useState } from "react";
 import { Carousel } from '@mantine/carousel';
 import axios from 'axios';
 
-// Define a type for the post object
+import { useMediaQuery } from '@mantine/hooks';
+
 interface Post {
   title: string;
   link: string;
@@ -21,8 +22,9 @@ function truncateTitle(title: string, maxWords: number = 19): string {
 }
 
 export default function FoodCampaignBlog() {
-  // Use the Post type for the state variable
   const [posts, setPosts] = useState<Post[]>([]);
+
+  const isMobile = useMediaQuery('(min-width: 56.25em)');
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -48,32 +50,33 @@ export default function FoodCampaignBlog() {
   }, []);
 
   return (
-    <Container fluid style={{ backgroundColor: '#E9E3D9' }}>
+    <Container fluid style={{ backgroundColor: '#E9E3D9', height: '500px' }}>
       <br />
       <Title order={2} px={30} style={{ fontWeight: 800, color: 'black' }}>人氣話題 #HOT TOPIC</Title>
       <br />
       <Carousel
-        height={600}
-        slideSize={{ base: '100%', sm: '50%', md: '23%' }}
-        slideGap={{ base: 0, sm: 'md' }}
+        height={300}
+        slideSize={isMobile ? "50%" : "100%"}
+        slideGap="md"
         loop
         align="start"
       >
         {posts.map((post, index) => (
           <Carousel.Slide key={index}>
-            <Card padding="xl" component='a' target="_blank" radius="md">
-              <Card.Section component="a" href={post.link} target="_blank">
-                <Image src={post.featured_image} height={300} alt={post.title} />
-              </Card.Section>
-              
-              <Group mt="md" mb="xs">
-                <Badge color="#FF6031">最新</Badge>
-              </Group>
-              <Text size="sg" style={{ color: 'black' }} fw={500}>
-                {new Date(post.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })} / by {post.author}
-              </Text>
-              <Title order={3}>{truncateTitle(post.title)}</Title>
-            </Card>
+            <div style={{ display: 'flex', height: '100%', backgroundColor: 'transparent' }}>
+              <div style={{ flex: '0 0 50%', height: '100%' }}>
+                <img src={post.featured_image} alt={post.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+              </div>
+              <div style={{ flex: '1', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '0 20px', backgroundColor: 'white' }}>
+                <Group mb="xs">
+                  <Badge autoContrast color="#69FFB3">飲食</Badge>
+                </Group>
+                {/* <Text size="sm" style={{ color: 'black' }} fw={500}>
+                  {new Date(post.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })} / by {post.author}
+                </Text> */}
+                <Title order={3} style={{ marginTop: '10px', marginBottom: '10px' }}><a href={post.link} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'black', fontWeight: 'bold' }}>{truncateTitle(post.title)}</a></Title>
+              </div>
+            </div>
           </Carousel.Slide>
         ))}
       </Carousel>
