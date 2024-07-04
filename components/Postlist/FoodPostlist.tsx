@@ -1,5 +1,5 @@
 import { useEffect, useState, CSSProperties } from "react";
-import { Text, Title, Divider, Image, Stack, Button, Grid, Container, Badge, Center } from "@mantine/core";
+import { Text, Title, Divider, Image, Stack, Button, Grid, Container, Badge, Group, Center } from "@mantine/core";
 import { IconPlus } from "@tabler/icons-react";
 import axios from "axios";
 import { useMediaQuery } from "@mantine/hooks";
@@ -14,16 +14,20 @@ interface Post {
   date: string;
 }
 
-export default function Postlist() {
+export default function FoodPostlist() {
   const [posts, setPosts] = useState<Post[]>([]);
   const isMobile = useMediaQuery('(max-width: 768px)');
+
+  const [activeButton, setActiveButton] = useState('全部');
+
+  const categories = ['全部', '新品發佈', '人氣美食', '餐廳情報', '美食攻略', '小食甜品', '酒店餐飲'];
 
   useEffect(() => {
     // Fetch posts from the API
     const fetchPosts = async () => {
       try {
         const response = await axios.get(
-          'https://public-api.wordpress.com/rest/v1.1/sites/playeateasy.com/posts/'
+          'https://public-api.wordpress.com/rest/v1.1/sites/playeateasy.com/posts/?category=%E9%A3%B2%E9%A3%9F'
         );
         const fetchedPosts = response.data.posts.slice(0, 4).map((post: any) => ({
           featured_image: post.featured_image,
@@ -84,10 +88,34 @@ export default function Postlist() {
 
   return (
     <Container fluid style={{ backgroundColor: '#F5F5F5' }} >
-      <Title fw={800} order={1} c="#FF6031">SELECTED POST</Title>
-      <Title fw={800} order={2}>精選文章</Title>
+      <Title fw={800} order={2}>全部文章</Title>
       <br />
       <Divider size="sm" />
+      <br />
+      <Group spacing="xs">
+        {categories.map((category) => (
+          <Button
+            key={category}
+            variant="outline"
+            radius="xl"
+            color={activeButton === category ? '#FF6031' : 'gray'}
+            onClick={() => setActiveButton(category)}
+            styles={(theme) => ({
+              root: {
+                backgroundColor: activeButton === category ? "#FF6031" : 'transparent',
+                border: `1px solid ${activeButton === category ? "#FF6031" : theme.colors.gray[5]}`,
+                color: activeButton === category ? theme.white : theme.colors.gray[7],
+                '&:hover': {
+                  backgroundColor: "#FF6031",
+                  color: theme.white,
+                },
+              },
+            })}
+          >
+            {category}
+          </Button>
+        ))}
+      </Group>
       <br />
       <Grid>
         <Grid.Col span={10}>
@@ -115,7 +143,10 @@ export default function Postlist() {
                     <Title style={styles.postTitle} order={2}>{post.title}</Title>
                   </a>
                   <Title style={styles.postTitle} order={5}>{new Date(post.date).toLocaleDateString()}</Title>
-                  <Badge color="#FF6031">最新</Badge>
+                  <Group>
+                    <Badge color="#FF6031">最新</Badge>
+                    <Badge autoContrast color="#69FFB3">飲食</Badge>
+                  </Group>
                 </Grid.Col>
               </Grid>
             ))}
