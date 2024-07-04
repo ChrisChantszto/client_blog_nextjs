@@ -167,7 +167,7 @@ export default function HeaderMegaMenu() {
           <a href="https://playeateasy.com/category/%e7%8e%a9%e6%a8%82/" className={classes.link}>
             玩樂
           </a>
-          <a href="https://playeateasy.com/category/%e9%a3%b2%e9%a3%9f/" className={classes.link}>
+          <a href="/food" className={classes.link}>
             飲食
           </a>
           <a href="https://playeateasy.com/category/%e8%b3%bc%e7%89%a9/" className={classes.link}>
