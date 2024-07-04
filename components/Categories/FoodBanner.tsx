@@ -66,7 +66,7 @@ export default function FoodBanner() {
                     justifyContent: 'center'
                 }}
             >
-                <Group spacing="lg">
+                <Group gap="lg">
                     {categories.map((category, index) => (
                         <Button 
                             key={index}
