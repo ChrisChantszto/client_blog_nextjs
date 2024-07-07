@@ -14,7 +14,7 @@ interface Post {
   date: string;
 }
 
-export default function EntertainmentPostlist() {
+export default function TravelPostlist() {
   const [posts, setPosts] = useState<Post[]>([]);
   const isMobile = useMediaQuery('(max-width: 768px)');
 
@@ -113,7 +113,7 @@ export default function EntertainmentPostlist() {
       <br />
       <Divider size="sm" />
       <br />
-      <Group gap="xs">
+      {/* <Group gap="xs">
         {categories.map((category) => (
           <Button
             key={category}
@@ -136,7 +136,7 @@ export default function EntertainmentPostlist() {
             {category}
           </Button>
         ))}
-      </Group>
+      </Group> */}
       <br />
       <Grid>
         <Grid.Col span={10}>
@@ -166,7 +166,7 @@ export default function EntertainmentPostlist() {
                   <Title style={styles.postTitle} order={5}>{new Date(post.date).toLocaleDateString()}</Title>
                   <Group>
                     <Badge color="#FF6031">最新</Badge>
-                    <Badge autoContrast color="#6FB3FF">娛樂</Badge>
+                    <Badge autoContrast color="#C79AFF">旅遊</Badge>
                   </Group>
                 </Grid.Col>
               </Grid>
