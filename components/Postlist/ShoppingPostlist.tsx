@@ -1,5 +1,5 @@
 import { useEffect, useState, CSSProperties } from "react";
-import { Text, Title, Divider, Image, Stack, Button, Grid, Container, Badge, Group, Center } from "@mantine/core";
+import { Text, Title, Divider, Image, Stack, Button, Grid, Container, Badge, Group, Center, Select } from "@mantine/core";
 import { IconPlus } from "@tabler/icons-react";
 import axios from "axios";
 import { useMediaQuery } from "@mantine/hooks";
@@ -21,6 +21,8 @@ export default function ShoppingPostlist() {
   const [activeButton, setActiveButton] = useState('全部');
 
   const categories = ['全部', '商場', '開倉優惠', '產品試用', '新店開業', '化妝品'];
+
+  const [sortOrder, setSortOrder] = useState('newest');
 
   useEffect(() => {
     // Fetch posts from the API
@@ -88,7 +90,26 @@ export default function ShoppingPostlist() {
 
   return (
     <Container fluid style={{ backgroundColor: '#F5F5F5' }} >
-      <Title fw={800} order={2}>全部文章</Title>
+      <Group justify="space-between">
+        <Title fw={800} order={2}>全部文章</Title>
+        <Group gap="xs">
+          <Text>排序:</Text>
+          <Text
+            fw={sortOrder === 'newest' ? 700 : 400}
+            style={{ cursor: 'pointer' }}
+            onClick={() => setSortOrder('newest')}
+          >
+            最新
+          </Text>
+          <Text
+            fw={sortOrder === 'mostHit' ? 700 : 400}
+            style={{ cursor: 'pointer' }}
+            onClick={() => setSortOrder('mostHit')}
+          >
+            最HIT
+          </Text>
+        </Group>
+      </Group>
       <br />
       <Divider size="sm" />
       <br />
