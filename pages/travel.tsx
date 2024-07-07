@@ -54,6 +54,10 @@ export default function Life() {
         <br />
         <TravelCard />
         <br />
+        <TravelCarousel />
+        <br />
+        <br />
+        <br />
         <TravelPostlist />
         <br />
         <br />

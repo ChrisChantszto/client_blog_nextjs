@@ -1,94 +1,162 @@
+import '@mantine/carousel/styles.css';
+import { useEffect, useState } from 'react';
+import { Progress, Image, Center, Loader, rem, Badge, Title } from '@mantine/core';
 import { Carousel } from '@mantine/carousel';
+import axios from 'axios';
+import { IconArrowRight, IconArrowLeft } from '@tabler/icons-react';
 import { useMediaQuery } from '@mantine/hooks';
-import { Button, Paper, Title, useMantineTheme, Text } from '@mantine/core';
-import classes from './Demo.module.css';
-
-const data = [
-  {
-    image:
-      'https://images.unsplash.com/photo-1508193638397-1c4234db14d8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80',
-    title: 'Best forests to visit in North America',
-    category: 'nature',
-  },
-  {
-    image:
-      'https://images.unsplash.com/photo-1559494007-9f5847c49d94?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80',
-    title: 'Hawaii beaches review: better than you think',
-    category: 'beach',
-  },
-  {
-    image:
-      'https://images.unsplash.com/photo-1608481337062-4093bf3ed404?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80',
-    title: 'Mountains at night: 12 best locations to enjoy the view',
-    category: 'nature',
-  },
-  {
-    image:
-      'https://images.unsplash.com/photo-1507272931001-fc06c17e4f43?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80',
-    title: 'Aurora in Norway: when to visit for best experience',
-    category: 'nature',
-  },
-  {
-    image:
-      'https://images.unsplash.com/photo-1510798831971-661eb04b3739?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80',
-    title: 'Best places to visit this winter',
-    category: 'tourism',
-  },
-  {
-    image:
-      'https://images.unsplash.com/photo-1582721478779-0ae163c05a60?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=400&q=80',
-    title: 'Active volcanos reviews: travel at your own risk',
-    category: 'nature',
-  },
-];
-
-interface CardProps {
-  image: string;
-  title: string;
-  category: string;
-}
-
-function Card({ image, title, category }: CardProps) {
-  return (
-    <Paper
-      shadow="md"
-      p="xl"
-      radius="md"
-      style={{ backgroundImage: `url(${image})` }}
-      className={classes.card}
-    >
-      <div>
-        <Text className={classes.category} size="xs">
-          {category}
-        </Text>
-        <Title order={3} className={classes.title}>
-          {title}
-        </Title>
-      </div>
-      <Button variant="white" color="dark">
-        Read article
-      </Button>
-    </Paper>
-  );
-}
 
 export default function TravelCarousel() {
-  const theme = useMantineTheme();
-  const mobile = useMediaQuery(`(max-width: ${theme.breakpoints.sm})`);
-  const slides = data.map((item) => (
-    <Carousel.Slide key={item.title}>
-      <Card {...item} />
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const [images, setImages] = useState<{ url: string; title: string; link: string }[]>([]);
+  const [embla, setEmbla] = useState<any>(null); // Adjust Embla type as per Mantine documentation or typings
+  const [loading, setLoading] = useState(true); // State to track loading state
+  const isMobile = useMediaQuery('(max-width: 768px)');
+
+  useEffect(() => {
+    const fetchImages = async () => {
+      try {
+        const response = await axios.get(
+          'https://public-api.wordpress.com/rest/v1.1/sites/playeateasy.com/posts/?category=%E5%A8%9B%E6%A8%82'
+        );
+        const posts = response.data.posts;
+        const fetchedImages = posts
+          .map((post: any) => ({
+            url: post.featured_image,
+            title: post.title, // Retrieve title of the post
+            link: post.URL,
+          }))
+          .filter((item: { url: string; title: string; link: string }) => item.url && item.title && item.link)
+          .slice(0, 5); // Take the first 5 images
+
+        setImages(fetchedImages);
+        setLoading(false); // Update loading state once images are fetched
+      } catch (error) {
+        console.error('Error fetching images:', error);
+        setLoading(false); // Update loading state in case of error
+      }
+    };
+
+    fetchImages();
+  }, []);
+
+  const handleScroll = () => {
+    if (embla) {
+      const progress = Math.max(0, Math.min(1, embla.scrollProgress()));
+      setScrollProgress(progress * 100);
+    }
+  };
+
+  useEffect(() => {
+    if (embla) {
+      embla.on('scroll', handleScroll);
+      handleScroll();
+    }
+  }, [embla]);
+
+  const slides = images.map((item, index) => (
+    <Carousel.Slide
+      key={index}
+      onClick={() => window.open(item.link, '_blank')}
+      style={{
+        position: 'relative',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: '5px',
+        overflow: 'hidden',
+      }}
+    >
+      <div className="image-wrapper">
+        <Image src={item.url} alt={`Image ${index}`} style={{ borderRadius: '5px' }} />
+      </div>
+      <div className="gradient-overlay"></div>
+      <div
+        style={{
+          position: 'absolute',
+          bottom: '30px',
+          left: '15px',
+          right: '15px',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'flex-start',
+          color: 'white',
+          textAlign: 'left',
+          fontSize: '18px',
+          fontWeight: 'bold',
+          textShadow: '1px 1px 2px rgba(0.5, 0.5, 0.5, 0.6)',
+        }}
+      >
+        <Badge color="#FF6031" variant="filled" size="lg" style={{ marginBottom: '10px' }}>
+          最新
+        </Badge>
+        {isMobile ? null : item.title}
+      </div>
     </Carousel.Slide>
   ));
 
+  useEffect(() => {
+    // This code will run only on the client side
+    const styles = document.createElement('style');
+    styles.innerHTML = `
+      .image-wrapper {
+        position: relative;
+        width: 100%;
+        padding-top: 150%; /* 4:3 Aspect Ratio */
+      }
+
+      .image-wrapper img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 5px; /* Ensure image has rounded corners */
+      }
+
+      .gradient-overlay {
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 80px;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0));
+        border-radius: 0 0 5px 5px; /* Ensure gradient overlay has rounded corners */
+      }
+    `;
+    document.head.appendChild(styles);
+
+    // Cleanup function to remove the style tag if component unmounts
+    return () => {
+      document.head.removeChild(styles);
+    };
+  }, []); // Empty dependency array ensures this effect runs only once
+
+  if (loading) {
+    return <Loader />; // Display loader while images are being fetched
+  }
+
   return (
-    <Carousel
-      slideSize={{ base: '100%', sm: '50%' }}
-      slideGap={{ base: 'xl', sm: 2 }}
-      align="start"
-      slidesToScroll={mobile ? 1 : 2}
-    >
-      {slides}
-    </Carousel>
+    <>
+        <Center>
+        <Title order={3} size="h1" w={700} style={{ marginBottom: '20px', textAlign: 'center' }}>
+            專題玩樂遊
+        </Title>
+      </Center>
+      <Carousel
+        withIndicators
+        loop
+        dragFree
+        slideSize="33.333%"
+        slideGap="md"
+        nextControlIcon={<IconArrowRight style={{ width: rem(60), height: rem(60), color: '#FF6031' }} />}
+        previousControlIcon={<IconArrowLeft style={{ width: rem(60), height: rem(60), color: '#FF6031' }} />}
+        height={1200} // Adjust the height as needed
+        getEmblaApi={setEmbla}
+        initialSlide={2}
+      >
+        {slides}
+      </Carousel>
+    </>
   );
 }
