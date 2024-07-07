@@ -83,7 +83,7 @@ export default function HeaderMegaMenu() {
             <a href="https://playeateasy.com/category/%e6%9c%83%e5%93%a1%e6%b4%bb%e5%8b%95/" className={classes.link} color="#222222">
               會員活動
             </a>
-            <a href="https://playeateasy.com/category/%e7%8e%a9%e6%a8%82/" className={classes.link} color="#222222">
+            <a href="/play" className={classes.link} color="#222222">
               玩樂
             </a>
             <a href="/food" className={classes.link} color="#222222">
@@ -164,7 +164,7 @@ export default function HeaderMegaMenu() {
           <a href="https://playeateasy.com/category/%e6%9c%83%e5%93%a1%e6%b4%bb%e5%8b%95/" className={classes.link}>
             會員活動
           </a>
-          <a href="https://playeateasy.com/category/%e7%8e%a9%e6%a8%82/" className={classes.link}>
+          <a href="/play" className={classes.link}>
             玩樂
           </a>
           <a href="/food" className={classes.link}>
