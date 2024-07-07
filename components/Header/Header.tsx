@@ -89,7 +89,7 @@ export default function HeaderMegaMenu() {
             <a href="/food" className={classes.link} color="#222222">
               飲食
             </a>
-            <a href="https://playeateasy.com/category/%e8%b3%bc%e7%89%a9/" className={classes.link} color="#222222">
+            <a href="/shopping" className={classes.link} color="#222222">
               購物
             </a>
             <a href="#" className={classes.link} color="#222222">
@@ -170,7 +170,7 @@ export default function HeaderMegaMenu() {
           <a href="/food" className={classes.link}>
             飲食
           </a>
-          <a href="https://playeateasy.com/category/%e8%b3%bc%e7%89%a9/" className={classes.link}>
+          <a href="/shopping" className={classes.link}>
             購物
           </a>
           <a href="#" className={classes.link}>
