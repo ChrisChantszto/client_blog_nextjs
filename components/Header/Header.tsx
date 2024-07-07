@@ -92,7 +92,7 @@ export default function HeaderMegaMenu() {
             <a href="/shopping" className={classes.link} color="#222222">
               購物
             </a>
-            <a href="#" className={classes.link} color="#222222">
+            <a href="/entertainment" className={classes.link} color="#222222">
               娛樂熱話
             </a>
             <a href="#" className={classes.link} color="#222222">
@@ -173,7 +173,7 @@ export default function HeaderMegaMenu() {
           <a href="/shopping" className={classes.link}>
             購物
           </a>
-          <a href="#" className={classes.link}>
+          <a href="/entertainment" className={classes.link}>
             娛樂熱話
           </a>
           <a href="#" className={classes.link}>
