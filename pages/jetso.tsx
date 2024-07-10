@@ -12,6 +12,7 @@ import ShoppingCampaignblog from '@/components/Campaignblog/ShoppingCampaignblog
 import JetsoBanner from '@/components/Categories/JetsoBanner';
 import JetsoCard from '@/components/Cardlist/JetsoCard';
 import JetsoPostlist from '@/components/Postlist/JetsoPostlist';
+import JetsoCampaignblog from '@/components/Campaignblog/JetsoCampaignblog';
 
 export default function Jetso() {
   const [opened, { toggle }] = useDisclosure();
@@ -52,6 +53,10 @@ export default function Jetso() {
         <JetsoBanner />
         <br />
         <JetsoCard />
+        <br />
+        <br />
+        <br />
+        <JetsoCampaignblog />
         <br />
         <JetsoPostlist />
         <br />
