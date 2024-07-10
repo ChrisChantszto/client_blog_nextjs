@@ -77,7 +77,7 @@ export default function HeaderMegaMenu() {
           <img src={logoUrl} alt="Your Logo" style={{ height: 30, cursor: 'pointer' }} />
 
           <Group h="100%" gap={0} visibleFrom="sm">
-            <a href="https://playeateasy.com/category/%e5%84%aa%e6%83%a0%e6%b8%9b%e5%83%b9/" className={classes.link} color="#222222">
+            <a href="/jetso" className={classes.link} color="#222222">
               優惠減價
             </a>
             <a href="https://playeateasy.com/category/%e6%9c%83%e5%93%a1%e6%b4%bb%e5%8b%95/" className={classes.link} color="#222222">
@@ -158,7 +158,7 @@ export default function HeaderMegaMenu() {
               </UnstyledButton>
             ))}
           </Collapse>
-          <a href="https://playeateasy.com/category/%e5%84%aa%e6%83%a0%e6%b8%9b%e5%83%b9/" className={classes.link}>
+          <a href="/jetso" className={classes.link}>
             優惠減價
           </a>
           <a href="https://playeateasy.com/category/%e6%9c%83%e5%93%a1%e6%b4%bb%e5%8b%95/" className={classes.link}>
