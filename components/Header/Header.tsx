@@ -74,8 +74,9 @@ export default function HeaderMegaMenu() {
     <Box pb={120}>
       <header className={classes.header}>
         <Group justify="space-between" h="100%">
+        <a href="https://www.playeateasy.com/">
           <img src={logoUrl} alt="Your Logo" style={{ height: 30, cursor: 'pointer' }} />
-
+        </a>
           <Group h="100%" gap={0} visibleFrom="sm">
             <a href="/jetso" className={classes.link} color="#222222">
               優惠減價
