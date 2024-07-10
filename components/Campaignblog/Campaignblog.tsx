@@ -1,4 +1,4 @@
-import { Container, Title, Group, Card, Image, Button, Badge, Text } from '@mantine/core';
+import { Container, Title, Group, Card, Image, Button, Badge, Box, Text } from '@mantine/core';
 import { useEffect, useState } from "react";
 import { Carousel } from '@mantine/carousel';
 import axios from 'axios';
@@ -62,7 +62,7 @@ export default function CampaignBlog() {
       >
         {posts.map((post, index) => (
           <Carousel.Slide key={index}>
-            <Card padding="xl" component='a' target="_blank" radius="md">
+            <Card padding="xl" component='a' target="_blank" radius="md" style={{ height: '550px', display: 'flex', flexDirection: 'column' }}>
               <Card.Section component="a" href={post.link} target="_blank">
                 <Image src={post.featured_image} height={300} alt={post.title} />
               </Card.Section>
@@ -70,10 +70,15 @@ export default function CampaignBlog() {
               <Group mt="md" mb="xs">
                 <Badge color="#FF6031">最新</Badge>
               </Group>
-              <Text size="sg" style={{ color: 'black' }} fw={500}>
+              <Text size="sm" style={{ color: 'black' }} fw={500}>
                 {new Date(post.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })} / by {post.author}
               </Text>
-              <Title order={3}>{truncateTitle(post.title)}</Title>
+              <Box style={{ height: '98px', overflow: 'hidden' }}>
+                <Title order={3}>
+                  {post.title}
+                </Title>
+              </Box>
+              {/* <Title order={3}>{truncateTitle(post.title)}</Title> */}
             </Card>
           </Carousel.Slide>
         ))}
