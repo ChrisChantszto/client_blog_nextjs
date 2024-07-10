@@ -80,7 +80,7 @@ export default function HeaderMegaMenu() {
             <a href="/jetso" className={classes.link} color="#222222">
               優惠減價
             </a>
-            <a href="https://playeateasy.com/category/%e6%9c%83%e5%93%a1%e6%b4%bb%e5%8b%95/" className={classes.link} color="#222222">
+            <a href="/membership" className={classes.link} color="#222222">
               會員活動
             </a>
             <a href="/play" className={classes.link} color="#222222">
@@ -161,7 +161,7 @@ export default function HeaderMegaMenu() {
           <a href="/jetso" className={classes.link}>
             優惠減價
           </a>
-          <a href="https://playeateasy.com/category/%e6%9c%83%e5%93%a1%e6%b4%bb%e5%8b%95/" className={classes.link}>
+          <a href="/membership" className={classes.link}>
             會員活動
           </a>
           <a href="/play" className={classes.link}>
