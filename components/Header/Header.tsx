@@ -63,7 +63,7 @@ const mockdata = [
   },
 ];
 
-const logoUrl = 'https://playeateasy.com/wp-content/uploads/2022/10/橫pee-logo-1-1.gif';
+const logoUrl = 'https://sismapblog.wpcomstaging.com/wp-content/uploads/2022/10/%E6%A9%ABpee-logo-1-1.gif';
 
 export default function HeaderMegaMenu() {
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] = useDisclosure(false);
