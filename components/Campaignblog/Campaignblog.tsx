@@ -50,8 +50,8 @@ export default function CampaignBlog() {
   return (
     <Container fluid style={{ backgroundColor: '#433D33' }}>
       <br />
-      <Title order={1} px={30} style={{ fontWeight: 800, color: 'white' }}>CAMPAIGN BLOG</Title>
-      <Title order={1} px={30} style={{ fontWeight: 800, color: 'white' }}>最新活動</Title>
+      <Title order={1} px={30} style={{ fontWeight: 800, color: 'white' }}>Summer Fun</Title>
+      <Title order={1} px={30} style={{ fontWeight: 800, color: 'white' }}>夏日活動</Title>
       <br />
       <Carousel
         height={600}
