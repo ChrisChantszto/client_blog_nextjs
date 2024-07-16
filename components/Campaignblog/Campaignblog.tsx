@@ -28,7 +28,7 @@ export default function CampaignBlog() {
     const fetchPosts = async () => {
       try {
         const response = await axios.get(
-          "https://public-api.wordpress.com/rest/v1.1/sites/playeateasy.com/posts/?category=%e5%84%aa%e6%83%a0%e6%b8%9b%e5%83%b9"
+          "https://public-api.wordpress.com/rest/v1.1/sites/playeateasy.com/posts/?category=%E7%8E%A9%E6%A8%82"
         );
         const fetchedPosts = response.data.posts.map((post: any) => ({
           title: post.title,
