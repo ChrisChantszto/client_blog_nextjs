@@ -1,8 +1,9 @@
-import { useEffect, useState, CSSProperties } from "react";
+import React, { useEffect, useState, CSSProperties } from "react";
 import { Text, Title, Divider, Image, Stack, Button, Grid, Container, Badge, Center } from "@mantine/core";
 import { IconPlus } from "@tabler/icons-react";
 import axios from "axios";
 import { useMediaQuery } from "@mantine/hooks";
+import { useImageVersion } from './useImageVersion';
 
 interface Post {
   featured_image: string;
@@ -17,6 +18,10 @@ interface Post {
 export default function Postlist() {
   const [posts, setPosts] = useState<Post[]>([]);
   const isMobile = useMediaQuery('(max-width: 768px)');
+  const baseImageUrl = "https://i.imgur.com/VEBexAy.png?5000";
+  const imageUrl = useImageVersion(baseImageUrl);
+  
+  console.log(imageUrl);
 
   useEffect(() => {
     // Fetch posts from the API
@@ -43,6 +48,8 @@ export default function Postlist() {
 
     fetchPosts();
   }, []);
+
+  
 
   // Inline styles
   const styles: { [key: string]: CSSProperties } = {
@@ -123,13 +130,13 @@ export default function Postlist() {
         </Grid.Col>
         <Grid.Col span={2}>
           <div style={styles.banner}>
-            {/* <Image
+            <Image
               radius="md"
-              src="https://via.placeholder.com/200x400.png?text=Banner"
+              src={imageUrl}
               alt="Banner"
               fit="contain"
               style={{ width: '100%', height: 'auto' }}
-            /> */}
+            />
             <br />
             {isMobile ? null : <Title order={2}>FOLLOW US!</Title>}
             <br />
