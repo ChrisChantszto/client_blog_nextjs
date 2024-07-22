@@ -9,12 +9,12 @@ import Instagram from '@/components/Instagram/Instagram';
 import { IconBrandFacebook, IconBrandInstagram, IconBrandYoutube } from '@tabler/icons-react';
 import Youtube from '@/components/Youtube/Youtube';
 import EntertainmentCampaignblog from '@/components/Campaignblog/EntertainmentCampaignblog';
-import TravelBanner from '@/components/Categories/TravelBanner';
-import TravelCard from '@/components/Cardlist/TravelCard';
-import TravelPostlist from '@/components/Postlist/TravelPostlist';
+import TravelInBanner from '@/components/Categories/TravelInBanner';
+import TravelInCard from '@/components/Cardlist/TravelInCard';
+import TravelInPostlist from '@/components/Postlist/TravelInPostlist';
 import TravelCarousel from '@/components/TravelCarousel/TravelCarousel';
 
-export default function Travel() {
+export default function TravelIn() {
   const [opened, { toggle }] = useDisclosure();
   const [footerVisible, setFooterVisible] = useState(false);
   const sentinelRef = useRef(null);
@@ -50,15 +50,13 @@ export default function Travel() {
         <HeaderMegaMenu />
       </AppShell.Header>
       <AppShell.Main>
-        <TravelBanner />
+        <TravelInBanner />
         <br />
-        <TravelCard />
-        <br />
-        <TravelCarousel />
+        <TravelInCard />
         <br />
         <br />
         <br />
-        <TravelPostlist />
+        <TravelInPostlist />
         <br />
         <br />
         <br />
