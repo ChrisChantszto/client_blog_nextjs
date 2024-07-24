@@ -17,12 +17,11 @@ interface Post {
 
 export default function Postlist() {
   const [posts, setPosts] = useState<Post[]>([]);
+  const [bannerImage, setBannerImage] = useState("");
   const isMobile = useMediaQuery('(max-width: 768px)');
   const baseImageUrl = "https://i.imgur.com/VEBexAy.png?5000";
   const imageUrl = useImageVersion(baseImageUrl);
   
-  console.log(imageUrl);
-
   useEffect(() => {
     // Fetch posts from the API
     const fetchPosts = async () => {
@@ -46,8 +45,31 @@ export default function Postlist() {
       }
     };
 
+    // Fetch banner image from Strapi
+    const fetchBannerImage = async () => {
+      try {
+        const response = await axios.get(`http://localhost:1337/api/advertisements/1?populate=*`, {
+          headers: {
+            Authorization: `Bearer deda75a117450c315ea0c5d3652d912b88fd301ea8b24217d199a6ea1a152a76a67fd0cf4215219c24dbfd61c9e10991b1c44eb1d8b953590958c58c8dbebe1eee48a6fe2342846bf6fc29a1ba21f0b11de39a22c6de5ac81919e24961e2bd6bb578aa141073d0882353c27b5286a530e2fa079e512b0ca1ee9a77b0aa44d3fa`,
+          },
+        });
+        const bannerData = response.data.data;
+        const largeImageUrl = bannerData.attributes.Photo.data.attributes.formats.small.url;
+
+        const fullImageUrl = `http://localhost:1337${largeImageUrl}`;
+
+        setBannerImage(fullImageUrl);
+      } catch (error) {
+        console.error('Error fetching banner image:', error);
+      }
+    };
+
     fetchPosts();
+    fetchBannerImage();
   }, []);
+
+
+  console.log("banner", bannerImage);
 
   
 
@@ -130,13 +152,13 @@ export default function Postlist() {
         </Grid.Col>
         <Grid.Col span={2}>
           <div style={styles.banner}>
-            <Image
+            {/* <Image
               radius="md"
-              src={imageUrl}
+              src={bannerImage}
               alt="Banner"
               fit="contain"
               style={{ width: '100%', height: 'auto' }}
-            />
+            /> */}
             <br />
             {isMobile ? null : <Title order={2}>FOLLOW US!</Title>}
             <br />
