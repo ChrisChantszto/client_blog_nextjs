@@ -1,9 +1,8 @@
-import React, { useEffect, useState, CSSProperties } from "react";
-import { Text, Title, Divider, Image, Stack, Button, Grid, Container, Badge, Center } from "@mantine/core";
+import { useEffect, useState, CSSProperties } from "react";
+import { Text, Title, Divider, Image, Stack, Button, Grid, Container, Badge, Group, Center, Select } from "@mantine/core";
 import { IconPlus } from "@tabler/icons-react";
 import axios from "axios";
 import { useMediaQuery } from "@mantine/hooks";
-import { useImageVersion } from './useImageVersion';
 
 interface Post {
   featured_image: string;
@@ -15,19 +14,22 @@ interface Post {
   date: string;
 }
 
-export default function Postlist() {
+export default function TravelInPostlist() {
   const [posts, setPosts] = useState<Post[]>([]);
-  const [bannerImage, setBannerImage] = useState("");
   const isMobile = useMediaQuery('(max-width: 768px)');
-  const baseImageUrl = "https://i.imgur.com/VEBexAy.png?5000";
-  const imageUrl = useImageVersion(baseImageUrl);
-  
+
+  const [activeButton, setActiveButton] = useState('全部');
+
+  const categories = ['全部', '藝術展覽', '最新電影上映', '綜藝節目', '粉絲見面會', '文化節慶'];
+
+  const [sortOrder, setSortOrder] = useState('newest');
+
   useEffect(() => {
     // Fetch posts from the API
     const fetchPosts = async () => {
       try {
         const response = await axios.get(
-          'https://public-api.wordpress.com/rest/v1.1/sites/playeateasy.com/posts/'
+          'https://public-api.wordpress.com/rest/v1.1/sites/playeateasy.com/posts/?category=%E5%8C%97%E4%B8%8A%E7%8E%A9%E9%A3%9F%E6%98%93'
         );
         const fetchedPosts = response.data.posts.slice(0, 4).map((post: any) => ({
           featured_image: post.featured_image,
@@ -45,33 +47,8 @@ export default function Postlist() {
       }
     };
 
-    // Fetch banner image from Strapi
-    const fetchBannerImage = async () => {
-      try {
-        const response = await axios.get(`http://localhost:1337/api/advertisements/1?populate=*`, {
-          headers: {
-            Authorization: `Bearer deda75a117450c315ea0c5d3652d912b88fd301ea8b24217d199a6ea1a152a76a67fd0cf4215219c24dbfd61c9e10991b1c44eb1d8b953590958c58c8dbebe1eee48a6fe2342846bf6fc29a1ba21f0b11de39a22c6de5ac81919e24961e2bd6bb578aa141073d0882353c27b5286a530e2fa079e512b0ca1ee9a77b0aa44d3fa`,
-          },
-        });
-        const bannerData = response.data.data;
-        const largeImageUrl = bannerData.attributes.Photo.data.attributes.formats.small.url;
-
-        const fullImageUrl = `http://localhost:1337${largeImageUrl}`;
-
-        setBannerImage(fullImageUrl);
-      } catch (error) {
-        console.error('Error fetching banner image:', error);
-      }
-    };
-
     fetchPosts();
-    fetchBannerImage();
   }, []);
-
-
-  console.log("banner", bannerImage);
-
-  
 
   // Inline styles
   const styles: { [key: string]: CSSProperties } = {
@@ -107,16 +84,59 @@ export default function Postlist() {
     },
     postTitle: {
       // backgroundColor: '#F5F5F5', // Ensure consistent background color for titles
-      marginBottom: '0.5rem', // Adjust spacing as needed
+      marginBottom: '0.5rem',
     },
   };
 
   return (
     <Container fluid style={{ backgroundColor: '#F5F5F5' }} >
-      <Title fw={800} order={1} c="#FF6031">SELECTED POST</Title>
-      <Title fw={800} order={2}>精選文章</Title>
+      <Group justify="space-between">
+        <Title fw={800} order={2}>全部文章</Title>
+        <Group gap="xs">
+          <Text>排序:</Text>
+          <Text
+            fw={sortOrder === 'newest' ? 700 : 400}
+            style={{ cursor: 'pointer' }}
+            onClick={() => setSortOrder('newest')}
+          >
+            最新
+          </Text>
+          <Text
+            fw={sortOrder === 'mostHit' ? 700 : 400}
+            style={{ cursor: 'pointer' }}
+            onClick={() => setSortOrder('mostHit')}
+          >
+            最HIT
+          </Text>
+        </Group>
+      </Group>
       <br />
       <Divider size="sm" />
+      <br />
+      {/* <Group gap="xs">
+        {categories.map((category) => (
+          <Button
+            key={category}
+            variant="outline"
+            radius="xl"
+            color={activeButton === category ? '#FF6031' : 'gray'}
+            onClick={() => setActiveButton(category)}
+            styles={(theme) => ({
+              root: {
+                backgroundColor: activeButton === category ? "#FF6031" : 'transparent',
+                border: `1px solid ${activeButton === category ? "#FF6031" : theme.colors.gray[5]}`,
+                color: activeButton === category ? theme.white : theme.colors.gray[7],
+                '&:hover': {
+                  backgroundColor: "#FF6031",
+                  color: theme.white,
+                },
+              },
+            })}
+          >
+            {category}
+          </Button>
+        ))}
+      </Group> */}
       <br />
       <Grid>
         <Grid.Col span={10}>
@@ -144,7 +164,10 @@ export default function Postlist() {
                     <Title style={styles.postTitle} order={2}>{post.title}</Title>
                   </a>
                   <Title style={styles.postTitle} order={5}>{new Date(post.date).toLocaleDateString()}</Title>
-                  <Badge color="#FF6031">最新</Badge>
+                  <Group>
+                    <Badge color="#FF6031">最新</Badge>
+                    <Badge autoContrast color="#C79AFF">旅遊</Badge>
+                  </Group>
                 </Grid.Col>
               </Grid>
             ))}
@@ -154,7 +177,7 @@ export default function Postlist() {
           <div style={styles.banner}>
             {/* <Image
               radius="md"
-              src={bannerImage}
+              src="https://via.placeholder.com/200x400.png?text=Banner"
               alt="Banner"
               fit="contain"
               style={{ width: '100%', height: 'auto' }}
