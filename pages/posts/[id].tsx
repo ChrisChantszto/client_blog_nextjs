@@ -19,14 +19,14 @@ interface Post {
 export default function Post() {
   const router = useRouter();
   const { id } = router.query;
-  const [post, setPost] = useState(null);
+  const [post, setPost] = useState<Post | null>(null);
   const sentinelRef = useRef(null);
   const [footerVisible, setFooterVisible] = useState(false);
 
   useEffect(() => {
     if (id) {
       axios.get(`/api/posts/${id}`)
-        .then(response => setPost(response.data))
+        .then(response => setPost(response.data as Post))
         .catch(error => console.error('Error fetching post:', error));
     }
   }, [id]);
@@ -44,27 +44,30 @@ export default function Post() {
         <HeaderMegaMenu />
       </AppShell.Header>
       <AppShell.Main>
-      <h1>{post.title}</h1>
-      <div dangerouslySetInnerHTML={{ __html: post.content }} />
-      
-      {post.attachments && post.attachments.length > 0 && (
-        <div>
-          <h2>Attachments</h2>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
-            {post.attachments.map(attachment => (
-              <div key={attachment.id} style={{ maxWidth: '300px' }}>
-                <Image
-                  src={attachment.url}
-                  width={attachment.width}
-                  height={attachment.height}
-                  alt="Attachment"
-                  layout="responsive"
-                />
+        {post && (
+          <div>
+            <h1>{post.title}</h1>
+            <div dangerouslySetInnerHTML={{ __html: post.content }} />
+            {post.attachments && post.attachments.length > 0 && (
+              <div>
+                <h2>Attachments</h2>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
+                  {post.attachments.map(attachment => (
+                    <div key={attachment.id} style={{ maxWidth: '300px' }}>
+                      <Image
+                        src={attachment.url}
+                        width={attachment.width}
+                        height={attachment.height}
+                        alt="Attachment"
+                        layout="responsive"
+                      />
+                    </div>
+                  ))}
+                </div>
               </div>
-            ))}
+            )}
           </div>
-        </div>
-      )}
+        )}
         {/* <Instagram /> */}
         <div style={{ position: 'relative', width: '100%', height: '100%', overflow: 'hidden' }}>
           <Center>
