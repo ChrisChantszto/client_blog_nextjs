@@ -3,6 +3,7 @@ import { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
 import { AppShell, Center, Burger } from '@mantine/core';
 import Image from 'next/image';
+import Footer from '@/components/Footer/Footer';
 import HeaderMegaMenu from '@/components/Header/Header';
 
 interface Post {
