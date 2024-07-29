@@ -5,6 +5,17 @@ import { AppShell, Center, Burger } from '@mantine/core';
 import Image from 'next/image';
 import HeaderMegaMenu from '@/components/Header/Header';
 
+interface Post {
+  title: string;
+  content: string;
+  attachments?: Array<{
+    id: string;
+    url: string;
+    width: number;
+    height: number;
+  }>;
+}
+
 export default function Post() {
   const router = useRouter();
   const { id } = router.query;
