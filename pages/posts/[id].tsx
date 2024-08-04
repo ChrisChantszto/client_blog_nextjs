@@ -1,6 +1,8 @@
 import { useRouter } from 'next/router';
+import cheerio from 'cheerio'
 import { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
+import DynamicContent from './DynamicContent';
 import { AppShell, Center, Burger } from '@mantine/core';
 import Image from 'next/image';
 import Footer from '@/components/Footer/Footer';
@@ -15,6 +17,7 @@ interface Post {
     width: number;
     height: number;
   }>;
+  originalContent: string;
 }
 
 export default function Post() {
@@ -32,7 +35,45 @@ export default function Post() {
     }
   }, [id]);
 
+  useEffect(() => {
+    const observer = new IntersectionObserver(([entry]) => {
+      setFooterVisible(entry.isIntersecting);
+    });
+    if (sentinelRef.current) {
+      observer.observe(sentinelRef.current);
+    }
+    return () => {
+      if (sentinelRef.current) {
+        observer.unobserve(sentinelRef.current);
+      }
+    };
+  }, []);
+
   if (!post) return <div>Loading...</div>;
+
+  // Function to insert images into content
+  const insertImagesIntoContent = (content: string, attachments: any[]) => {
+    if (!attachments || attachments.length === 0) {
+      return content;
+    }
+  
+    const $ = cheerio.load(content);
+  
+    attachments.forEach((attachment, index) => {
+      const $imgPlaceholder = $(`img[data-src="${attachment.url}"]`);
+  
+      if ($imgPlaceholder.length > 0) {
+        $imgPlaceholder.attr('src', attachment.url);
+        $imgPlaceholder.removeAttr('data-src');
+        $imgPlaceholder.attr('width', attachment.width);
+        $imgPlaceholder.attr('height', attachment.height);
+      }
+    });
+  
+    return $.html();
+  };
+
+  console.log(post.originalContent);
 
   return (
     <AppShell
@@ -45,30 +86,14 @@ export default function Post() {
         <HeaderMegaMenu />
       </AppShell.Header>
       <AppShell.Main>
-        {post && (
+      {post && (
           <div>
             <h1>{post.title}</h1>
-            <div dangerouslySetInnerHTML={{ __html: post.content }} />
-            {post.attachments && post.attachments.length > 0 && (
-              <div>
-                <h2>Attachments</h2>
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
-                  {post.attachments.map(attachment => (
-                    <div key={attachment.id} style={{ maxWidth: '300px' }}>
-                      <Image
-                        src={attachment.url}
-                        width={attachment.width}
-                        height={attachment.height}
-                        alt="Attachment"
-                        layout="responsive"
-                      />
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
+            {/* <div dangerouslySetInnerHTML={{ __html: post.originalContent }} /> */}
+            <DynamicContent content={post.originalContent} attachments={post.attachments || []} />
+            
           </div>
-        )}
+          )}
         {/* <Instagram /> */}
         <div style={{ position: 'relative', width: '100%', height: '100%', overflow: 'hidden' }}>
           <Center>
