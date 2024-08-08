@@ -39,6 +39,7 @@ export default function EntertainmentPostlist() {
             name: post.author.name
           },
           date: post.date,
+          slug: post.slug
         })) as Post[]; // Type assertion to ensure TypeScript understands this is an array of Post objects
 
         setPosts(fetchedPosts);
@@ -160,7 +161,7 @@ export default function EntertainmentPostlist() {
                   </div>
                 </Grid.Col>
                 <Grid.Col span={6}>
-                  <a href={post.link} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'inherit' }}>
+                  <a href={`/posts/${post.slug}`} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'inherit' }}>
                     <Title style={styles.postTitle} order={2}>{post.title}</Title>
                   </a>
                   <Title style={styles.postTitle} order={5}>{new Date(post.date).toLocaleDateString()}</Title>
