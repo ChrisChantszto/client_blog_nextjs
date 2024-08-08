@@ -22,6 +22,7 @@ export default function JetsoCard() {
         const fetchedImages = posts
           .map((post: any) => ({
             url: post.featured_image,
+            slug: post.slug,
             title: post.title, // Retrieve title of the post
             link: post.URL,
           }))
@@ -54,6 +55,10 @@ export default function JetsoCard() {
     }
   }, [embla]);
 
+  const handleSlideClick = (slug: string) => {
+    window.location.href = `/posts/${slug}`;
+  };
+
   const slides = images.map((item, index) => (
     <Carousel.Slide
       key={index}
@@ -63,7 +68,7 @@ export default function JetsoCard() {
         alignItems: 'center',
         justifyContent: 'center',
       }}
-      onClick={() => window.open(item.link, '_blank')} // Open the post link in a new tab
+      onClick={() => handleSlideClick(item.slug)} // Open the post link in a new tab
     >
       <div
         style={{
@@ -97,10 +102,7 @@ export default function JetsoCard() {
           textShadow: '1px 1px 2px rgba(0.5, 0.5, 0.5, 0.6)',
           cursor: 'pointer',
         }}
-        onClick={(e) => {
-          e.stopPropagation(); // Prevent the event from bubbling up to the parent div
-          window.open(item.link, '_blank');
-        }}
+        onClick={() => handleSlideClick(item.slug)}
       >
         {isMobile? null : item.title}
       </div>

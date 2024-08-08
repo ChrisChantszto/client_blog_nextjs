@@ -33,6 +33,7 @@ export default function JetsoCampaignblog() {
         const fetchedPosts = response.data.posts.map((post: any) => ({
           title: post.title,
           link: post.URL,
+          slug: post.slug,
           featured_image: post.featured_image,
           date: post.date,
           author: post.author.name
@@ -75,7 +76,7 @@ export default function JetsoCampaignblog() {
                 display: 'flex', 
                 flexDirection: 'column' 
               }}>
-              <Card.Section component="a" href={post.link} target="_blank">
+              <Card.Section component="a" href={`/posts/${post.slug}`} target="_blank">
                 <Image src={post.featured_image} height={300} alt={post.title} />
               </Card.Section>
               
