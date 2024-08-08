@@ -8,6 +8,7 @@ interface Post {
   title: string;
   link: string;
   featured_image: string;
+  slug: string;
   date: string;
   author: string;
 }
@@ -33,6 +34,7 @@ export default function CampaignBlog() {
         const fetchedPosts = response.data.posts.map((post: any) => ({
           title: post.title,
           link: post.URL,
+          slug: post.slug,
           featured_image: post.featured_image,
           date: post.date,
           author: post.author.name
@@ -63,7 +65,7 @@ export default function CampaignBlog() {
         {posts.map((post, index) => (
           <Carousel.Slide key={index}>
             <Card padding="xl" component='a' target="_blank" radius="md" style={{ height: '550px', display: 'flex', flexDirection: 'column' }}>
-              <Card.Section component="a" href={post.link} target="_blank">
+              <Card.Section component="a" href={`/posts/${post.slug}`} target="_blank">
                 <Image src={post.featured_image} height={300} alt={post.title} />
               </Card.Section>
               

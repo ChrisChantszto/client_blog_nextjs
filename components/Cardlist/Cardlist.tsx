@@ -24,9 +24,10 @@ export default function PhotoCarousel() {
             url: post.featured_image,
             title: post.title, // Retrieve title of the post
             link: post.URL,
+            slug: post.slug
           }))
-          .filter((item: { url: string; title: string; link: string }) => item.url && item.title
-          && item.link)
+          .filter((item: { url: string; title: string; link: string; slug: string}) => item.url && item.title
+          && item.link && item.slug) // Filter out items with missing data
           .slice(0, 5); // Take the first 5 images
 
         setImages(fetchedImages);
@@ -47,6 +48,10 @@ export default function PhotoCarousel() {
     }
   };
 
+  const handleSlideClick = (slug: string) => {
+    window.location.href = `/posts/${slug}`;
+  };
+
   useEffect(() => {
     if (embla) {
       embla.on('scroll', handleScroll);
@@ -63,7 +68,7 @@ export default function PhotoCarousel() {
         alignItems: 'center',
         justifyContent: 'center',
       }}
-      onClick={() => window.open(item.link, '_blank')} // Open the post link in a new tab
+      onClick={() => handleSlideClick(item.slug)}
     >
       <div
         style={{
@@ -97,10 +102,7 @@ export default function PhotoCarousel() {
           textShadow: '1px 1px 2px rgba(0.5, 0.5, 0.5, 0.6)',
           cursor: 'pointer',
         }}
-        onClick={(e) => {
-          e.stopPropagation(); // Prevent the event from bubbling up to the parent div
-          window.open(item.link, '_blank');
-        }}
+        onClick={() => handleSlideClick(item.slug)}
       >
         {isMobile? null : item.title}
       </div>

@@ -9,6 +9,7 @@ interface Post {
   featured_image: string;
   title: string;
   link: string;  // Added link property
+  slug: string;
   author: {
     name: string;
   };
@@ -33,6 +34,7 @@ export default function Postlist() {
           featured_image: post.featured_image,
           title: post.title,
           link: post.URL,  // Extract link from the API response
+          slug: post.slug,
           author: {
             name: post.author.name
           },
@@ -140,7 +142,7 @@ export default function Postlist() {
                   </div>
                 </Grid.Col>
                 <Grid.Col span={6}>
-                  <a href={post.link} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'inherit' }}>
+                  <a href={`/posts/${post.slug}`} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'inherit' }}>
                     <Title style={styles.postTitle} order={2}>{post.title}</Title>
                   </a>
                   <Title style={styles.postTitle} order={5}>{new Date(post.date).toLocaleDateString()}</Title>

@@ -1,38 +1,40 @@
+import '@mantine/core/styles.css';
 import '@mantine/carousel/styles.css';
 import { useEffect, useState } from 'react';
-import { Progress, Image, Loader, Badge } from '@mantine/core';
+import { Image, Loader, Badge } from '@mantine/core';
 import { Carousel } from '@mantine/carousel';
 import axios from 'axios';
 import { useMediaQuery } from '@mantine/hooks';
 
 export default function PhotoCarousel() {
   const [scrollProgress, setScrollProgress] = useState(0);
-  const [images, setImages] = useState<{ url: string; title: string; link: string }[]>([]);
-  const [embla, setEmbla] = useState<any>(null); // Adjust Embla type as per Mantine documentation or typings
-  const [loading, setLoading] = useState(true); // State to track loading state
+  const [images, setImages] = useState<{ url: string; title: string; id: number; slug: string }[]>([]);
+  const [embla, setEmbla] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
   const isMobile = useMediaQuery('(max-width: 768px)');
 
   useEffect(() => {
     const fetchImages = async () => {
       try {
         const response = await axios.get(
-          'https://public-api.wordpress.com/rest/v1.1/sites/playeateasy.com/posts'
+          'https://public-api.wordpress.com/rest/v1.1/sites/sismapblog.wpcomstaging.com/posts'
         );
         const posts = response.data.posts;
         const fetchedImages = posts
           .map((post: any) => ({
             url: post.featured_image,
-            title: post.title, // Retrieve title of the post
-            link: post.URL,
+            title: post.title,
+            id: post.ID,
+            slug: post.slug
           }))
-          .filter((item: { url: string; title: string; link: string }) => item.url && item.title && item.link)
-          .slice(0, 5); // Take the first 5 images
+          .filter((item: { url: string; title: string; id: number; slug: string }) => item.url && item.title && item.id && item.slug)
+          .slice(0, 5);
 
         setImages(fetchedImages);
-        setLoading(false); // Update loading state once images are fetched
+        setLoading(false);
       } catch (error) {
         console.error('Error fetching images:', error);
-        setLoading(false); // Update loading state in case of error
+        setLoading(false);
       }
     };
 
@@ -53,10 +55,14 @@ export default function PhotoCarousel() {
     }
   }, [embla]);
 
+  const handleSlideClick = (slug: string) => {
+    window.location.href = `/posts/${slug}`;
+  };
+
   const slides = images.map((item, index) => (
     <Carousel.Slide
       key={index}
-      onClick={() => window.open(item.link, '_blank')}
+      onClick={() => handleSlideClick(item.slug)}
       style={{
         position: 'relative',
         display: 'flex',
@@ -64,6 +70,7 @@ export default function PhotoCarousel() {
         justifyContent: 'center',
         borderRadius: '5px',
         overflow: 'hidden',
+        cursor: 'pointer',
       }}
     >
       <div className="image-wrapper">
@@ -95,7 +102,6 @@ export default function PhotoCarousel() {
   ));
 
   useEffect(() => {
-    // This code will run only on the client side
     const styles = document.createElement('style');
     styles.innerHTML = `
       .image-wrapper {
@@ -111,43 +117,41 @@ export default function PhotoCarousel() {
         width: 100%;
         height: 100%;
         object-fit: cover;
-        border-radius: 5px; /* Ensure image has rounded corners */
+        border-radius: 5px;
       }
 
       .gradient-overlay {
+        position: absolute;
         bottom: 0;
         left: 0;
         right: 0;
         height: 80px;
         background: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0));
-        border-radius: 0 0 5px 5px; /* Ensure gradient overlay has rounded corners */
+        border-radius: 0 0 5px 5px;
       }
     `;
     document.head.appendChild(styles);
 
-    // Cleanup function to remove the style tag if component unmounts
     return () => {
       document.head.removeChild(styles);
     };
-  }, []); // Empty dependency array ensures this effect runs only once
+  }, []);
 
   if (loading) {
-    return <Loader />; // Display loader while images are being fetched
+    return <Loader />;
   }
 
   return (
-    <>
-      <Carousel
-        loop
-        dragFree
-        slideSize="50%"
-        slideGap="md"
-        height={400} // Adjust the height as needed
-        getEmblaApi={setEmbla}
-        initialSlide={2}
-      >
-        {slides}
-      </Carousel>
-    </>
+    <Carousel
+      loop
+      dragFree
+      slideSize="50%"
+      slideGap="md"
+      height={400}
+      getEmblaApi={setEmbla}
+      initialSlide={2}
+    >
+      {slides}
+    </Carousel>
   );
 }
