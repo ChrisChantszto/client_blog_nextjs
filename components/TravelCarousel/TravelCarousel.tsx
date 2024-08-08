@@ -23,10 +23,11 @@ export default function TravelCarousel() {
         const fetchedImages = posts
           .map((post: any) => ({
             url: post.featured_image,
+            slug: post.slug,
             title: post.title, // Retrieve title of the post
             link: post.URL,
           }))
-          .filter((item: { url: string; title: string; link: string }) => item.url && item.title && item.link)
+          .filter((item: { url: string; title: string; link: string; slug: string }) => item.url && item.title && item.link && item.slug)
           .slice(0, 5); // Take the first 5 images
 
         setImages(fetchedImages);
@@ -54,10 +55,14 @@ export default function TravelCarousel() {
     }
   }, [embla]);
 
+  const handleSlideClick = (slug: string) => {
+    window.location.href = `/posts/${slug}`;
+  };
+
   const slides = images.map((item, index) => (
     <Carousel.Slide
       key={index}
-      onClick={() => window.open(item.link, '_blank')}
+      onClick={() => handleSlideClick(item.slug)}
       style={{
         position: 'relative',
         display: 'flex',

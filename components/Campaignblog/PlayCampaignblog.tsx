@@ -37,6 +37,7 @@ export default function PlayCampaignBlog() {
           link: post.URL,
           featured_image: post.featured_image,
           date: post.date,
+          slug: post.slug,
           author: post.author.name
         }));
 
@@ -74,7 +75,7 @@ export default function PlayCampaignBlog() {
                 {/* <Text size="sm" style={{ color: 'black' }} fw={500}>
                   {new Date(post.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })} / by {post.author}
                 </Text> */}
-                <Title order={3} style={{ marginTop: '10px', marginBottom: '10px' }}><a href={post.link} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'black', fontWeight: 'bold' }}>{truncateTitle(post.title)}</a></Title>
+                <Title order={3} style={{ marginTop: '10px', marginBottom: '10px' }}><a href={`/posts/${post.slug}`} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'black', fontWeight: 'bold' }}>{truncateTitle(post.title)}</a></Title>
               </div>
             </div>
           </Carousel.Slide>

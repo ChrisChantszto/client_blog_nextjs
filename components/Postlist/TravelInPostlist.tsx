@@ -33,6 +33,7 @@ export default function TravelInPostlist() {
         );
         const fetchedPosts = response.data.posts.slice(0, 4).map((post: any) => ({
           featured_image: post.featured_image,
+          slug: post.slug,
           title: post.title,
           link: post.URL,  // Extract link from the API response
           author: {
@@ -160,7 +161,7 @@ export default function TravelInPostlist() {
                   </div>
                 </Grid.Col>
                 <Grid.Col span={6}>
-                  <a href={post.link} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'inherit' }}>
+                  <a href={`/posts/${post.slug}`} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'inherit' }}>
                     <Title style={styles.postTitle} order={2}>{post.title}</Title>
                   </a>
                   <Title style={styles.postTitle} order={5}>{new Date(post.date).toLocaleDateString()}</Title>

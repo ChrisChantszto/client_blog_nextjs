@@ -36,6 +36,7 @@ export default function PlayPostlist() {
           author: {
             name: post.author.name
           },
+          slug: post.slug,
           date: post.date,
         })) as Post[]; // Type assertion to ensure TypeScript understands this is an array of Post objects
 
@@ -139,7 +140,7 @@ export default function PlayPostlist() {
                   </div>
                 </Grid.Col>
                 <Grid.Col span={6}>
-                  <a href={post.link} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'inherit' }}>
+                  <a href={`/posts/${post.slug}`} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'inherit' }}>
                     <Title style={styles.postTitle} order={2}>{post.title}</Title>
                   </a>
                   <Title style={styles.postTitle} order={5}>{new Date(post.date).toLocaleDateString()}</Title>
