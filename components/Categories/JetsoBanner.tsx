@@ -34,6 +34,7 @@ export default function JetsoBanner() {
         { label: "購物優惠", link: "/healthy-eating" },
         { label: "旅遊優惠", link: "/healthy-eating" },
         { label: "會員獨家優惠", link: "/healthy-eating" },
+        { label: "銀行優惠", link: "https://sismapblog.wpcomstaging.com/category/%e5%84%aa%e6%83%a0%e6%b8%9b%e5%83%b9/%e9%8a%80%e8%a1%8c%e5%84%aa%e6%83%a0/" },
     ];
 
     return (
