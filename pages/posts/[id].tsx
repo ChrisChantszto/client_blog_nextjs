@@ -95,10 +95,10 @@ export default function Post() {
                 alt={post.title}
                 width={800}
                 height={600}
-                style={{ width: '30%', height: 'auto', borderRadius: '8px' }}
+                style={{ width: '80%', height: 'auto', borderRadius: '8px' }}
               />
             )}
-            <h1>{post.title}</h1>
+            <h1 style={{ fontSize: '3rem', fontWeight: 'bold' }}>{post.title}</h1>
             {/* <div dangerouslySetInnerHTML={{ __html: post.originalContent }} /> */}
             <DynamicContent content={post.originalContent} attachments={post.attachments || []} />
             
