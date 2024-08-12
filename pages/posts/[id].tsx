@@ -18,6 +18,7 @@ interface Post {
     height: number;
   }>;
   originalContent: string;
+  featuredImage: string;
 }
 
 export default function Post() {
@@ -88,6 +89,15 @@ export default function Post() {
       <AppShell.Main>
       {post && (
           <div>
+            {post.featuredImage && (
+              <Image 
+                src={post.featuredImage}
+                alt={post.title}
+                width={800}
+                height={600}
+                style={{ width: '30%', height: 'auto', borderRadius: '8px' }}
+              />
+            )}
             <h1>{post.title}</h1>
             {/* <div dangerouslySetInnerHTML={{ __html: post.originalContent }} /> */}
             <DynamicContent content={post.originalContent} attachments={post.attachments || []} />

@@ -32,7 +32,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       ...post,
       content: cleanedContent,
       originalContent: post.content, // Keep the original content if needed
-      attachments
+      attachments,
+      featuredImage: post.featured_image
     };
     
     res.status(200).json(modifiedPost);
