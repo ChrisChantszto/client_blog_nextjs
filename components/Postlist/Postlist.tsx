@@ -174,7 +174,9 @@ export default function Postlist() {
                   </a>
                 </Grid.Col>
                 <Grid.Col span={9}>
-                  {isMobile ? null : <Text fw={800}>Play Eat Easy 玩食易</Text>}
+                  <a href="https://www.facebook.com/playeateasy/" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'inherit' }}>
+                    {isMobile ? null : <Text fw={800}>Play Eat Easy 玩食易</Text>}
+                  </a>
                 </Grid.Col>
                 <Grid.Col span={3}>
                   <a href="https://www.instagram.com/playeateasy/?hl=en" target="_blank" rel="noopener noreferrer">
@@ -195,7 +197,9 @@ export default function Postlist() {
                   </a>
                 </Grid.Col>
                 <Grid.Col span={9}>
-                  {isMobile ? null : <Text fw={800}>PLAYEATEASY</Text>}
+                  <a href="https://www.instagram.com/playeateasy/?hl=en" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'inherit' }}>
+                    {isMobile ? null : <Text fw={800}>PLAYEATEASY</Text>}
+                  </a>
                 </Grid.Col>
                 <Grid.Col span={3}>
                   <a href="https://www.youtube.com/@playeateasy" target="_blank" rel="noopener noreferrer">
@@ -206,7 +210,9 @@ export default function Postlist() {
                   </a>
                 </Grid.Col>
                 <Grid.Col span={9}>
-                  {isMobile ? null : <Text fw={800}>@PLAYEATEASY</Text>}
+                  <a href="https://www.youtube.com/@playeateasy" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'inherit' }}>
+                    {isMobile ? null : <Text fw={800}>@PLAYEATEASY</Text>}
+                  </a>
                 </Grid.Col>
                 <Grid.Col span={3}>
                   <a href="https://www.xiaohongshu.com/user/profile/5de9b4d50000000001007191?xhsshare" target="_blank" rel="noopener noreferrer">
@@ -223,7 +229,9 @@ export default function Postlist() {
                   </a>
                 </Grid.Col>
                 <Grid.Col span={9}>
-                  {isMobile ? null : <Text fw={800}>Play Eat Easy 玩食易</Text>}
+                  <a href="https://www.xiaohongshu.com/user/profile/5de9b4d50000000001007191?xhsshare" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'inherit' }}>
+                    {isMobile ? null : <Text fw={800}>Play Eat Easy 玩食易</Text>}
+                  </a>
                 </Grid.Col>
                 <Grid.Col span={3}>
                   <a href="https://www.linkedin.com/company/lab-20?originalSubdomain=hk" target="_blank" rel="noopener noreferrer">
@@ -234,7 +242,9 @@ export default function Postlist() {
                   </a>
                 </Grid.Col>
                 <Grid.Col span={9}>
-                  {isMobile ? null : <Text fw={800}>LAB20 MEDIA</Text>}
+                  <a href="https://www.linkedin.com/company/lab-20?originalSubdomain=hk" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'inherit' }}>
+                    {isMobile ? null : <Text fw={800}>LAB20 MEDIA</Text>}
+                  </a>
                 </Grid.Col>
                 </Grid>
             </Stack> 
