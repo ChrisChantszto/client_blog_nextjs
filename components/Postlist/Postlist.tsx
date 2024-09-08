@@ -1,5 +1,5 @@
 import React, { useEffect, useState, CSSProperties } from "react";
-import { Text, Title, Divider, Image, Stack, Button, Grid, Container, Badge, Center } from "@mantine/core";
+import { Text, Title, Divider, Image, Stack, Button, Grid, Container, Box, Badge, Center, Overlay } from "@mantine/core";
 import { IconPlus } from "@tabler/icons-react";
 import axios from "axios";
 import { useMediaQuery } from "@mantine/hooks";
@@ -70,9 +70,6 @@ export default function Postlist() {
     fetchBannerImage();
   }, []);
 
-
-  console.log("banner", bannerImage);
-
   
 
   // Inline styles
@@ -113,60 +110,39 @@ export default function Postlist() {
     },
   };
 
-  return (
-    <Container fluid style={{ backgroundColor: '#F5F5F5' }} >
-      <Title fw={800} order={1} c="#FF6031">SELECTED POST</Title>
-      <Title fw={800} order={2}>精選文章</Title>
-      <br />
-      <Divider size="sm" />
-      <br />
+  const PostItem = ({ post }: { post: Post }) => (
+    <Box style={{ position: 'relative', marginBottom: '1rem' }}>
+      <Image
+        radius="md"
+        src={post.featured_image}
+        alt={post.title}
+        style={{ width: '100%', height: 'auto' }}
+      />
+      <Overlay color="#000" opacity={0.6} zIndex={1} />
+      <Box
+        style={{
+          position: 'absolute',
+          bottom: 0,
+          left: 0,
+          right: 0,
+          padding: '1rem',
+          zIndex: 2,
+        }}
+      >
+        <a href={`/posts/${post.slug}`} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'white' }}>
+          <Title order={3}>{post.title}</Title>
+        </a>
+        <Text c="white">{new Date(post.date).toLocaleDateString()}</Text>
+        <Badge color="#FF6031">最新</Badge>
+      </Box>
+    </Box>
+  );
+
+  const SocialMediaLinks = () => (
+    <Stack gap="xs">
+      <Title order={2}>FOLLOW US!</Title>
       <Grid>
-        <Grid.Col span={10}>
-          <Stack
-            h={1000}
-            align="stretch"
-            justify="flex-start"
-            style={{ overflow: 'hidden' }}
-            gap="lg"
-          >
-            {posts.map((post, index) => (
-              <Grid key={index}>
-                <Grid.Col span={6}>
-                  <div style={{ ...styles.imageContainer, paddingTop: '56.25%' }}>
-                    <Image
-                      radius="md"
-                      src={post.featured_image}
-                      alt={post.title}
-                      style={styles.image}
-                    />
-                  </div>
-                </Grid.Col>
-                <Grid.Col span={6}>
-                  <a href={`/posts/${post.slug}`} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'inherit' }}>
-                    <Title style={styles.postTitle} order={2}>{post.title}</Title>
-                  </a>
-                  <Title style={styles.postTitle} order={5}>{new Date(post.date).toLocaleDateString()}</Title>
-                  <Badge color="#FF6031">最新</Badge>
-                </Grid.Col>
-              </Grid>
-            ))}
-          </Stack>
-        </Grid.Col>
-        <Grid.Col span={2}>
-          <div style={styles.banner}>
-            {/* <Image
-              radius="md"
-              src={bannerImage}
-              alt="Banner"
-              fit="contain"
-              style={{ width: '100%', height: 'auto' }}
-            /> */}
-            <br />
-            {isMobile ? null : <Title order={2}>FOLLOW US!</Title>}
-            <br />
-            <Stack gap="xs">
-              <Grid>
-                <Grid.Col span={3}>
+      <Grid.Col span={3}>
                   <a href="https://www.facebook.com/playeateasy/" target="_blank" rel="noopener noreferrer">
                     <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M25.0189 21.3138L25.5846 17.7226H22.0998V15.3884C22.0998 14.4064 22.5863 13.4469 24.142 13.4469H25.7487V10.3887C24.813 10.2397 23.8676 10.159 22.9201 10.1475C20.0519 10.1475 18.1793 11.8701 18.1793 14.9843V17.7226H15V21.3138H18.1793V30H22.0998V21.3138H25.0189Z" fill="#337FFF"/>
@@ -175,7 +151,7 @@ export default function Postlist() {
                 </Grid.Col>
                 <Grid.Col span={9}>
                   <a href="https://www.facebook.com/playeateasy/" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'inherit' }}>
-                    {isMobile ? null : <Text fw={800}>Play Eat Easy 玩食易</Text>}
+                    <Text fw={800}>Play Eat Easy 玩食易</Text>
                   </a>
                 </Grid.Col>
                 <Grid.Col span={3}>
@@ -198,7 +174,7 @@ export default function Postlist() {
                 </Grid.Col>
                 <Grid.Col span={9}>
                   <a href="https://www.instagram.com/playeateasy/?hl=en" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'inherit' }}>
-                    {isMobile ? null : <Text fw={800}>PLAYEATEASY</Text>}
+                    <Text fw={800}>PLAYEATEASY</Text>
                   </a>
                 </Grid.Col>
                 <Grid.Col span={3}>
@@ -211,7 +187,7 @@ export default function Postlist() {
                 </Grid.Col>
                 <Grid.Col span={9}>
                   <a href="https://www.youtube.com/@playeateasy" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'inherit' }}>
-                    {isMobile ? null : <Text fw={800}>@PLAYEATEASY</Text>}
+                    <Text fw={800}>@PLAYEATEASY</Text>
                   </a>
                 </Grid.Col>
                 <Grid.Col span={3}>
@@ -230,7 +206,7 @@ export default function Postlist() {
                 </Grid.Col>
                 <Grid.Col span={9}>
                   <a href="https://www.xiaohongshu.com/user/profile/5de9b4d50000000001007191?xhsshare" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'inherit' }}>
-                    {isMobile ? null : <Text fw={800}>Play Eat Easy 玩食易</Text>}
+                    <Text fw={800}>Play Eat Easy 玩食易</Text>
                   </a>
                 </Grid.Col>
                 <Grid.Col span={3}>
@@ -243,15 +219,69 @@ export default function Postlist() {
                 </Grid.Col>
                 <Grid.Col span={9}>
                   <a href="https://www.linkedin.com/company/lab-20?originalSubdomain=hk" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'inherit' }}>
-                    {isMobile ? null : <Text fw={800}>LAB20 MEDIA</Text>}
+                    <Text fw={800}>LAB20 MEDIA</Text>
                   </a>
                 </Grid.Col>
-                </Grid>
-            </Stack> 
-          </div>
-          
-        </Grid.Col>
       </Grid>
+    </Stack>
+  );
+
+  return (
+    <Container fluid style={{ backgroundColor: '#F5F5F5' }} >
+      <Title fw={800} order={1} c="#FF6031">SELECTED POST</Title>
+      <Title fw={800} order={2}>精選文章</Title>
+      <br />
+      <Divider size="sm" />
+      <br />
+      <Grid>
+      <Grid.Col span={isMobile ? 12 : 10}>
+          <Stack
+            align="stretch"
+            justify="flex-start"
+            style={{ overflow: 'hidden' }}
+            gap="lg"
+          >
+            {posts.map((post, index) => (
+              isMobile ? (
+                <PostItem key={index} post={post} />
+              ) : (
+                <Grid key={index}>
+                  <Grid.Col span={6}>
+                    <div style={{ ...styles.imageContainer, paddingTop: '56.25%' }}>
+                      <Image
+                        radius="md"
+                        src={post.featured_image}
+                        alt={post.title}
+                        style={styles.image}
+                      />
+                    </div>
+                  </Grid.Col>
+                  <Grid.Col span={6}>
+                    <a href={`/posts/${post.slug}`} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'inherit' }}>
+                      <Title style={styles.postTitle} order={2}>{post.title}</Title>
+                    </a>
+                    <Title style={styles.postTitle} order={5}>{new Date(post.date).toLocaleDateString()}</Title>
+                    <Badge color="#FF6031">最新</Badge>
+                  </Grid.Col>
+                </Grid>
+              )
+            ))}
+          </Stack>
+        </Grid.Col>
+        {!isMobile && (
+          <Grid.Col span={2}>
+            <div style={styles.banner}>
+              <SocialMediaLinks />
+            </div>
+          </Grid.Col>
+        )}
+      </Grid>
+
+      {isMobile && (
+        <Box mt="xl">
+          <SocialMediaLinks />
+        </Box>
+      )}
 
       <Center style={{ marginTop: '1rem' }}>
         <Button variant="filled" color="#FF6031" radius="xl">
