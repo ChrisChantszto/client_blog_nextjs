@@ -17,23 +17,29 @@ const DynamicContent = ({ content, attachments }) => {
         img.removeAttribute('data-src');
         img.removeAttribute('data-expand');
         img.classList.remove('lazyload');
-        img.width = 400; // Set the image width to 400px
-        img.height = 300; // Set the image height to 300px
+        img.style.maxWidth = '100%';
+        img.style.height = 'auto';
+        img.style.display = 'block';
+        img.style.margin = '0 auto';
       }
     });
 
-    // Make the text bigger
+    // Make the text bigger and improve readability
     const paragraphs = doc.querySelectorAll('p');
     paragraphs.forEach((p) => {
-      p.style.fontSize = '17px'; // Set the font size to 18px
-      p.style.lineHeight = '1.5'; // Set the line height to 1.5
+      p.style.fontSize = '18px';
+      p.style.lineHeight = '1.6';
+      p.style.marginBottom = '1.5rem';
     });
 
     setProcessedContent(doc.body.innerHTML);
   }, [content]);
 
   return (
-    <div dangerouslySetInnerHTML={{ __html: processedContent }} />
+    <div 
+      dangerouslySetInnerHTML={{ __html: processedContent }} 
+      style={{ maxWidth: '100%', overflow: 'hidden' }}
+    />
   );
 };
 
