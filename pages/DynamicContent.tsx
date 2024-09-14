@@ -27,7 +27,7 @@ const DynamicContent = ({ content, attachments }) => {
     // Make the text bigger and improve readability
     const paragraphs = doc.querySelectorAll('p');
     paragraphs.forEach((p) => {
-      p.style.fontSize = '18px';
+      p.style.fontSize = '19px';
       p.style.lineHeight = '1.6';
       p.style.marginBottom = '1.5rem';
     });

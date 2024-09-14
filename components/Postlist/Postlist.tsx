@@ -129,7 +129,7 @@ export default function Postlist() {
           zIndex: 2,
         }}
       >
-        <a href={`/posts/${post.slug}`} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'white' }}>
+        <a href={`/${post.slug}`} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'white' }}>
           <Title order={3}>{post.title}</Title>
         </a>
         <Text c="white">{new Date(post.date).toLocaleDateString()}</Text>
@@ -257,7 +257,7 @@ export default function Postlist() {
                     </div>
                   </Grid.Col>
                   <Grid.Col span={6}>
-                    <a href={`/posts/${post.slug}`} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'inherit' }}>
+                    <a href={`/${post.slug}`} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'inherit' }}>
                       <Title style={styles.postTitle} order={2}>{post.title}</Title>
                     </a>
                     <Title style={styles.postTitle} order={5}>{new Date(post.date).toLocaleDateString()}</Title>

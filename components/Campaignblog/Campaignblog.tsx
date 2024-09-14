@@ -65,7 +65,7 @@ export default function CampaignBlog() {
         {posts.map((post, index) => (
           <Carousel.Slide key={index}>
             <Card padding="xl" component='a' target="_blank" radius="md" style={{ height: '550px', display: 'flex', flexDirection: 'column' }}>
-              <Card.Section component="a" href={`/posts/${post.slug}`} target="_blank">
+              <Card.Section component="a" href={`/${post.slug}`} target="_blank">
                 <Image src={post.featured_image} height={300} alt={post.title} />
               </Card.Section>
               

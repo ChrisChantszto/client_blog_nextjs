@@ -76,7 +76,7 @@ export default function JetsoCampaignblog() {
                 display: 'flex', 
                 flexDirection: 'column' 
               }}>
-              <Card.Section component="a" href={`/posts/${post.slug}`} target="_blank">
+              <Card.Section component="a" href={`/${post.slug}`} target="_blank">
                 <Image src={post.featured_image} height={300} alt={post.title} />
               </Card.Section>
               

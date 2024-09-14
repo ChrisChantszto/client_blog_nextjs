@@ -140,7 +140,7 @@ export default function FoodPostlist() {
                   </div>
                 </Grid.Col>
                 <Grid.Col span={6}>
-                  <a href={`/posts/${post.slug}`} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'inherit' }}>
+                  <a href={`/${post.slug}`} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'inherit' }}>
                     <Title style={styles.postTitle} order={2}>{post.title}</Title>
                   </a>
                   <Title style={styles.postTitle} order={5}>{new Date(post.date).toLocaleDateString()}</Title>

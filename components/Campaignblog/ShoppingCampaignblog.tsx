@@ -75,7 +75,7 @@ export default function ShoppingCampaignblog() {
                 {/* <Text size="sm" style={{ color: 'black' }} fw={500}>
                   {new Date(post.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })} / by {post.author}
                 </Text> */}
-                <Title order={3} style={{ marginTop: '10px', marginBottom: '10px' }}><a href={`/posts/${post.slug}`} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'black', fontWeight: 'bold' }}>{truncateTitle(post.title)}</a></Title>
+                <Title order={3} style={{ marginTop: '10px', marginBottom: '10px' }}><a href={`/${post.slug}`} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'black', fontWeight: 'bold' }}>{truncateTitle(post.title)}</a></Title>
               </div>
             </div>
           </Carousel.Slide>

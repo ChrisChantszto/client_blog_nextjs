@@ -2,10 +2,12 @@ import { useRouter } from 'next/router';
 import { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
 import DynamicContent from './DynamicContent';
-import { AppShell, Stack, Box, Container, Grid, Title, Text } from '@mantine/core';
+import { AppShell, Stack, Box, Container, Grid, Title, Text, Group, Badge } from '@mantine/core';
 import Image from 'next/image';
 import { useMediaQuery } from '@mantine/hooks';
+import PostlistBlog from '@/components/Postlist/PostlistBlog';
 import Footer from '@/components/Footer/Footer';
+import BlogPostsCampaignblog from '@/components/Campaignblog/BlogPostsCampaignblog';
 import HeaderMegaMenu from '@/components/Header/Header';
 
 interface Post {
@@ -19,6 +21,13 @@ interface Post {
   }>;
   originalContent: string;
   featuredImage: string;
+  date: string;
+  terms: Array<{
+    category: string;
+    post_tag: string;
+    post_format: string;
+    reaction: string;
+  }>;
 }
 
 export default function Post() {
@@ -37,19 +46,6 @@ export default function Post() {
     }
   }, [id]);
 
-  // useEffect(() => {
-  //   const observer = new IntersectionObserver(([entry]) => {
-  //     setFooterVisible(entry.isIntersecting);
-  //   });
-  //   if (sentinelRef.current) {
-  //     observer.observe(sentinelRef.current);
-  //   }
-  //   return () => {
-  //     if (sentinelRef.current) {
-  //       observer.unobserve(sentinelRef.current);
-  //     }
-  //   };
-  // }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver(([entry]) => {
@@ -57,10 +53,15 @@ export default function Post() {
     }, {
       rootMargin: '0px 0px 100% 0px', // Add a margin to the bottom of the viewport
     });
-    if (sentinelRef.current) {
-      observer.observe(sentinelRef.current);
-    }
+  
+    const delay = setTimeout(() => {
+      if (sentinelRef.current) {
+        observer.observe(sentinelRef.current);
+      }
+    }, 1000); // Add a 1 second delay
+  
     return () => {
+      clearTimeout(delay);
       if (sentinelRef.current) {
         observer.unobserve(sentinelRef.current);
       }
@@ -108,7 +109,7 @@ export default function Post() {
 
   const SocialMediaLinks = () => (
     <Stack gap="xs">
-      <Title order={2}>FOLLOW US!</Title>
+      <Title order={2}>STAY CONNECTED!</Title>
       <Grid>
       <Grid.Col span={3}>
                   <a href="https://www.facebook.com/playeateasy/" target="_blank" rel="noopener noreferrer">
@@ -194,6 +195,13 @@ export default function Post() {
     </Stack>
   );
 
+  const date = new Date(post.date);
+  const formattedDate = new Intl.DateTimeFormat('en-GB', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  }).format(date);
+
   return (
     <AppShell
       header={{ height: 60 }}
@@ -204,10 +212,10 @@ export default function Post() {
         <HeaderMegaMenu />
       </AppShell.Header>
       <AppShell.Main>
-        <Container size="md" sx={{ display: 'flex', justifyContent: 'center' }}>
+        <Container size="1700" sx={{ display: 'flex', justifyContent: 'center' }}>
           <Grid>
             <Grid.Col span={isMobile ? 12 : 9}>
-            <div style={{ width: '100%', maxWidth: '800px' }}>
+            <div style={{ width: '100%' }}>
               {post && (
                 <div>
                   {post.featuredImage && (
@@ -221,11 +229,15 @@ export default function Post() {
                       />
                     </div>
                   )}
-                  <h1 style={{ fontSize: '3rem', fontWeight: 'bold', marginBottom: '2rem' }}>{post.title}</h1>
+                  <h1 style={{ fontSize: '2.2rem', fontWeight: 'bold', marginBottom: '2rem' }}>{post.title}</h1>
+                  <Group position="apart" style={{ marginBottom: '1rem' }}>
+                    <Text color="dimmed">{formattedDate}</Text>
+                    <br />
+                    <Badge color="blue" variant="light">testing</Badge>
+                  </Group>
                   <DynamicContent content={post.originalContent} attachments={post.attachments || []} />
                 </div>
               )}
-              <div ref={sentinelRef} style={{ height: '1px' }}></div>
             </div>
             </Grid.Col>
             {!isMobile && (
@@ -244,8 +256,22 @@ export default function Post() {
           )}
           </Grid>
         </Container>
+        <Container fluid style={{ backgroundColor: '#E9E3D9', height: '500px' }}>
+          <div style={{ width: '100%', maxWidth: '1700px', margin: '0 auto' }}>
+            <BlogPostsCampaignblog />
+          </div>
+        </Container>
+        <br />
+        <br />
+        <br />
+        <PostlistBlog />
+        <br />
+        <br />
+        <br />
+        <Footer />
+
       </AppShell.Main>
-      {footerVisible && <AppShell.Footer><Footer /></AppShell.Footer>}
+      {footerVisible && <AppShell.Footer ref={sentinelRef}><Footer /></AppShell.Footer>}
     </AppShell>
   );
 }

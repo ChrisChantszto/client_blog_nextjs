@@ -56,7 +56,7 @@ export default function PhotoCarousel() {
   }, [embla]);
 
   const handleSlideClick = (slug: string) => {
-    window.location.href = `/posts/${slug}`;
+    window.location.href = `/${slug}`;
   };
 
   const slides = images.map((item, index) => (

@@ -21,7 +21,7 @@ function truncateTitle(title: string, maxWords: number = 19): string {
   return title;
 }
 
-export default function FoodCampaignBlog() {
+export default function BlogPostsCampaignblog() {
   const [posts, setPosts] = useState<Post[]>([]);
 
   const isMobile = useMediaQuery('(min-width: 56.25em)');
@@ -53,7 +53,7 @@ export default function FoodCampaignBlog() {
   return (
     <Container fluid style={{ backgroundColor: '#E9E3D9', height: '500px' }}>
       <br />
-      <Title order={2} px={30} style={{ fontWeight: 800, color: 'black' }}>人氣話題 #HOT TOPIC</Title>
+      <Title order={2} px={30} style={{ fontWeight: 800, color: 'black' }}>延伸閱讀 #Next Reading</Title>
       <br />
       <Carousel
         height={300}
@@ -61,26 +61,32 @@ export default function FoodCampaignBlog() {
         slideGap="md"
         loop
         align="start"
-      >
-        {posts.map((post, index) => (
-          <Carousel.Slide key={index}>
-            <div style={{ display: 'flex', height: '100%', backgroundColor: 'transparent' }}>
-              <div style={{ flex: '0 0 50%', height: '100%' }}>
-                <img src={post.featured_image} alt={post.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-              </div>
-              <div style={{ flex: '1', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '0 20px', backgroundColor: 'white' }}>
-                <Group mb="xs">
-                  <Badge autoContrast color="#69FFB3">飲食</Badge>
-                </Group>
-                {/* <Text size="sm" style={{ color: 'black' }} fw={500}>
-                  {new Date(post.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })} / by {post.author}
-                </Text> */}
-                <Title order={3} style={{ marginTop: '10px', marginBottom: '10px' }}><a href={`/${post.slug}`} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'black', fontWeight: 'bold' }}>{truncateTitle(post.title)}</a></Title>
-              </div>
-            </div>
-          </Carousel.Slide>
-        ))}
-      </Carousel>
+        styles={{
+            root: {
+              width: '100%',
+              maxWidth: '1000px',
+              margin: '0 auto',
+              display: 'flex',
+              overflowX: 'auto',
+            },
+          }}
+    >
+            {/* {posts.map((post, index) => (
+            <Carousel.Slide key={index}>
+                <div style={{ display: 'flex', height: '100%', backgroundColor: 'transparent' }}>
+                <div style={{ flex: '0 0 50%', height: '100%' }}>
+                    <img src={post.featured_image} alt={post.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                </div>
+                <div style={{ flex: '1', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '0 20px', backgroundColor: 'white' }}>
+                    <Group mb="xs">
+                    <Badge autoContrast color="#69FFB3">飲食</Badge>
+                    </Group>
+                    <Title order={3} style={{ marginTop: '10px', marginBottom: '10px' }}><a href={`/posts/${post.slug}`} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'black', fontWeight: 'bold' }}>{post.title}</a></Title>
+                </div>
+                </div>
+            </Carousel.Slide>
+            ))} */}
+        </Carousel>
     </Container>
   );
 }
