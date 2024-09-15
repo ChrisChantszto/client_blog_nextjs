@@ -49,7 +49,7 @@ export default function FoodCard() {
   };
 
   const handleSlideClick = (slug: string) => {
-    window.location.href = `/posts/${slug}`;
+    window.location.href = `/${slug}`;
   };
 
   useEffect(() => {

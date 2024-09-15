@@ -49,7 +49,7 @@ export default function PhotoCarousel() {
   };
 
   const handleSlideClick = (slug: string) => {
-    window.location.href = `/posts/${slug}`;
+    window.location.href = `/${slug}`;
   };
 
   useEffect(() => {
