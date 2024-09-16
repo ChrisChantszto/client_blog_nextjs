@@ -138,6 +138,29 @@ export default function Postlist() {
     </Box>
   );
 
+  const MobilePostItem = ({ post }: { post: Post }) => (
+    <Box style={{ marginBottom: '1rem' }}>
+      <Image
+        radius="md"
+        src={post.featured_image}
+        alt={post.title}
+        style={{ width: '100%', height: 'auto' }}
+      />
+      <Box
+        style={{
+          padding: '1rem',
+          backgroundColor: '#F5F5F5',
+        }}
+      >
+        <a href={`/${post.slug}`} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'inherit' }}>
+          <Title order={3} style={{ marginBottom: '0.5rem' }}>{post.title}</Title>
+        </a>
+        <Text c="dimmed" style={{ marginBottom: '0.5rem' }}>{new Date(post.date).toLocaleDateString()}</Text>
+        <Badge color="#FF6031">最新</Badge>
+      </Box>
+    </Box>
+  );
+
   const SocialMediaLinks = () => (
     <Stack gap="xs">
       <Title order={2}>FOLLOW US!</Title>
@@ -234,7 +257,7 @@ export default function Postlist() {
       <Divider size="sm" />
       <br />
       <Grid>
-      <Grid.Col span={isMobile ? 12 : 10}>
+        <Grid.Col span={isMobile ? 12 : 10}>
           <Stack
             align="stretch"
             justify="flex-start"
@@ -243,7 +266,7 @@ export default function Postlist() {
           >
             {posts.map((post, index) => (
               isMobile ? (
-                <PostItem key={index} post={post} />
+                <MobilePostItem key={index} post={post} />
               ) : (
                 <Grid key={index}>
                   <Grid.Col span={6}>
