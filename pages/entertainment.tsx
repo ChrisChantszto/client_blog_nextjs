@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { AppShell, Center, Burger } from '@mantine/core';
+import { AppShell, Container, Center, Burger } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import HeaderMegaMenu from '@/components/Header/Header';
 import PhotoCarousel from '@/components/PhotoCarousel/PhotoCarousel';
@@ -76,6 +76,7 @@ export default function Entertainment() {
         <br />
         <br />
         {/* <Instagram /> */}
+        <Container size="md">
         <div style={{ position: 'relative', width: '100%', height: '100%', overflow: 'hidden' }}>
           <Center>
           <img
@@ -86,10 +87,10 @@ export default function Entertainment() {
           <div style={{
             position: 'absolute',
             top: '20%', // Percentage relative to the container
-            left: '20%', // Center align
-            transform: 'translate(-50%, -50%)', // Center the div on the specified top and left
+            left: '14%', // Center align
+            transform: 'translate(-23.5%, -50%)', // Center the div on the specified top and left
             color: 'white',
-            fontSize: '5vw', // Responsive font size based on viewport width
+            fontSize: '1.9rem', // Responsive font size based on viewport width
             fontWeight: 'bold',
             textShadow: '0px 0px 8px rgba(0, 0, 0, 0.6)',
             whiteSpace: 'nowrap' // Prevents the text from breaking into multiple lines
@@ -99,10 +100,11 @@ export default function Entertainment() {
           <div style={{
             position: 'absolute',
             top: '33%', // Adjust this value to move the text lower or higher
-            left: '4%', // Adjust this value to move the text more to the left or right
+            left: '9.5%', // Adjust this value to move the text more to the left or right
             color: 'white', // Text color
-            fontSize: '2vw', // Text size
+            fontSize: '1.25rem', // Text size
             fontWeight: 'bold', // Text weight
+            transform: 'translate(-2.5%, -10%)',
             textShadow: '0px 0px 8px rgba(0, 0, 0, 0.6)' // Text shadow for better readability
           }}>
             立即追蹤我們緊貼最新資訊！
@@ -161,6 +163,7 @@ export default function Entertainment() {
           </div>
           </Center>
         </div>
+        </Container>
         <br />
         <br />
         <br />
