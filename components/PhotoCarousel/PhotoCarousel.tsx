@@ -76,11 +76,11 @@ export default function PhotoCarousel() {
       <div className="image-wrapper">
         <Image src={item.url} alt={`Image ${index}`} style={{ borderRadius: '5px' }} />
       </div>
-      <div className="gradient-overlay"></div>
+
       <div
         style={{
           position: 'absolute',
-          bottom: '30px',
+          bottom: isMobile ? '60px' : '30px',
           left: '15px',
           right: '15px',
           display: 'flex',
@@ -88,15 +88,14 @@ export default function PhotoCarousel() {
           alignItems: 'flex-start',
           color: 'white',
           textAlign: 'left',
-          fontSize: '29px',
+          fontSize: isMobile ? '25px' : '29px',
           fontWeight: 'bold',
-          textShadow: '1px 1px 2px rgba(0.5, 0.5, 0.5, 0.6)',
         }}
       >
         <Badge color="#FF6031" variant="filled" size="lg" style={{ marginBottom: '10px' }}>
           最新
         </Badge>
-        {isMobile ? null : item.title}
+        {item.title}
       </div>
     </Carousel.Slide>
   ));
@@ -107,7 +106,7 @@ export default function PhotoCarousel() {
       .image-wrapper {
         position: relative;
         width: 100%;
-        padding-top: 75%; /* 4:3 Aspect Ratio */
+        padding-top: 75%;
       }
 
       .image-wrapper img {
@@ -118,16 +117,6 @@ export default function PhotoCarousel() {
         height: 100%;
         object-fit: cover;
         border-radius: 5px;
-      }
-
-      .gradient-overlay {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        height: 80px;
-        background: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0));
-        border-radius: 0 0 5px 5px;
       }
     `;
     document.head.appendChild(styles);
@@ -145,7 +134,7 @@ export default function PhotoCarousel() {
     <Carousel
       loop
       dragFree
-      slideSize="50%"
+      slideSize={isMobile ? "100%" : "50%"}
       slideGap="md"
       height={400}
       getEmblaApi={setEmbla}
