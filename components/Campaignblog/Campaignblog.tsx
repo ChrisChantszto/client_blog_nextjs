@@ -73,7 +73,7 @@ export default function CampaignBlog() {
                 <Badge color="#FF6031">最新</Badge>
               </Group>
               <Text size="sm" style={{ color: 'black' }} fw={500}>
-                {new Date(post.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })} / by {post.author}
+                {new Date(post.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
               </Text>
               <Box style={{ height: '98px', overflow: 'hidden' }}>
                 <Title order={3}>
