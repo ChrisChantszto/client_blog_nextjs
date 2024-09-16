@@ -75,7 +75,7 @@ export default function HeaderMegaMenu() {
       <header className={classes.header}>
         <Group justify="space-between" h="100%">
         <a href="https://www.playeateasy.com/">
-          <img src={logoUrl} alt="Your Logo" style={{ height: 30, cursor: 'pointer' }} />
+          <img src={logoUrl} alt="Your Logo" className={classes.logo} />
         </a>
           <Group h="100%" gap={0} visibleFrom="sm">
             <a href="/jetso" className={classes.link} color="#222222">
@@ -120,7 +120,7 @@ export default function HeaderMegaMenu() {
             </Button>
           </Group>
 
-          <Burger size="xs" opened={drawerOpened} onClick={toggleDrawer} hiddenFrom="sm" />
+          <Burger size="sm" opened={drawerOpened} onClick={toggleDrawer} hiddenFrom="sm" />
         </Group>
       </header>
 
