@@ -22,6 +22,14 @@ export default function Postlist() {
   const isMobile = useMediaQuery('(max-width: 768px)');
   const baseImageUrl = "https://i.imgur.com/VEBexAy.png?5000";
   const imageUrl = useImageVersion(baseImageUrl);
+  const [allPosts, setAllPosts] = useState<Post[]>([]);
+  const [visiblePosts, setVisiblePosts] = useState(3);
+
+  const loadMorePosts = () => {
+    const newVisiblePosts = visiblePosts + 3;
+    setVisiblePosts(newVisiblePosts);
+    setPosts(allPosts.slice(0, newVisiblePosts));
+  };
   
   useEffect(() => {
     // Fetch posts from the API
@@ -30,7 +38,7 @@ export default function Postlist() {
         const response = await axios.get(
           'https://public-api.wordpress.com/rest/v1.1/sites/playeateasy.com/posts/'
         );
-        const fetchedPosts = response.data.posts.slice(0, 4).map((post: any) => ({
+        const fetchedPosts = response.data.posts.map((post: any) => ({
           featured_image: post.featured_image,
           title: post.title,
           link: post.URL,  // Extract link from the API response
@@ -41,7 +49,9 @@ export default function Postlist() {
           date: post.date,
         })) as Post[]; // Type assertion to ensure TypeScript understands this is an array of Post objects
 
-        setPosts(fetchedPosts);
+        setPosts(fetchedPosts.slice(0, 4));
+        setAllPosts(fetchedPosts);
+        // setPosts(fetchedPosts.slice(0, visiblePosts));
       } catch (error) {
         console.error('Error fetching posts:', error);
       }
@@ -86,14 +96,12 @@ export default function Postlist() {
       marginTop: '1rem',
       width: '70%',
       height: 'auto',
-      // backgroundColor: '#F5F5F5',
     },
     imageContainer: {
       position: 'relative',
       width: '100%',
-      paddingTop: '56.25%', // 16:9 Aspect Ratio (adjust as needed)
+      paddingTop: '56.25%',
       overflow: 'hidden',
-      // backgroundColor: '#F5F5F5',
     },
     image: {
       position: 'absolute',
@@ -102,11 +110,9 @@ export default function Postlist() {
       width: '100%',
       height: '100%',
       objectFit: 'cover',
-      // backgroundColor: '#F5F5F5',
     },
     postTitle: {
-      // backgroundColor: '#F5F5F5', // Ensure consistent background color for titles
-      marginBottom: '0.5rem', // Adjust spacing as needed
+      marginBottom: '0.5rem',
     },
   };
 
@@ -137,6 +143,7 @@ export default function Postlist() {
       </Box>
     </Box>
   );
+
 
   const MobilePostItem = ({ post }: { post: Post }) => (
     <Box style={{ marginBottom: '1rem' }}>
@@ -307,7 +314,7 @@ export default function Postlist() {
       )}
 
       <Center style={{ marginTop: '1rem' }}>
-        <Button variant="filled" color="#FF6031" radius="xl">
+        <Button variant="filled" color="#FF6031" radius="xl" onClick={loadMorePosts}>
           <Text size="xl">更多文章</Text>
           <IconPlus />
         </Button>
