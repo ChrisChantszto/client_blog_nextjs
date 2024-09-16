@@ -1,8 +1,6 @@
-import { Container, Title, Group, Badge, Text } from '@mantine/core';
+import { Container, Title, Group, Badge, Text, SimpleGrid, Card } from '@mantine/core';
 import { useEffect, useState } from "react";
-import { Carousel } from '@mantine/carousel';
 import axios from 'axios';
-
 import { useMediaQuery } from '@mantine/hooks';
 
 interface Post {
@@ -11,6 +9,7 @@ interface Post {
   featured_image: string;
   date: string;
   author: string;
+  slug: string;
 }
 
 function truncateTitle(title: string, maxWords: number = 19): string {
@@ -23,8 +22,8 @@ function truncateTitle(title: string, maxWords: number = 19): string {
 
 export default function BlogPostsCampaignblog() {
   const [posts, setPosts] = useState<Post[]>([]);
-
-  const isMobile = useMediaQuery('(min-width: 56.25em)');
+  const isMobile = useMediaQuery('(max-width: 768px)');
+  const isTablet = useMediaQuery('(min-width: 769px) and (max-width: 1024px)');
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -41,7 +40,7 @@ export default function BlogPostsCampaignblog() {
           author: post.author.name
         }));
 
-        setPosts(fetchedPosts);
+        setPosts(fetchedPosts.slice(0, 3));
       } catch (error) {
         console.error("Error fetching posts:", error);
       }
@@ -50,43 +49,42 @@ export default function BlogPostsCampaignblog() {
     fetchPosts();
   }, []);
 
+  const PostCard = ({ post }: { post: Post }) => (
+    <Card shadow="sm" padding="lg" radius="md" style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+      <Card.Section style={{ position: 'relative', paddingTop: '56.25%' }}>
+        <img
+          src={post.featured_image}
+          alt={post.title}
+          style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover' }}
+        />
+      </Card.Section>
+
+      <Group mt="md" mb="xs">
+        <Badge autoContrast color="#69FFB3">飲食</Badge>
+      </Group>
+
+      <Title order={3} style={{ marginTop: '10px', marginBottom: '10px', flexGrow: 1 }}>
+        <a href={`/posts/${post.slug}`} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'black', fontWeight: 'bold' }}>
+          {truncateTitle(post.title)}
+        </a>
+      </Title>
+    </Card>
+  );
+
+  const getColumnCount = () => {
+    if (isMobile) return 1;
+    if (isTablet) return 2;
+    return 3;
+  };
+
   return (
-    <Container fluid style={{ backgroundColor: '#E9E3D9', height: '500px' }}>
-      <br />
-      <Title order={2} px={30} style={{ fontWeight: 800, color: 'black' }}>延伸閱讀 #Next Reading</Title>
-      <br />
-      <Carousel
-        height={300}
-        slideSize={isMobile ? "50%" : "100%"}
-        slideGap="md"
-        loop
-        align="start"
-        styles={{
-            root: {
-              width: '100%',
-              maxWidth: '1000px',
-              margin: '0 auto',
-              display: 'flex',
-              overflowX: 'auto',
-            },
-          }}
-    >
-            {/* {posts.map((post, index) => (
-            <Carousel.Slide key={index}>
-                <div style={{ display: 'flex', height: '100%', backgroundColor: 'transparent' }}>
-                <div style={{ flex: '0 0 50%', height: '100%' }}>
-                    <img src={post.featured_image} alt={post.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                </div>
-                <div style={{ flex: '1', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '0 20px', backgroundColor: 'white' }}>
-                    <Group mb="xs">
-                    <Badge autoContrast color="#69FFB3">飲食</Badge>
-                    </Group>
-                    <Title order={3} style={{ marginTop: '10px', marginBottom: '10px' }}><a href={`/posts/${post.slug}`} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'black', fontWeight: 'bold' }}>{post.title}</a></Title>
-                </div>
-                </div>
-            </Carousel.Slide>
-            ))} */}
-        </Carousel>
+    <Container fluid style={{ backgroundColor: '#E9E3D9', padding: '30px' }}>
+      <Title order={2} mb="md" style={{ fontWeight: 800, color: 'black' }}>延伸閱讀 #Next Reading</Title>
+      <SimpleGrid cols={getColumnCount()} spacing="lg">
+        {posts.slice(0, getColumnCount()).map((post, index) => (
+          <PostCard key={index} post={post} />
+        ))}
+      </SimpleGrid>
     </Container>
   );
 }

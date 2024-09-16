@@ -233,7 +233,7 @@ export default function Post() {
                   <Group position="apart" style={{ marginBottom: '1rem' }}>
                     <Text color="dimmed">{formattedDate}</Text>
                     <br />
-                    <Badge color="blue" variant="light">testing</Badge>
+                    <Badge color="blue" variant="light">最新</Badge>
                   </Group>
                   <DynamicContent content={post.originalContent} attachments={post.attachments || []} />
                 </div>

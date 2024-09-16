@@ -22,6 +22,8 @@ export default function PostlistBlog() {
   const isMobile = useMediaQuery('(max-width: 768px)');
   const baseImageUrl = "https://i.imgur.com/VEBexAy.png?5000";
   const imageUrl = useImageVersion(baseImageUrl);
+  const [allPosts, setAllPosts] = useState<Post[]>([]);
+  const [visiblePosts, setVisiblePosts] = useState(3);
   
   useEffect(() => {
     // Fetch posts from the API
@@ -30,7 +32,7 @@ export default function PostlistBlog() {
         const response = await axios.get(
           'https://public-api.wordpress.com/rest/v1.1/sites/playeateasy.com/posts/'
         );
-        const fetchedPosts = response.data.posts.slice(0, 4).map((post: any) => ({
+        const fetchedPosts = response.data.posts.map((post: any) => ({
           featured_image: post.featured_image,
           title: post.title,
           link: post.URL,  // Extract link from the API response
@@ -41,7 +43,9 @@ export default function PostlistBlog() {
           date: post.date,
         })) as Post[]; // Type assertion to ensure TypeScript understands this is an array of Post objects
 
-        setPosts(fetchedPosts);
+        setPosts(fetchedPosts.slice(0, 4));
+        setAllPosts(fetchedPosts);
+        // setPosts(fetchedPosts.slice(0, visiblePosts));
       } catch (error) {
         console.error('Error fetching posts:', error);
       }
@@ -86,14 +90,12 @@ export default function PostlistBlog() {
       marginTop: '1rem',
       width: '70%',
       height: 'auto',
-      // backgroundColor: '#F5F5F5',
     },
     imageContainer: {
       position: 'relative',
       width: '100%',
-      paddingTop: '56.25%', // 16:9 Aspect Ratio (adjust as needed)
+      paddingTop: '56.25%',
       overflow: 'hidden',
-      // backgroundColor: '#F5F5F5',
     },
     image: {
       position: 'absolute',
@@ -102,11 +104,9 @@ export default function PostlistBlog() {
       width: '100%',
       height: '100%',
       objectFit: 'cover',
-      // backgroundColor: '#F5F5F5',
     },
     postTitle: {
-      // backgroundColor: '#F5F5F5', // Ensure consistent background color for titles
-      marginBottom: '0.5rem', // Adjust spacing as needed
+      marginBottom: '0.5rem',
     },
   };
 
@@ -138,14 +138,39 @@ export default function PostlistBlog() {
     </Box>
   );
 
+
+  const MobilePostItem = ({ post }: { post: Post }) => (
+    <Box style={{ marginBottom: '1rem' }}>
+      <Image
+        radius="md"
+        src={post.featured_image}
+        alt={post.title}
+        style={{ width: '100%', height: 'auto' }}
+      />
+      <Box
+        style={{
+          padding: '1rem',
+          backgroundColor: '#F5F5F5',
+        }}
+      >
+        <a href={`/${post.slug}`} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'inherit' }}>
+          <Title order={3} style={{ marginBottom: '0.5rem' }}>{post.title}</Title>
+        </a>
+        <Text c="dimmed" style={{ marginBottom: '0.5rem' }}>{new Date(post.date).toLocaleDateString()}</Text>
+        <Badge color="#FF6031">最新</Badge>
+      </Box>
+    </Box>
+  );
+
   return (
-    <Container size="1800" style={{ backgroundColor: '#F5F5F5' }} >
-      <Title fw={800} order={2}>更多文章</Title>
+    <Container fluid style={{ backgroundColor: '#F5F5F5' }} >
+      <Title fw={800} order={1} c="#FF6031">SELECTED POST</Title>
+      <Title fw={800} order={2}>精選文章</Title>
       <br />
       <Divider size="sm" />
       <br />
       <Grid>
-      <Grid.Col span={12}>
+        <Grid.Col span={12}>
           <Stack
             align="stretch"
             justify="flex-start"
@@ -154,10 +179,10 @@ export default function PostlistBlog() {
           >
             {posts.map((post, index) => (
               isMobile ? (
-                <PostItem key={index} post={post} />
+                <MobilePostItem key={index} post={post} />
               ) : (
                 <Grid key={index}>
-                  <Grid.Col span={6}>
+                  <Grid.Col span={5}>
                     <div style={{ ...styles.imageContainer, paddingTop: '56.25%' }}>
                       <Image
                         radius="md"
@@ -167,7 +192,7 @@ export default function PostlistBlog() {
                       />
                     </div>
                   </Grid.Col>
-                  <Grid.Col span={6}>
+                  <Grid.Col span={7}>
                     <a href={`/${post.slug}`} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'inherit' }}>
                       <Title style={styles.postTitle} order={2}>{post.title}</Title>
                     </a>
@@ -179,7 +204,7 @@ export default function PostlistBlog() {
             ))}
           </Stack>
         </Grid.Col>
-        </Grid>
+      </Grid>
     </Container>
   );
 }
