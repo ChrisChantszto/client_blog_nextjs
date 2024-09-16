@@ -7,9 +7,9 @@ import { useMediaQuery } from '@mantine/hooks';
 
 export default function PhotoCarousel() {
   const [scrollProgress, setScrollProgress] = useState(0);
-  const [images, setImages] = useState<{ url: string; title: string; link: string }[]>([]);
-  const [embla, setEmbla] = useState<any>(null); // Adjust Embla type as per Mantine documentation or typings
-  const [loading, setLoading] = useState(true); // State to track loading state
+  const [images, setImages] = useState<{ url: string; title: string; link: string; slug: string }[]>([]);
+  const [embla, setEmbla] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
   const isMobile = useMediaQuery('(max-width: 768px)');
 
   useEffect(() => {
@@ -22,19 +22,18 @@ export default function PhotoCarousel() {
         const fetchedImages = posts
           .map((post: any) => ({
             url: post.featured_image,
-            title: post.title, // Retrieve title of the post
+            title: post.title,
             link: post.URL,
             slug: post.slug
           }))
-          .filter((item: { url: string; title: string; link: string; slug: string}) => item.url && item.title
-          && item.link && item.slug) // Filter out items with missing data
-          .slice(0, 5); // Take the first 5 images
+          .filter((item: { url: string; title: string; link: string; slug: string}) => item.url && item.title && item.link && item.slug)
+          .slice(0, 5);
 
         setImages(fetchedImages);
-        setLoading(false); // Update loading state once images are fetched
+        setLoading(false);
       } catch (error) {
         console.error('Error fetching images:', error);
-        setLoading(false); // Update loading state in case of error
+        setLoading(false);
       }
     };
 
@@ -74,7 +73,7 @@ export default function PhotoCarousel() {
         style={{
           position: 'relative',
           width: '100%',
-          paddingTop: '75%', // 4:3 Aspect Ratio
+          paddingTop: '75%',
         }}
       >
         <Image
@@ -97,33 +96,33 @@ export default function PhotoCarousel() {
           left: '15px',
           right: '15px',
           color: 'white',
-          fontSize: '22px',
+          fontSize: isMobile ? '22px' : '22px',
           fontWeight: 'bold',
           textShadow: '1px 1px 2px rgba(0.5, 0.5, 0.5, 0.6)',
           cursor: 'pointer',
         }}
         onClick={() => handleSlideClick(item.slug)}
       >
-        {isMobile? null : item.title}
+        {item.title}
       </div>
     </Carousel.Slide>
   ));
 
   if (loading) {
-    return <Loader />; // Display loader while images are being fetched
+    return <Loader />;
   }
 
   return (
     <>
       <Carousel
         dragFree
-        slideSize="30%"
+        slideSize={isMobile ? "100%" : "30%"}
+        slideGap={isMobile ? 0 : "md"}
         withIndicators
-        slideGap="md"
-        height={350} // Adjust the height as needed
+        height={350}
         getEmblaApi={setEmbla}
         loop
-        initialSlide={2}
+        initialSlide={isMobile ? 0 : 2}
       >
         {slides}
       </Carousel>
