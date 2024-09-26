@@ -2,6 +2,7 @@ import '@mantine/core/styles.css';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import { MantineProvider } from '@mantine/core';
+import Script from 'next/script';
 import { theme } from '../theme';
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -15,6 +16,10 @@ export default function App({ Component, pageProps }: AppProps) {
         />
         <link rel="shortcut icon" href="/homepage.svg" />
       </Head>
+      <Script
+        src="//anymind360.com/js/7639/ats.js"
+        strategy="afterInteractive"
+      />
       <Component {...pageProps} />
     </MantineProvider>
   );
