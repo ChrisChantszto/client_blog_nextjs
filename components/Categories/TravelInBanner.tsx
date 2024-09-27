@@ -51,7 +51,7 @@ export default function TravelInBanner() {
                 }}
             >
                 <Title order={1} px={30} style={{ fontWeight: 800, color: 'white' }}>
-                    大灣區旅遊 #TRAVEL
+                    大灣區旅遊 #TRAVEL 
                 </Title>
             </Container>
             <Container 
