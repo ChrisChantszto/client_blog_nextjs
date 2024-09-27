@@ -103,7 +103,7 @@ export default function HeaderMegaMenu() {
               旅遊
             </a>
             <a href="/travelIn" className={classes.link} color="#222222">
-              北上旅遊
+              大灣區旅遊
             </a>
           </Group>
 
@@ -184,7 +184,7 @@ export default function HeaderMegaMenu() {
             旅遊
           </a>
           <a href="/travelIn" className={classes.link}>
-            北上旅遊
+            大灣區旅遊
           </a>
 
         </ScrollArea>
