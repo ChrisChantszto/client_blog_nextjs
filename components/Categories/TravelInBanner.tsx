@@ -28,12 +28,12 @@ const CONTAINER_SIZES: Record<string, string> = {
 
 export default function TravelInBanner() {
     const categories = [
-        { label: "全部文章", link: "/food-exploration" },
-        { label: "旅行前必備", link: "/local-specialties" },
-        { label: "最新景點", link: "/global-flavors" },
-        { label: "人氣景點", link: "/healthy-eating" },
-        { label: "租車資訊", link: "/healthy-eating" },
-        { label: "旅遊保險比較", link: "/healthy-eating" },
+        { label: "全部文章", link: "/travelIn/all" },
+        { label: "大灣區美食", link: "travelIn/food" },
+        { label: "大灣區玩樂", link: "/travelIn/play" },
+        { label: "大灣區商場", link: "/travelIn/mall" },
+        { label: "北上消費", link: "/travelIn/pay" },
+        { label: "北上旅遊", link: "/travelIn/travel" },
     ];
 
     return (

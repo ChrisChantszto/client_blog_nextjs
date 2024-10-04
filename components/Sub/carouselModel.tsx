@@ -3,7 +3,6 @@ import { Container, Title, Group, Badge, Text } from '@mantine/core';
 import { useEffect, useState } from "react";
 import { Carousel } from '@mantine/carousel';
 import axios from 'axios';
-
 import { useMediaQuery } from '@mantine/hooks';
 
 interface Post {
@@ -12,6 +11,15 @@ interface Post {
   featured_image: string;
   date: string;
   author: string;
+  slug: string;
+}
+
+interface CampaignBlogProps {
+  apiUrl: string;
+  title: string;
+  badgeText: string;
+  badgeColor: string;
+  backgroundColor: string;
 }
 
 function truncateTitle(title: string, maxWords: number = 19): string {
@@ -22,22 +30,19 @@ function truncateTitle(title: string, maxWords: number = 19): string {
   return title;
 }
 
-export default function ShoppingCampaignblog() {
+export default function CarouselModel({ apiUrl, title, badgeText, badgeColor, backgroundColor }: CampaignBlogProps) {
   const [posts, setPosts] = useState<Post[]>([]);
-
   const isMobile = useMediaQuery('(min-width: 56.25em)');
 
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await axios.get(
-          "https://public-api.wordpress.com/rest/v1.1/sites/playeateasy.com/posts/?category=%E8%B3%BC%E7%89%A9"
-        );
+        const response = await axios.get(apiUrl);
         const fetchedPosts = response.data.posts.map((post: any) => ({
           title: post.title,
-          slug: post.slug,
           link: post.URL,
           featured_image: post.featured_image,
+          slug: post.slug,
           date: post.date,
           author: post.author.name
         }));
@@ -49,12 +54,12 @@ export default function ShoppingCampaignblog() {
     };
 
     fetchPosts();
-  }, []);
+  }, [apiUrl]);
 
   return (
-    <Container fluid style={{ backgroundColor: '#E9E3D9', height: '500px' }}>
+    <Container fluid style={{ backgroundColor, height: '500px' }}>
       <br />
-      <Title order={2} px={30} style={{ fontWeight: 800, color: 'black' }}>人氣話題 #HOT TOPIC</Title>
+      <Title order={2} px={30} style={{ fontWeight: 800, color: 'black' }}>{title}</Title>
       <br />
       <Carousel
         height={300}
@@ -71,12 +76,13 @@ export default function ShoppingCampaignblog() {
               </div>
               <div style={{ flex: '1', display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '0 20px', backgroundColor: 'white' }}>
                 <Group mb="xs">
-                  <Badge autoContrast color="#FFBDF8">購物</Badge>
+                  <Badge autoContrast color={badgeColor}>{badgeText}</Badge>
                 </Group>
-                {/* <Text size="sm" style={{ color: 'black' }} fw={500}>
-                  {new Date(post.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })} / by {post.author}
-                </Text> */}
-                <Title order={3} style={{ marginTop: '10px', marginBottom: '10px' }}><a href={`/${post.slug}`} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'black', fontWeight: 'bold' }}>{truncateTitle(post.title)}</a></Title>
+                <Title order={3} style={{ marginTop: '10px', marginBottom: '10px' }}>
+                  <a href={`/${post.slug}`} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'black', fontWeight: 'bold' }}>
+                    {truncateTitle(post.title)}
+                  </a>
+                </Title>
               </div>
             </div>
           </Carousel.Slide>
