@@ -1,5 +1,6 @@
-anymanager.io, A7639, DIRECT
+anymanager.io, A3600, DIRECT
 google.com, pub-5454875279695201, RESELLER, f08c47fec0942fa0
+
 appnexus.com, 3691, DIRECT
 media.net, 8CU3VM41V, DIRECT
 media.net, 8CU52266U, DIRECT
@@ -11,8 +12,8 @@ google.com, pub-8787923930478618, RESELLER, f08c47fec0942fa0
 google.com, pub-9507736279911916, RESELLER, f08c47fec0942fa0
 pubmatic.com, 157267, DIRECT, 5d62403b186f2ace
 pubmatic.com, 158497, RESELLER, 5d62403b186f2ace
-rubiconproject.com, 17692, DIRECT, 0bfd66d529a55807
-rubiconproject.com, 21468, DIRECT, 0bfd66d529a55807
+rubiconproject.com, 17692, RESELLER, 0bfd66d529a55807
+rubiconproject.com, 21468, RESELLER, 0bfd66d529a55807
 triplelift.com, 7207, DIRECT, 6c33edb13117fd86
 triplelift.com, 7207-EB, DIRECT, 6c33edb13117fd86
 smartadserver.com, 4012, DIRECT
@@ -1492,3 +1493,4 @@ yahoo.com, 56860, RESELLER, e1a5b5b6e3255540
 yahoo.com, 59531, RESELLER, e1a5b5b6e3255540
 yeahmobi.com, 5135284, RESELLER
 yieldmo.com, 2754490424016969782, RESELLER
+smartadserver.com,2974-OB,RESELLER,060d053dcf45cbf3
