@@ -31,11 +31,8 @@ export default function App({ Component, pageProps }: AppProps) {
           content="minimum-scale=1, initial-scale=1, width=device-width, user-scalable=no"
         />
         <link rel="shortcut icon" href="/homepage.svg" />
+        <script src="//anymind360.com/js/7639/ats.js" />
       </Head>
-      <Script
-        src="//anymind360.com/js/7639/ats.js"
-        strategy="afterInteractive"
-      />
       {/* Google Analytics */}
       <Script
         strategy="afterInteractive"
