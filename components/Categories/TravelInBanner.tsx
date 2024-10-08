@@ -32,7 +32,7 @@ export default function TravelInBanner() {
         { label: "大灣區美食", link: "travelIn/food" },
         { label: "大灣區玩樂", link: "/travelIn/play" },
         { label: "大灣區商場", link: "/travelIn/mall" },
-        { label: "北上消費", link: "/travelIn/pay" },
+        { label: "北上消費", link: "/travelIn/buy" },
         { label: "北上旅遊", link: "/travelIn/travel" },
     ];
 
