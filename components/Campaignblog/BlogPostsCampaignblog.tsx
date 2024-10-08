@@ -64,7 +64,7 @@ export default function BlogPostsCampaignblog() {
       </Group>
 
       <Title order={3} style={{ marginTop: '10px', marginBottom: '10px', flexGrow: 1 }}>
-        <a href={`/posts/${post.slug}`} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'black', fontWeight: 'bold' }}>
+        <a href={`/${post.slug}`} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'black', fontWeight: 'bold' }}>
           {truncateTitle(post.title)}
         </a>
       </Title>
