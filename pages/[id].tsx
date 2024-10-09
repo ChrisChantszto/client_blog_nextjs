@@ -1,12 +1,14 @@
 import { useRouter } from 'next/router';
 import { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
-import DynamicContent from './DynamicContent';
-import { AppShell, Stack, Box, Container, Grid, Title, Text, Group, Badge } from '@mantine/core';
+import { AppShell, Stack, Box, Container, Grid, Title, Text, Button, Group, Badge, ActionIcon, Alert } from '@mantine/core';
 import Image from 'next/image';
 import { useMediaQuery } from '@mantine/hooks';
+import { IconLink, IconBrandFacebook, IconBrandInstagram } from '@tabler/icons-react';
+import DynamicContent from './DynamicContent';
 import PostlistBlog from '@/components/Postlist/PostlistBlog';
 import Footer from '@/components/Footer/Footer';
+import { IconCheck } from '@tabler/icons-react';
 import BlogPostsCampaignblog from '@/components/Campaignblog/BlogPostsCampaignblog';
 import HeaderMegaMenu from '@/components/Header/Header';
 
@@ -202,6 +204,53 @@ export default function Post() {
     year: 'numeric',
   }).format(date);
 
+  const ShareToFriends = () => {
+    const handleShare = (platform) => {
+      const url = window.location.href;
+      let shareUrl;
+
+      switch (platform) {
+        case 'link':
+          navigator.clipboard.writeText(url);
+          alert("Link copied to clipboard!");
+          return;
+        case 'facebook':
+          shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
+          break;
+        case 'instagram':
+          alert('Instagram sharing is not directly supported. You can copy the link and share it on Instagram.');
+          return;
+        case 'xiaohongshu':
+          alert('Xiaohongshu sharing is not directly supported. You can copy the link and share it on Xiaohongshu.');
+          return;
+      }
+
+      if (shareUrl) {
+        window.open(shareUrl, '_blank', 'width=600,height=400');
+      }
+    };
+
+    return (
+      <Box mt="xl">
+        <Title order={5} mb="md">Share to Friends!</Title>
+        <Group>
+          <ActionIcon variant="transparent" color="dark" onClick={() => handleShare('link')}>
+            <IconLink size={24} />
+          </ActionIcon>
+          <ActionIcon variant="transparent" color="dark" onClick={() => handleShare('facebook')}>
+            <IconBrandFacebook size={24} />
+          </ActionIcon>
+          <ActionIcon variant="transparent" color="dark" onClick={() => handleShare('instagram')}>
+            <IconBrandInstagram size={24} />
+          </ActionIcon>
+          <ActionIcon variant="transparent" color="dark" onClick={() => handleShare('xiaohongshu')}>
+            <Text size="sm" weight={700}>XHS</Text>
+          </ActionIcon>
+        </Group>
+      </Box>
+    );
+  };
+
   return (
     <AppShell
       header={{ height: 60 }}
@@ -235,6 +284,8 @@ export default function Post() {
                     <br />
                     <Badge color="blue" variant="light">最新</Badge>
                   </Group>
+                  <ShareToFriends />
+                  <br />
                   <DynamicContent content={post.originalContent} attachments={post.attachments || []} />
                 </div>
               )}
