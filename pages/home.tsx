@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { AppShell, Center, Burger, Container } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
+import Head from 'next/head';
 import HeaderMegaMenu from '@/components/Header/Header';
 import PhotoCarousel from '@/components/PhotoCarousel/PhotoCarousel';
 import Footer from '@/components/Footer/Footer';
@@ -43,6 +44,26 @@ export default function Home() {
       padding="md"
       style={{ backgroundColor: '#F5F5F5' }}
     >
+      <Head>
+        {/* Google Ad Manager Header Tag */}
+        <script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>
+        <script dangerouslySetInnerHTML={{
+          __html: `
+            window.googletag = window.googletag || {cmd: []};
+            googletag.cmd.push(function() {
+              googletag.defineSlot('/22000485675/ros_desktop_728x90', [728, 90], 'div-gpt-ad-1728872282390-0').setTargeting('position', ['top']).addService(googletag.pubads());
+              googletag.defineSlot('/22000485675/ros_desktop_728x90', [728, 90], 'div-gpt-ad-1728872308893-0').setTargeting('position', ['middle']).addService(googletag.pubads());
+              googletag.defineSlot('/22000485675/ros_desktop_728x90', [728, 90], 'div-gpt-ad-1728876526423-0').setTargeting('position', ['bottom']).addService(googletag.pubads());
+              googletag.defineSlot('/22000485675/ros_desktop_970x250', [970, 250], 'div-gpt-ad-1728872531921-0').setTargeting('position', ['top']).addService(googletag.pubads());
+              googletag.defineSlot('/22000485675/ros_desktop_970x250', [970, 250], 'div-gpt-ad-1728872550749-0').setTargeting('position', ['middle']).addService(googletag.pubads());
+              googletag.pubads().enableSingleRequest();
+              googletag.pubads().collapseEmptyDivs();
+              googletag.pubads().setTargeting('enviornment', ['desktop']).setTargeting('section', ['category']).setTargeting('content_category', ['dynamic_content_category']);
+              googletag.enableServices();
+            });
+          `}}
+        />
+      </Head>
       <AppShell.Header>
 
         <HeaderMegaMenu />
@@ -53,8 +74,22 @@ export default function Home() {
         <Discount />
         <br />
         <br />
+
+        {/* Top Ad */}
+        <div id="div-gpt-ad-1728872282390-0" style={{ minWidth: '728px', minHeight: '90px' }}>
+          <script dangerouslySetInnerHTML={{
+            __html: "googletag.cmd.push(function() { googletag.display('div-gpt-ad-1728872282390-0'); });"
+          }} />
+        </div>
         <Cardlist />
         <br />
+
+        {/* Middle Ad */}
+        <div id="div-gpt-ad-1728872308893-0" style={{ minWidth: '728px', minHeight: '90px' }}>
+          <script dangerouslySetInnerHTML={{
+            __html: "googletag.cmd.push(function() { googletag.display('div-gpt-ad-1728872308893-0'); });"
+          }} />
+        </div>
         <Postlist />
         <br />
         <br />
@@ -75,6 +110,14 @@ export default function Home() {
         <br />
         <br />
         <Youtube />
+
+
+        {/* Bottom Ad */}
+        <div id="div-gpt-ad-1728876526423-0" style={{ minWidth: '728px', minHeight: '90px' }}>
+          <script dangerouslySetInnerHTML={{
+            __html: "googletag.cmd.push(function() { googletag.display('div-gpt-ad-1728876526423-0'); });"
+          }} />
+        </div>
         <br />
         <br />
         <br />
