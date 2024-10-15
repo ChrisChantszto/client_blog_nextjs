@@ -115,18 +115,8 @@ export default function Home() {
             </Script>
           </div>
         </Center>
-
         <br />
         <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-
         <Campaignblog />
         <br />
         <br />

@@ -1,8 +1,9 @@
 import { useRouter } from 'next/router';
 import { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
-import { AppShell, Stack, Box, Container, Grid, Title, Text, Button, Group, Badge, ActionIcon, Alert } from '@mantine/core';
+import { AppShell, Stack, Box, Container, Grid, Title, Text, Button, Group, Badge, ActionIcon, Center } from '@mantine/core';
 import Image from 'next/image';
+import Script from 'next/script';
 import { useMediaQuery } from '@mantine/hooks';
 import { IconLink, IconBrandFacebook, IconBrandInstagram } from '@tabler/icons-react';
 import DynamicContent from './DynamicContent';
@@ -257,6 +258,25 @@ export default function Post() {
       padding="md"
       style={{ backgroundColor: '#F5F5F5' }}
     >
+      <Script
+        strategy="afterInteractive"
+        src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"
+      />
+      <Script id="gpt-init" strategy="afterInteractive">
+        {`
+          window.googletag = window.googletag || {cmd: []};
+          googletag.cmd.push(function() {
+            googletag.defineSlot('/22000485675/ros_desktop_728x90', [728, 90], 'div-gpt-ad-1728872238496-0').setTargeting('position', ['middle']).addService(googletag.pubads());
+            googletag.defineSlot('/22000485675/ros_desktop_728x90', [728, 90], 'div-gpt-ad-1728872258333-0').setTargeting('position', ['bottom']).addService(googletag.pubads());
+            googletag.defineSlot('/22000485675/ros_desktop_970x250', [970, 250], 'div-gpt-ad-1728872497774-0').setTargeting('position', ['middle']).addService(googletag.pubads());
+            googletag.defineSlot('/22000485675/ros_desktop_300x250', [300, 250], 'div-gpt-ad-1728872758865-0').setTargeting('position', ['right']).addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.pubads().collapseEmptyDivs();
+            googletag.pubads().setTargeting('environment', ['desktop']).setTargeting('section', ['content']).setTargeting('content_category', ['dynamic_content_category']);
+            googletag.enableServices();
+          });
+        `}
+      </Script>
       <AppShell.Header>
         <HeaderMegaMenu />
       </AppShell.Header>
@@ -295,6 +315,14 @@ export default function Post() {
           <Grid.Col span={3}>
                 <div style={styles.banner}>
                   <SocialMediaLinks />
+                  {/* 300x250 Ad */}
+                  <Box mt="xl">
+                    <div id="div-gpt-ad-1728872758865-0" style={{ minWidth: '300px', minHeight: '250px' }}>
+                      <Script id="gpt-display-right-300x250" strategy="afterInteractive">
+                        {"googletag.cmd.push(function() { googletag.display('div-gpt-ad-1728872758865-0'); });"}
+                      </Script>
+                    </div>
+                  </Box>
                 </div>
               </Grid.Col>
             )}
@@ -307,16 +335,38 @@ export default function Post() {
           )}
           </Grid>
         </Container>
+        <Center style={{ minHeight: '250px', marginBottom: '1rem' }}>
+          <div id="div-gpt-ad-1728872497774-0" style={{ minWidth: '970px', minHeight: '250px' }}>
+            <Script id="gpt-display-middle-970x250" strategy="afterInteractive">
+              {"googletag.cmd.push(function() { googletag.display('div-gpt-ad-1728872497774-0'); });"}
+            </Script>
+          </div>
+        </Center>
         <Container fluid style={{ backgroundColor: '#E9E3D9', height: '500px' }}>
           <div style={{ width: '100%', maxWidth: '1700px', margin: '0 auto' }}>
             <BlogPostsCampaignblog />
           </div>
         </Container>
         <br />
+        <Center style={{ minHeight: '90px', marginBottom: '1rem' }}>
+          <div id="div-gpt-ad-1728872238496-0" style={{ minWidth: '728px', minHeight: '90px' }}>
+            <Script id="gpt-display-middle-728x90" strategy="afterInteractive">
+              {"googletag.cmd.push(function() { googletag.display('div-gpt-ad-1728872238496-0'); });"}
+            </Script>
+          </div>
+        </Center>
         <br />
         <br />
         <PostlistBlog />
         <br />
+        {/* Bottom 728x90 Ad */}
+        <Center style={{ minHeight: '90px', marginTop: '1rem' }}>
+          <div id="div-gpt-ad-1728872258333-0" style={{ minWidth: '728px', minHeight: '90px' }}>
+            <Script id="gpt-display-bottom-728x90" strategy="afterInteractive">
+              {"googletag.cmd.push(function() { googletag.display('div-gpt-ad-1728872258333-0'); });"}
+            </Script>
+          </div>
+        </Center>
         <br />
         <br />
         <Footer />

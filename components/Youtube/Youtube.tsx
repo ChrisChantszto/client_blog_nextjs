@@ -1,4 +1,5 @@
 import React from "react";
+import Script from "next/script";
 import YouTube from "react-youtube";
 import { Center, Container, Title, Text, Button, Box, SimpleGrid } from "@mantine/core";
 import { IconArrowRight } from "@tabler/icons-react";
@@ -55,5 +56,6 @@ export default function Youtube() {
                 </Button>
             </Center>
         </Container>
+        
     );
 }
