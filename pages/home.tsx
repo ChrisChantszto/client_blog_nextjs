@@ -1,16 +1,16 @@
 import { useEffect, useRef, useState } from 'react';
-import { AppShell, Center, Burger, Container } from '@mantine/core';
+import { AppShell, Center, Container, Group } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import Head from 'next/head';
+import Script from 'next/script';
 import HeaderMegaMenu from '@/components/Header/Header';
 import PhotoCarousel from '@/components/PhotoCarousel/PhotoCarousel';
 import Footer from '@/components/Footer/Footer';
 import Discount from '@/components/Discount/Discount';
 import Cardlist from '@/components/Cardlist/Cardlist';
-import Instagram from '@/components/Instagram/Instagram';
 import Postlist from '@/components/Postlist/Postlist';
 import Campaignblog from '@/components/Campaignblog/Campaignblog';
-import { IconBrandFacebook, IconBrandInstagram, IconBrandYoutube } from '@tabler/icons-react';
+import { IconBrandFacebook, IconBrandInstagram, IconBrandYoutube, IconBrandLinkedin, IconBrandXing } from '@tabler/icons-react';
 import Youtube from '@/components/Youtube/Youtube';
 
 export default function Home() {
@@ -45,55 +45,77 @@ export default function Home() {
       style={{ backgroundColor: '#F5F5F5' }}
     >
       <Head>
-        {/* Google Ad Manager Header Tag */}
-        <script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>
-        <script dangerouslySetInnerHTML={{
-          __html: `
-            window.googletag = window.googletag || {cmd: []};
-            googletag.cmd.push(function() {
-              googletag.defineSlot('/22000485675/ros_desktop_728x90', [728, 90], 'div-gpt-ad-1728872282390-0').setTargeting('position', ['top']).addService(googletag.pubads());
-              googletag.defineSlot('/22000485675/ros_desktop_728x90', [728, 90], 'div-gpt-ad-1728872308893-0').setTargeting('position', ['middle']).addService(googletag.pubads());
-              googletag.defineSlot('/22000485675/ros_desktop_728x90', [728, 90], 'div-gpt-ad-1728876526423-0').setTargeting('position', ['bottom']).addService(googletag.pubads());
-              googletag.defineSlot('/22000485675/ros_desktop_970x250', [970, 250], 'div-gpt-ad-1728872531921-0').setTargeting('position', ['top']).addService(googletag.pubads());
-              googletag.defineSlot('/22000485675/ros_desktop_970x250', [970, 250], 'div-gpt-ad-1728872550749-0').setTargeting('position', ['middle']).addService(googletag.pubads());
-              googletag.pubads().enableSingleRequest();
-              googletag.pubads().collapseEmptyDivs();
-              googletag.pubads().setTargeting('enviornment', ['desktop']).setTargeting('section', ['category']).setTargeting('content_category', ['dynamic_content_category']);
-              googletag.enableServices();
-            });
-          `}}
-        />
+        <title>Your Website Title</title>
+        <meta name="description" content="Your website description" />
       </Head>
-      <AppShell.Header>
 
+      {/* Google Ad Manager Header Tag */}
+      <Script
+        strategy="afterInteractive"
+        src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"
+      />
+      <Script id="gpt-init" strategy="afterInteractive">
+        {`
+          window.googletag = window.googletag || {cmd: []};
+          googletag.cmd.push(function() {
+            googletag.defineSlot('/22000485675/ros_desktop_728x90', [728, 90], 'div-gpt-ad-1728872023126-0').setTargeting('position', ['top']).addService(googletag.pubads()); 
+            googletag.defineSlot('/22000485675/ros_desktop_728x90', [728, 90], 'div-gpt-ad-1728872170179-0').setTargeting('position', ['middle']).addService(googletag.pubads());
+            googletag.defineSlot('/22000485675/ros_desktop_728x90', [728, 90], 'div-gpt-ad-1728872208397-0').setTargeting('position', ['bottom']).addService(googletag.pubads()); 
+            googletag.defineSlot('/22000485675/ros_desktop_970x250', [970, 250], 'div-gpt-ad-1728872475614-0').setTargeting('position', ['middle']).addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest(); 
+            googletag.pubads().collapseEmptyDivs();
+            googletag.pubads().setTargeting('environment', ['desktop']).setTargeting('section', ['homepage']);
+            googletag.enableServices();
+          });
+        `}
+      </Script>
+
+      <AppShell.Header>
         <HeaderMegaMenu />
       </AppShell.Header>
+
       <AppShell.Main>
         <PhotoCarousel />
         <br />
+
+        {/* Top Ad */}
+        <Center style={{ minHeight: '90px', marginBottom: '1rem' }}>
+          <div id='div-gpt-ad-1728872023126-0' style={{ minWidth: '728px', minHeight: '90px' }}>
+            <Script id="gpt-display-top" strategy="afterInteractive">
+              {`googletag.cmd.push(function() { googletag.display('div-gpt-ad-1728872023126-0'); });`}
+            </Script>
+          </div>
+        </Center>
+
         <Discount />
         <br />
         <br />
-
-        {/* Top Ad */}
-        <div id="div-gpt-ad-1728872282390-0" style={{ minWidth: '728px', minHeight: '90px' }}>
-          <script dangerouslySetInnerHTML={{
-            __html: "googletag.cmd.push(function() { googletag.display('div-gpt-ad-1728872282390-0'); });"
-          }} />
-        </div>
         <Cardlist />
         <br />
 
         {/* Middle Ad */}
-        <div id="div-gpt-ad-1728872308893-0" style={{ minWidth: '728px', minHeight: '90px' }}>
-          <script dangerouslySetInnerHTML={{
-            __html: "googletag.cmd.push(function() { googletag.display('div-gpt-ad-1728872308893-0'); });"
-          }} />
-        </div>
+        <Center style={{ minHeight: '90px', marginBottom: '1rem' }}>
+          <div id='div-gpt-ad-1728872170179-0' style={{ minWidth: '728px', minHeight: '90px' }}>
+            <Script id="gpt-display-middle" strategy="afterInteractive">
+              {`googletag.cmd.push(function() { googletag.display('div-gpt-ad-1728872170179-0'); });`}
+            </Script>
+          </div>
+        </Center>
+
         <Postlist />
         <br />
         <br />
         <br />
+
+        {/* Large Middle Ad */}
+        <Center style={{ minHeight: '250px', marginBottom: '1rem' }}>
+          <div id='div-gpt-ad-1728872475614-0' style={{ minWidth: '970px', minHeight: '250px' }}>
+            <Script id="gpt-display-large-middle" strategy="afterInteractive">
+              {`googletag.cmd.push(function() { googletag.display('div-gpt-ad-1728872475614-0'); });`}
+            </Script>
+          </div>
+        </Center>
+
         <br />
         <br />
         <br />
@@ -104,6 +126,7 @@ export default function Home() {
         <br />
         <br />
         <br />
+
         <Campaignblog />
         <br />
         <br />
@@ -111,13 +134,15 @@ export default function Home() {
         <br />
         <Youtube />
 
-
         {/* Bottom Ad */}
-        <div id="div-gpt-ad-1728876526423-0" style={{ minWidth: '728px', minHeight: '90px' }}>
-          <script dangerouslySetInnerHTML={{
-            __html: "googletag.cmd.push(function() { googletag.display('div-gpt-ad-1728876526423-0'); });"
-          }} />
-        </div>
+        <Center style={{ minHeight: '90px', marginTop: '1rem' }}>
+          <div id='div-gpt-ad-1728872208397-0' style={{ minWidth: '728px', minHeight: '90px' }}>
+            <Script id="gpt-display-bottom" strategy="afterInteractive">
+              {`googletag.cmd.push(function() { googletag.display('div-gpt-ad-1728872208397-0'); });`}
+            </Script>
+          </div>
+        </Center>
+
         <br />
         <br />
         <br />
