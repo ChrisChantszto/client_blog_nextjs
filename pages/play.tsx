@@ -61,7 +61,7 @@ export default function Play() {
             googletag.defineSlot('/22000485675/ros_desktop_970x250', [970, 250], 'div-gpt-ad-1728872550749-0').setTargeting('position', ['middle']).addService(googletag.pubads());
             googletag.pubads().enableSingleRequest();
             googletag.pubads().collapseEmptyDivs();
-            googletag.pubads().setTargeting('environment', ['desktop']).setTargeting('section', ['category']).setTargeting('content_category', ['dynamic_content_category']);
+            googletag.pubads().setTargeting('environment', ['desktop']).setTargeting('section', ['category']).setTargeting('content_category', ['play']);
             googletag.enableServices();
           });
         `}

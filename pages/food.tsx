@@ -61,7 +61,7 @@ export default function Food() {
             googletag.defineSlot('/22000485675/ros_desktop_970x250', [970, 250], 'div-gpt-ad-1728872550749-0').setTargeting('position', ['middle']).addService(googletag.pubads());
             googletag.pubads().enableSingleRequest();
             googletag.pubads().collapseEmptyDivs();
-            googletag.pubads().setTargeting('environment', ['desktop']).setTargeting('section', ['category']).setTargeting('content_category', ['dynamic_content_category']);
+            googletag.pubads().setTargeting('environment', ['desktop']).setTargeting('section', ['category']).setTargeting('content_category', ['food']);
             googletag.enableServices();
           });
         `}
@@ -115,16 +115,7 @@ export default function Food() {
         <br />
         <br />
         <FoodCampaignBlog />
-        <br />
-        <br />
-        <br />
-        <br />
         {/* <Instagram /> */}
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
         <br />
         <br />
         <Center style={{ minHeight: '90px', marginTop: '1rem' }}>
@@ -134,6 +125,18 @@ export default function Food() {
             </Script>
           </div>
         </Center>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />     
+        <br />
+        <br />
+        <br />
         <br />
         <br />
         <br />

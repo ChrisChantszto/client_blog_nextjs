@@ -62,7 +62,7 @@ export default function TravelIn() {
             googletag.defineSlot('/22000485675/ros_desktop_970x250', [970, 250], 'div-gpt-ad-1728872550749-0').setTargeting('position', ['middle']).addService(googletag.pubads());
             googletag.pubads().enableSingleRequest();
             googletag.pubads().collapseEmptyDivs();
-            googletag.pubads().setTargeting('environment', ['desktop']).setTargeting('section', ['category']).setTargeting('content_category', ['dynamic_content_category']);
+            googletag.pubads().setTargeting('environment', ['desktop']).setTargeting('section', ['category']).setTargeting('content_category', ['travel', 'bay area']);
             googletag.enableServices();
           });
         `}
@@ -108,6 +108,14 @@ export default function TravelIn() {
         </Center>
         <br />
         <br />
+
+        <Center style={{ minHeight: '90px', marginTop: '1rem' }}>
+          <div id="div-gpt-ad-1728876526423-0" style={{ minWidth: '728px', minHeight: '90px' }}>
+            <Script id="gpt-display-bottom-728x90" strategy="afterInteractive">
+              {"googletag.cmd.push(function() { googletag.display('div-gpt-ad-1728876526423-0'); });"}
+            </Script>
+          </div>
+        </Center>
         <br />
         <br />
         <br />

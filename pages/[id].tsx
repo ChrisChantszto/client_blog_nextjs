@@ -37,6 +37,7 @@ export default function Post() {
   const router = useRouter();
   const { id } = router.query;
   const [post, setPost] = useState<Post | null>(null);
+  const [category, setCategory] = useState<string>("");
   const sentinelRef = useRef(null);
   const isMobile = useMediaQuery('(max-width: 768px)');
   const [footerVisible, setFooterVisible] = useState(false);
@@ -49,6 +50,35 @@ export default function Post() {
     }
   }, [id]);
 
+  // useEffect(() => {
+  //   if (id) {
+  //     axios.get(`/api/posts/${id}`)
+  //       .then(response => {
+  //         setPost(response.data as Post);
+  //         const postCategory = response.data.terms.category;
+  //         setCategory(Array.isArray(postCategory) ? postCategory[0] : postCategory);
+  //       })
+  //       .catch(error => console.error('Error fetching post:', error));
+  //   }
+  // }, [id]);
+
+  function getCategories(post) {
+    if (!post) return [];
+    if (post.terms && post.terms.category) {
+      return Object.keys(post.terms.category).map(key => post.terms.category[key].name);
+    }
+    return [];
+  }
+  
+  // Usage:
+  const categories = getCategories(post);
+  const formattedCategories = JSON.stringify(
+    Array.isArray(categories) 
+      ? categories.map(category => category.toString())
+      : categories.split(',').map(category => category.trim())
+  );
+  
+  console.log('formattedCategories', formattedCategories);
 
   useEffect(() => {
     const observer = new IntersectionObserver(([entry]) => {
@@ -273,7 +303,7 @@ export default function Post() {
               googletag.defineSlot('/22000485675/ros_mobile_320x100', [320, 100], 'div-gpt-ad-1728873125827-0').setTargeting('position', ['footer']).addService(googletag.pubads());
               googletag.pubads().enableSingleRequest();
               googletag.pubads().collapseEmptyDivs();
-              googletag.pubads().setTargeting('environment', ['mobile']).setTargeting('section', ['content']).setTargeting('content_category', ['dynamic_content_category']);
+              googletag.pubads().setTargeting('environment', ['mobile']).setTargeting('section', ['content']).setTargeting('content_category', ${formattedCategories});
               googletag.enableServices();
               googletag.display('div-gpt-ad-1728872887172-0');
               googletag.display('div-gpt-ad-1728872905980-0');
@@ -293,7 +323,7 @@ export default function Post() {
               googletag.defineSlot('/22000485675/ros_desktop_300x250', [300, 250], 'div-gpt-ad-1728872758865-0').setTargeting('position', ['right']).addService(googletag.pubads());
               googletag.pubads().enableSingleRequest();
               googletag.pubads().collapseEmptyDivs();
-              googletag.pubads().setTargeting('environment', ['desktop']).setTargeting('section', ['content']).setTargeting('content_category', ['dynamic_content_category']);
+              googletag.pubads().setTargeting('environment', ['desktop']).setTargeting('section', ['content']).setTargeting('content_category', ${formattedCategories});
               googletag.enableServices();
               googletag.display('div-gpt-ad-1728872238496-0');
               googletag.display('div-gpt-ad-1728872258333-0');
@@ -333,9 +363,19 @@ export default function Post() {
                   <ShareToFriends />
                   <br />
                   <DynamicContent content={post.originalContent} attachments={post.attachments || []} />
+                  <Center style={{ minHeight: '250px', marginBottom: '1rem' }}>
+                    <div id="div-gpt-ad-1728872497774-0" style={{ minWidth: '970px', minHeight: '250px' }}>
+                      <Script id="gpt-display-middle-970x250" strategy="afterInteractive">
+                        {"googletag.cmd.push(function() { googletag.display('div-gpt-ad-1728872497774-0'); });"}
+                      </Script>
+                    </div>
+                  </Center>
                 </div>
+                
               )}
+              
             </div>
+            
             </Grid.Col>
             {!isMobile && (
           <Grid.Col span={3}>
@@ -361,13 +401,6 @@ export default function Post() {
           )}
           </Grid>
         </Container>
-        <Center style={{ minHeight: '250px', marginBottom: '1rem' }}>
-          <div id="div-gpt-ad-1728872497774-0" style={{ minWidth: '970px', minHeight: '250px' }}>
-            <Script id="gpt-display-middle-970x250" strategy="afterInteractive">
-              {"googletag.cmd.push(function() { googletag.display('div-gpt-ad-1728872497774-0'); });"}
-            </Script>
-          </div>
-        </Center>
         <Container fluid style={{ backgroundColor: '#E9E3D9', height: '500px' }}>
           <div style={{ width: '100%', maxWidth: '1700px', margin: '0 auto' }}>
             <BlogPostsCampaignblog />
