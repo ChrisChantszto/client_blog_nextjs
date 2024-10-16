@@ -262,21 +262,47 @@ export default function Post() {
         strategy="afterInteractive"
         src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"
       />
-      <Script id="gpt-init" strategy="afterInteractive">
-        {`
-          window.googletag = window.googletag || {cmd: []};
-          googletag.cmd.push(function() {
-            googletag.defineSlot('/22000485675/ros_desktop_728x90', [728, 90], 'div-gpt-ad-1728872238496-0').setTargeting('position', ['middle']).addService(googletag.pubads());
-            googletag.defineSlot('/22000485675/ros_desktop_728x90', [728, 90], 'div-gpt-ad-1728872258333-0').setTargeting('position', ['bottom']).addService(googletag.pubads());
-            googletag.defineSlot('/22000485675/ros_desktop_970x250', [970, 250], 'div-gpt-ad-1728872497774-0').setTargeting('position', ['middle']).addService(googletag.pubads());
-            googletag.defineSlot('/22000485675/ros_desktop_300x250', [300, 250], 'div-gpt-ad-1728872758865-0').setTargeting('position', ['right']).addService(googletag.pubads());
-            googletag.pubads().enableSingleRequest();
-            googletag.pubads().collapseEmptyDivs();
-            googletag.pubads().setTargeting('environment', ['desktop']).setTargeting('section', ['content']).setTargeting('content_category', ['dynamic_content_category']);
-            googletag.enableServices();
-          });
-        `}
-      </Script>
+      {isMobile ? (
+        <Script id="gpt-init-mobile" strategy="afterInteractive">
+          {`
+            window.googletag = window.googletag || {cmd: []};
+            googletag.cmd.push(function() {
+              googletag.defineSlot('/22000485675/ros_mobile_300x250', [300, 250], 'div-gpt-ad-1728872887172-0').setTargeting('position', ['top']).addService(googletag.pubads());
+              googletag.defineSlot('/22000485675/ros_mobile_300x250', [300, 250], 'div-gpt-ad-1728872905980-0').setTargeting('position', ['middle']).addService(googletag.pubads());
+              googletag.defineSlot('/22000485675/ros_mobile_300x250', [300, 250], 'div-gpt-ad-1728872921894-0').setTargeting('position', ['bottom']).addService(googletag.pubads());
+              googletag.defineSlot('/22000485675/ros_mobile_320x100', [320, 100], 'div-gpt-ad-1728873125827-0').setTargeting('position', ['footer']).addService(googletag.pubads());
+              googletag.pubads().enableSingleRequest();
+              googletag.pubads().collapseEmptyDivs();
+              googletag.pubads().setTargeting('environment', ['mobile']).setTargeting('section', ['content']).setTargeting('content_category', ['dynamic_content_category']);
+              googletag.enableServices();
+              googletag.display('div-gpt-ad-1728872887172-0');
+              googletag.display('div-gpt-ad-1728872905980-0');
+              googletag.display('div-gpt-ad-1728872921894-0');
+              googletag.display('div-gpt-ad-1728873125827-0');
+            });
+          `}
+        </Script>
+      ) : (
+        <Script id="gpt-init-desktop" strategy="afterInteractive">
+          {`
+            window.googletag = window.googletag || {cmd: []};
+            googletag.cmd.push(function() {
+              googletag.defineSlot('/22000485675/ros_desktop_728x90', [728, 90], 'div-gpt-ad-1728872238496-0').setTargeting('position', ['middle']).addService(googletag.pubads());
+              googletag.defineSlot('/22000485675/ros_desktop_728x90', [728, 90], 'div-gpt-ad-1728872258333-0').setTargeting('position', ['bottom']).addService(googletag.pubads());
+              googletag.defineSlot('/22000485675/ros_desktop_970x250', [970, 250], 'div-gpt-ad-1728872497774-0').setTargeting('position', ['middle']).addService(googletag.pubads());
+              googletag.defineSlot('/22000485675/ros_desktop_300x250', [300, 250], 'div-gpt-ad-1728872758865-0').setTargeting('position', ['right']).addService(googletag.pubads());
+              googletag.pubads().enableSingleRequest();
+              googletag.pubads().collapseEmptyDivs();
+              googletag.pubads().setTargeting('environment', ['desktop']).setTargeting('section', ['content']).setTargeting('content_category', ['dynamic_content_category']);
+              googletag.enableServices();
+              googletag.display('div-gpt-ad-1728872238496-0');
+              googletag.display('div-gpt-ad-1728872258333-0');
+              googletag.display('div-gpt-ad-1728872497774-0');
+              googletag.display('div-gpt-ad-1728872758865-0');
+            });
+          `}
+        </Script>
+      )}
       <AppShell.Header>
         <HeaderMegaMenu />
       </AppShell.Header>
