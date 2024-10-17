@@ -69,7 +69,6 @@ export default function Home() {
       padding="md"
       style={{ backgroundColor: '#F5F5F5' }}
     >
-      
 
       {/* Google Ad Manager Header Tag */}
       <Script
