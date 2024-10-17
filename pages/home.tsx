@@ -1,21 +1,47 @@
 import { useEffect, useRef, useState } from 'react';
-import { AppShell, Center, Burger, Container } from '@mantine/core';
+import { AppShell, Center, Container, Group } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
+import Head from 'next/head';
+import Script from 'next/script';
 import HeaderMegaMenu from '@/components/Header/Header';
 import PhotoCarousel from '@/components/PhotoCarousel/PhotoCarousel';
 import Footer from '@/components/Footer/Footer';
 import Discount from '@/components/Discount/Discount';
 import Cardlist from '@/components/Cardlist/Cardlist';
-import Instagram from '@/components/Instagram/Instagram';
 import Postlist from '@/components/Postlist/Postlist';
 import Campaignblog from '@/components/Campaignblog/Campaignblog';
-import { IconBrandFacebook, IconBrandInstagram, IconBrandYoutube } from '@tabler/icons-react';
+import { IconBrandFacebook, IconBrandInstagram, IconBrandYoutube, IconBrandLinkedin, IconBrandXing } from '@tabler/icons-react';
 import Youtube from '@/components/Youtube/Youtube';
 
 export default function Home() {
   const [opened, { toggle }] = useDisclosure();
   const [footerVisible, setFooterVisible] = useState(false);
   const sentinelRef = useRef(null);
+
+  const [hasTopAd, setHasTopAd] = useState(true);
+  const [hasMiddleAd, setHasMiddleAd] = useState(true);
+  const [hasBottomAd, setHasBottomAd] = useState(true);
+
+  const checkAdContent = (adId, setHasAd) => {
+    const adElement = document.getElementById(adId);
+    if (adElement) {
+      const iframe = adElement.querySelector('iframe');
+      if (!iframe || !iframe.contentDocument || !iframe.contentDocument.body || iframe.contentDocument.body.innerHTML.trim() === '') {
+        setHasAd(false);
+      }
+    }
+  };
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      checkAdContent('div-gpt-ad-1728872023126-0', setHasTopAd);
+      checkAdContent('div-gpt-ad-1728872170179-0', setHasMiddleAd);
+      checkAdContent('div-gpt-ad-1728872208397-0', setHasBottomAd);
+    }, 1000); // Adjust the timeout as needed
+    
+    return () => clearTimeout(timer);
+  }, []);
+  
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -43,30 +69,78 @@ export default function Home() {
       padding="md"
       style={{ backgroundColor: '#F5F5F5' }}
     >
-      <AppShell.Header>
+      
 
+      {/* Google Ad Manager Header Tag */}
+      <Script
+        strategy="afterInteractive"
+        src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"
+      />
+      <Script id="gpt-init" strategy="afterInteractive">
+        {`
+          window.googletag = window.googletag || {cmd: []};
+          googletag.cmd.push(function() {
+            googletag.defineSlot('/22000485675/ros_desktop_728x90', [728, 90], 'div-gpt-ad-1728872023126-0').setTargeting('position', ['top']).addService(googletag.pubads()); 
+            googletag.defineSlot('/22000485675/ros_desktop_728x90', [728, 90], 'div-gpt-ad-1728872170179-0').setTargeting('position', ['middle']).addService(googletag.pubads());
+            googletag.defineSlot('/22000485675/ros_desktop_728x90', [728, 90], 'div-gpt-ad-1728872208397-0').setTargeting('position', ['bottom']).addService(googletag.pubads()); 
+            googletag.defineSlot('/22000485675/ros_desktop_970x250', [970, 250], 'div-gpt-ad-1728872475614-0').setTargeting('position', ['middle']).addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest(); 
+            googletag.pubads().collapseEmptyDivs();
+            googletag.pubads().setTargeting('environment', ['desktop']).setTargeting('section', ['homepage']);
+            googletag.enableServices();
+          });
+        `}
+      </Script>
+
+      <AppShell.Header>
         <HeaderMegaMenu />
       </AppShell.Header>
+
       <AppShell.Main>
         <PhotoCarousel />
         <br />
+
+        {/* Top Ad */}
+        {hasTopAd && (
+          <Center style={{ minHeight: '90px', marginBottom: '1rem' }}>
+            <div id='div-gpt-ad-1728872023126-0' style={{ minWidth: '728px', minHeight: '90px' }}>
+              <Script id="gpt-display-top" strategy="afterInteractive">
+                {`googletag.cmd.push(function() { googletag.display('div-gpt-ad-1728872023126-0'); });`}
+              </Script>
+            </div>
+          </Center>
+        )}
+
         <Discount />
         <br />
         <br />
         <Cardlist />
         <br />
+
+        {/* Middle Ad */}
+        {hasMiddleAd && (
+          <Center style={{ minHeight: '90px', marginBottom: '1rem' }}>
+            <div id='div-gpt-ad-1728872170179-0' style={{ minWidth: '728px', minHeight: '90px' }}>
+              <Script id="gpt-display-middle" strategy="afterInteractive">
+                {`googletag.cmd.push(function() { googletag.display('div-gpt-ad-1728872170179-0'); });`}
+              </Script>
+            </div>
+          </Center>
+        )}
+
         <Postlist />
         <br />
         <br />
         <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
+
+        {/* Large Middle Ad */}
+        <Center style={{ minHeight: '250px', marginBottom: '1rem' }}>
+          <div id='div-gpt-ad-1728872475614-0' style={{ minWidth: '970px', minHeight: '250px' }}>
+            <Script id="gpt-display-large-middle" strategy="afterInteractive">
+              {`googletag.cmd.push(function() { googletag.display('div-gpt-ad-1728872475614-0'); });`}
+            </Script>
+          </div>
+        </Center>
         <br />
         <br />
         <Campaignblog />
@@ -75,6 +149,18 @@ export default function Home() {
         <br />
         <br />
         <Youtube />
+
+        {/* Bottom Ad */}
+        {hasBottomAd && (
+          <Center style={{ minHeight: '90px', marginTop: '1rem' }}>
+            <div id='div-gpt-ad-1728872208397-0' style={{ minWidth: '728px', minHeight: '90px' }}>
+              <Script id="gpt-display-bottom" strategy="afterInteractive">
+                {`googletag.cmd.push(function() { googletag.display('div-gpt-ad-1728872208397-0'); });`}
+              </Script>
+            </div>
+          </Center>
+        )}
+
         <br />
         <br />
         <br />

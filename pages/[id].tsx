@@ -1,8 +1,9 @@
 import { useRouter } from 'next/router';
 import { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
-import { AppShell, Stack, Box, Container, Grid, Title, Text, Button, Group, Badge, ActionIcon, Alert } from '@mantine/core';
+import { AppShell, Stack, Box, Container, Grid, Title, Text, Button, Group, Badge, ActionIcon, Center } from '@mantine/core';
 import Image from 'next/image';
+import Script from 'next/script';
 import { useMediaQuery } from '@mantine/hooks';
 import { IconLink, IconBrandFacebook, IconBrandInstagram } from '@tabler/icons-react';
 import DynamicContent from './DynamicContent';
@@ -36,9 +37,36 @@ export default function Post() {
   const router = useRouter();
   const { id } = router.query;
   const [post, setPost] = useState<Post | null>(null);
+  const [category, setCategory] = useState<string>("");
   const sentinelRef = useRef(null);
   const isMobile = useMediaQuery('(max-width: 768px)');
   const [footerVisible, setFooterVisible] = useState(false);
+
+  const [hasTopAd, setHasTopAd] = useState(true);
+  const [hasMiddleAd, setHasMiddleAd] = useState(true);
+  const [hasBottomAd, setHasBottomAd] = useState(true);
+  const [hasRightAd, setHasRightAd] = useState(true);
+
+  const checkAdContent = (adId, setHasAd) => {
+    const adElement = document.getElementById(adId);
+    if (adElement) {
+      const iframe = adElement.querySelector('iframe');
+      if (!iframe || !iframe.contentDocument || !iframe.contentDocument.body || iframe.contentDocument.body.innerHTML.trim() === '') {
+        setHasAd(false);
+      }
+    }
+  };
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      checkAdContent('div-gpt-ad-1728872497774-0', setHasMiddleAd);
+      checkAdContent('div-gpt-ad-1728872758865-0', setHasRightAd);
+      checkAdContent('div-gpt-ad-1728872238496-0', setHasTopAd);
+      checkAdContent('div-gpt-ad-1728872258333-0', setHasBottomAd);
+    }, 1000); // Adjust the timeout as needed
+  
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     if (id) {
@@ -48,6 +76,35 @@ export default function Post() {
     }
   }, [id]);
 
+  // useEffect(() => {
+  //   if (id) {
+  //     axios.get(`/api/posts/${id}`)
+  //       .then(response => {
+  //         setPost(response.data as Post);
+  //         const postCategory = response.data.terms.category;
+  //         setCategory(Array.isArray(postCategory) ? postCategory[0] : postCategory);
+  //       })
+  //       .catch(error => console.error('Error fetching post:', error));
+  //   }
+  // }, [id]);
+
+  function getCategories(post) {
+    if (!post) return [];
+    if (post.terms && post.terms.category) {
+      return Object.keys(post.terms.category).map(key => post.terms.category[key].name);
+    }
+    return [];
+  }
+  
+  // Usage:
+  const categories = getCategories(post);
+  const formattedCategories = JSON.stringify(
+    Array.isArray(categories) 
+      ? categories.map(category => category.toString())
+      : categories.split(',').map(category => category.trim())
+  );
+  
+  console.log('formattedCategories', formattedCategories);
 
   useEffect(() => {
     const observer = new IntersectionObserver(([entry]) => {
@@ -257,6 +314,51 @@ export default function Post() {
       padding="md"
       style={{ backgroundColor: '#F5F5F5' }}
     >
+      <Script
+        strategy="afterInteractive"
+        src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"
+      />
+      {isMobile ? (
+        <Script id="gpt-init-mobile" strategy="afterInteractive">
+          {`
+            window.googletag = window.googletag || {cmd: []};
+            googletag.cmd.push(function() {
+              googletag.defineSlot('/22000485675/ros_mobile_300x250', [300, 250], 'div-gpt-ad-1728872887172-0').setTargeting('position', ['top']).addService(googletag.pubads());
+              googletag.defineSlot('/22000485675/ros_mobile_300x250', [300, 250], 'div-gpt-ad-1728872905980-0').setTargeting('position', ['middle']).addService(googletag.pubads());
+              googletag.defineSlot('/22000485675/ros_mobile_300x250', [300, 250], 'div-gpt-ad-1728872921894-0').setTargeting('position', ['bottom']).addService(googletag.pubads());
+              googletag.defineSlot('/22000485675/ros_mobile_320x100', [320, 100], 'div-gpt-ad-1728873125827-0').setTargeting('position', ['footer']).addService(googletag.pubads());
+              googletag.pubads().enableSingleRequest();
+              googletag.pubads().collapseEmptyDivs();
+              googletag.pubads().setTargeting('environment', ['mobile']).setTargeting('section', ['content']).setTargeting('content_category', ${formattedCategories});
+              googletag.enableServices();
+              googletag.display('div-gpt-ad-1728872887172-0');
+              googletag.display('div-gpt-ad-1728872905980-0');
+              googletag.display('div-gpt-ad-1728872921894-0');
+              googletag.display('div-gpt-ad-1728873125827-0');
+            });
+          `}
+        </Script>
+      ) : (
+        <Script id="gpt-init-desktop" strategy="afterInteractive">
+          {`
+            window.googletag = window.googletag || {cmd: []};
+            googletag.cmd.push(function() {
+              googletag.defineSlot('/22000485675/ros_desktop_728x90', [728, 90], 'div-gpt-ad-1728872238496-0').setTargeting('position', ['middle']).addService(googletag.pubads());
+              googletag.defineSlot('/22000485675/ros_desktop_728x90', [728, 90], 'div-gpt-ad-1728872258333-0').setTargeting('position', ['bottom']).addService(googletag.pubads());
+              googletag.defineSlot('/22000485675/ros_desktop_970x250', [970, 250], 'div-gpt-ad-1728872497774-0').setTargeting('position', ['middle']).addService(googletag.pubads());
+              googletag.defineSlot('/22000485675/ros_desktop_300x250', [300, 250], 'div-gpt-ad-1728872758865-0').setTargeting('position', ['right']).addService(googletag.pubads());
+              googletag.pubads().enableSingleRequest();
+              googletag.pubads().collapseEmptyDivs();
+              googletag.pubads().setTargeting('environment', ['desktop']).setTargeting('section', ['content']).setTargeting('content_category', ${formattedCategories});
+              googletag.enableServices();
+              googletag.display('div-gpt-ad-1728872238496-0');
+              googletag.display('div-gpt-ad-1728872258333-0');
+              googletag.display('div-gpt-ad-1728872497774-0');
+              googletag.display('div-gpt-ad-1728872758865-0');
+            });
+          `}
+        </Script>
+      )}
       <AppShell.Header>
         <HeaderMegaMenu />
       </AppShell.Header>
@@ -287,14 +389,36 @@ export default function Post() {
                   <ShareToFriends />
                   <br />
                   <DynamicContent content={post.originalContent} attachments={post.attachments || []} />
+                  {hasMiddleAd && (
+                    <Center style={{ minHeight: '250px', marginBottom: '1rem' }}>
+                      <div id="div-gpt-ad-1728872497774-0" style={{ minWidth: '970px', minHeight: '250px' }}>
+                        <Script id="gpt-display-middle-970x250" strategy="afterInteractive">
+                          {"googletag.cmd.push(function() { googletag.display('div-gpt-ad-1728872497774-0'); });"}
+                        </Script>
+                      </div>
+                    </Center>
+                  )}
                 </div>
+                
               )}
+              
             </div>
+            
             </Grid.Col>
             {!isMobile && (
           <Grid.Col span={3}>
                 <div style={styles.banner}>
                   <SocialMediaLinks />
+                  {/* 300x250 Ad */}
+                  {!isMobile && hasRightAd && (
+                    <Box mt="xl">
+                      <div id="div-gpt-ad-1728872758865-0" style={{ minWidth: '300px', minHeight: '250px' }}>
+                        <Script id="gpt-display-right-300x250" strategy="afterInteractive">
+                          {"googletag.cmd.push(function() { googletag.display('div-gpt-ad-1728872758865-0'); });"}
+                        </Script>
+                      </div>
+                    </Box>
+                  )}
                 </div>
               </Grid.Col>
             )}
@@ -313,9 +437,29 @@ export default function Post() {
           </div>
         </Container>
         <br />
+        {hasTopAd && (
+          <Center style={{ minHeight: '90px', marginBottom: '1rem' }}>
+            <div id="div-gpt-ad-1728872238496-0" style={{ minWidth: '728px', minHeight: '90px' }}>
+              <Script id="gpt-display-middle-728x90" strategy="afterInteractive">
+                {"googletag.cmd.push(function() { googletag.display('div-gpt-ad-1728872238496-0'); });"}
+              </Script>
+            </div>
+          </Center>
+        )}
         <br />
         <br />
         <PostlistBlog />
+        <br />
+        {/* Bottom 728x90 Ad */}
+        {hasBottomAd && (
+          <Center style={{ minHeight: '90px', marginTop: '1rem' }}>
+            <div id="div-gpt-ad-1728872258333-0" style={{ minWidth: '728px', minHeight: '90px' }}>
+              <Script id="gpt-display-bottom-728x90" strategy="afterInteractive">
+                {"googletag.cmd.push(function() { googletag.display('div-gpt-ad-1728872258333-0'); });"}
+              </Script>
+            </div>
+          </Center>
+        )}
         <br />
         <br />
         <br />
