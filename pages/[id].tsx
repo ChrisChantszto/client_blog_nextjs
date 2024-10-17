@@ -40,17 +40,20 @@ export default function Post() {
   const [category, setCategory] = useState<string>("");
   const sentinelRef = useRef(null);
   const isMobile = useMediaQuery('(max-width: 768px)');
-  const [footerVisible, setFooterVisible] = useState(false);
+  const [footerVisible, setFooterVisible] = useState(true);
 
-  const [hasTopAd, setHasTopAd] = useState(false);
-  const [hasMiddleAd, setHasMiddleAd] = useState(false);
-  const [hasBottomAd, setHasBottomAd] = useState(false);
-  const [hasRightAd, setHasRightAd] = useState(false);
+  const [hasTopAd, setHasTopAd] = useState(true);
+  const [hasMiddleAd, setHasMiddleAd] = useState(true);
+  const [hasBottomAd, setHasBottomAd] = useState(true);
+  const [hasRightAd, setHasRightAd] = useState(true);
 
   const checkAdContent = (adId, setHasAd) => {
     const adElement = document.getElementById(adId);
-    if (adElement && adElement.innerHTML.trim() !== '') {
-      setHasAd(true);
+    if (adElement) {
+      const iframe = adElement.querySelector('iframe');
+      if (!iframe || !iframe.contentDocument || !iframe.contentDocument.body || iframe.contentDocument.body.innerHTML.trim() === '') {
+        setHasAd(false);
+      }
     }
   };
 

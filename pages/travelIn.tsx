@@ -20,6 +20,32 @@ export default function TravelIn() {
   const [footerVisible, setFooterVisible] = useState(false);
   const sentinelRef = useRef(null);
 
+  const [hasTopAd, setHasTopAd] = useState(true);
+  const [hasMiddleAd1, setHasMiddleAd1] = useState(true);
+  const [hasMiddleAd2, setHasMiddleAd2] = useState(true);
+  const [hasBottomAd, setHasBottomAd] = useState(true);
+
+  const checkAdContent = (adId, setHasAd) => {
+    const adElement = document.getElementById(adId);
+    if (adElement) {
+      const iframe = adElement.querySelector('iframe');
+      if (!iframe || !iframe.contentDocument || !iframe.contentDocument.body || iframe.contentDocument.body.innerHTML.trim() === '') {
+        setHasAd(false);
+      }
+    }
+  };
+  
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      checkAdContent('div-gpt-ad-1728872531921-0', setHasTopAd);
+      checkAdContent('div-gpt-ad-1728872282390-0', setHasMiddleAd1);
+      checkAdContent('div-gpt-ad-1728872550749-0', setHasMiddleAd2);
+      checkAdContent('div-gpt-ad-1728876526423-0', setHasBottomAd);
+    }, 2000); // Adjust the timeout as needed
+  
+    return () => clearTimeout(timer);
+  }, []);
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -72,6 +98,7 @@ export default function TravelIn() {
         <HeaderMegaMenu />
       </AppShell.Header>
       <AppShell.Main>
+      {hasTopAd && (
         <Center style={{ minHeight: '250px', marginTop: '1rem' }}>
           <div id="div-gpt-ad-1728872531921-0" style={{ minWidth: '970px', minHeight: '250px' }}>
             <Script id="gpt-display-top-970x250" strategy="afterInteractive">
@@ -79,19 +106,22 @@ export default function TravelIn() {
             </Script>
           </div>
         </Center>
+      )}
         <br />
         <br />
         <TravelInBanner />
         <br />
         <TravelInCard />
         <br />
-        <Center style={{ minHeight: '90px', marginTop: '1rem' }}>
-          <div id="div-gpt-ad-1728872282390-0" style={{ minWidth: '728px', minHeight: '90px' }}>
-            <Script id="gpt-display-top-728x90" strategy="afterInteractive">
-              {"googletag.cmd.push(function() { googletag.display('div-gpt-ad-1728872282390-0'); });"}
-            </Script>
-          </div>
-        </Center>
+        {hasMiddleAd1 && (
+          <Center style={{ minHeight: '90px', marginTop: '1rem' }}>
+            <div id="div-gpt-ad-1728872282390-0" style={{ minWidth: '728px', minHeight: '90px' }}>
+              <Script id="gpt-display-top-728x90" strategy="afterInteractive">
+                {"googletag.cmd.push(function() { googletag.display('div-gpt-ad-1728872282390-0'); });"}
+              </Script>
+            </div>
+          </Center>
+        )}
         <br />
         <br />
         <TravelInPostlist />
@@ -99,23 +129,27 @@ export default function TravelIn() {
         <br />
         <br />
         <br />
-        <Center style={{ minHeight: '250px', marginTop: '1rem' }}>
-          <div id="div-gpt-ad-1728872550749-0" style={{ minWidth: '970px', minHeight: '250px' }}>
-            <Script id="gpt-display-middle-970x250" strategy="afterInteractive">
-              {"googletag.cmd.push(function() { googletag.display('div-gpt-ad-1728872550749-0'); });"}
-            </Script>
-          </div>
-        </Center>
+        {hasMiddleAd2 && (
+          <Center style={{ minHeight: '250px', marginTop: '1rem' }}>
+            <div id="div-gpt-ad-1728872550749-0" style={{ minWidth: '970px', minHeight: '250px' }}>
+              <Script id="gpt-display-middle-970x250" strategy="afterInteractive">
+                {"googletag.cmd.push(function() { googletag.display('div-gpt-ad-1728872550749-0'); });"}
+              </Script>
+            </div>
+          </Center>
+        )}
         <br />
         <br />
 
-        <Center style={{ minHeight: '90px', marginTop: '1rem' }}>
-          <div id="div-gpt-ad-1728876526423-0" style={{ minWidth: '728px', minHeight: '90px' }}>
-            <Script id="gpt-display-bottom-728x90" strategy="afterInteractive">
-              {"googletag.cmd.push(function() { googletag.display('div-gpt-ad-1728876526423-0'); });"}
-            </Script>
-          </div>
-        </Center>
+        {hasBottomAd && (
+          <Center style={{ minHeight: '90px', marginTop: '1rem' }}>
+            <div id="div-gpt-ad-1728876526423-0" style={{ minWidth: '728px', minHeight: '90px' }}>
+              <Script id="gpt-display-bottom-728x90" strategy="afterInteractive">
+                {"googletag.cmd.push(function() { googletag.display('div-gpt-ad-1728876526423-0'); });"}
+              </Script>
+            </div>
+          </Center>
+        )}
         <br />
         <br />
         <br />
