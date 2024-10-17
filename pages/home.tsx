@@ -18,6 +18,28 @@ export default function Home() {
   const [footerVisible, setFooterVisible] = useState(false);
   const sentinelRef = useRef(null);
 
+  const [hasTopAd, setHasTopAd] = useState(false);
+  const [hasMiddleAd, setHasMiddleAd] = useState(false);
+  const [hasBottomAd, setHasBottomAd] = useState(false);
+
+  const checkAdContent = (adId, setHasAd) => {
+    const adElement = document.getElementById(adId);
+    if (adElement && adElement.innerHTML.trim() !== '') {
+      setHasAd(true);
+    }
+  };
+  
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      checkAdContent('div-gpt-ad-1728872023126-0', setHasTopAd);
+      checkAdContent('div-gpt-ad-1728872170179-0', setHasMiddleAd);
+      checkAdContent('div-gpt-ad-1728872208397-0', setHasBottomAd);
+    }, 1000); // Adjust the timeout as needed
+    
+    return () => clearTimeout(timer);
+  }, []);
+  
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -79,13 +101,15 @@ export default function Home() {
         <br />
 
         {/* Top Ad */}
-        <Center style={{ minHeight: '90px', marginBottom: '1rem' }}>
-          <div id='div-gpt-ad-1728872023126-0' style={{ minWidth: '728px', minHeight: '90px' }}>
-            <Script id="gpt-display-top" strategy="afterInteractive">
-              {`googletag.cmd.push(function() { googletag.display('div-gpt-ad-1728872023126-0'); });`}
-            </Script>
-          </div>
-        </Center>
+        {hasTopAd && (
+          <Center style={{ minHeight: '90px', marginBottom: '1rem' }}>
+            <div id='div-gpt-ad-1728872023126-0' style={{ minWidth: '728px', minHeight: '90px' }}>
+              <Script id="gpt-display-top" strategy="afterInteractive">
+                {`googletag.cmd.push(function() { googletag.display('div-gpt-ad-1728872023126-0'); });`}
+              </Script>
+            </div>
+          </Center>
+        )}
 
         <Discount />
         <br />
@@ -94,13 +118,15 @@ export default function Home() {
         <br />
 
         {/* Middle Ad */}
-        <Center style={{ minHeight: '90px', marginBottom: '1rem' }}>
-          <div id='div-gpt-ad-1728872170179-0' style={{ minWidth: '728px', minHeight: '90px' }}>
-            <Script id="gpt-display-middle" strategy="afterInteractive">
-              {`googletag.cmd.push(function() { googletag.display('div-gpt-ad-1728872170179-0'); });`}
-            </Script>
-          </div>
-        </Center>
+        {hasMiddleAd && (
+          <Center style={{ minHeight: '90px', marginBottom: '1rem' }}>
+            <div id='div-gpt-ad-1728872170179-0' style={{ minWidth: '728px', minHeight: '90px' }}>
+              <Script id="gpt-display-middle" strategy="afterInteractive">
+                {`googletag.cmd.push(function() { googletag.display('div-gpt-ad-1728872170179-0'); });`}
+              </Script>
+            </div>
+          </Center>
+        )}
 
         <Postlist />
         <br />
@@ -125,13 +151,15 @@ export default function Home() {
         <Youtube />
 
         {/* Bottom Ad */}
-        <Center style={{ minHeight: '90px', marginTop: '1rem' }}>
-          <div id='div-gpt-ad-1728872208397-0' style={{ minWidth: '728px', minHeight: '90px' }}>
-            <Script id="gpt-display-bottom" strategy="afterInteractive">
-              {`googletag.cmd.push(function() { googletag.display('div-gpt-ad-1728872208397-0'); });`}
-            </Script>
-          </div>
-        </Center>
+        {hasBottomAd && (
+          <Center style={{ minHeight: '90px', marginTop: '1rem' }}>
+            <div id='div-gpt-ad-1728872208397-0' style={{ minWidth: '728px', minHeight: '90px' }}>
+              <Script id="gpt-display-bottom" strategy="afterInteractive">
+                {`googletag.cmd.push(function() { googletag.display('div-gpt-ad-1728872208397-0'); });`}
+              </Script>
+            </div>
+          </Center>
+        )}
 
         <br />
         <br />

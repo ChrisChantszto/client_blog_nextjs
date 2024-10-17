@@ -42,6 +42,29 @@ export default function Post() {
   const isMobile = useMediaQuery('(max-width: 768px)');
   const [footerVisible, setFooterVisible] = useState(false);
 
+  const [hasTopAd, setHasTopAd] = useState(false);
+  const [hasMiddleAd, setHasMiddleAd] = useState(false);
+  const [hasBottomAd, setHasBottomAd] = useState(false);
+  const [hasRightAd, setHasRightAd] = useState(false);
+
+  const checkAdContent = (adId, setHasAd) => {
+    const adElement = document.getElementById(adId);
+    if (adElement && adElement.innerHTML.trim() !== '') {
+      setHasAd(true);
+    }
+  };
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      checkAdContent('div-gpt-ad-1728872497774-0', setHasMiddleAd);
+      checkAdContent('div-gpt-ad-1728872758865-0', setHasRightAd);
+      checkAdContent('div-gpt-ad-1728872238496-0', setHasTopAd);
+      checkAdContent('div-gpt-ad-1728872258333-0', setHasBottomAd);
+    }, 1000); // Adjust the timeout as needed
+  
+    return () => clearTimeout(timer);
+  }, []);
+
   useEffect(() => {
     if (id) {
       axios.get(`/api/posts/${id}`)
@@ -363,13 +386,15 @@ export default function Post() {
                   <ShareToFriends />
                   <br />
                   <DynamicContent content={post.originalContent} attachments={post.attachments || []} />
-                  <Center style={{ minHeight: '250px', marginBottom: '1rem' }}>
-                    <div id="div-gpt-ad-1728872497774-0" style={{ minWidth: '970px', minHeight: '250px' }}>
-                      <Script id="gpt-display-middle-970x250" strategy="afterInteractive">
-                        {"googletag.cmd.push(function() { googletag.display('div-gpt-ad-1728872497774-0'); });"}
-                      </Script>
-                    </div>
-                  </Center>
+                  {hasMiddleAd && (
+                    <Center style={{ minHeight: '250px', marginBottom: '1rem' }}>
+                      <div id="div-gpt-ad-1728872497774-0" style={{ minWidth: '970px', minHeight: '250px' }}>
+                        <Script id="gpt-display-middle-970x250" strategy="afterInteractive">
+                          {"googletag.cmd.push(function() { googletag.display('div-gpt-ad-1728872497774-0'); });"}
+                        </Script>
+                      </div>
+                    </Center>
+                  )}
                 </div>
                 
               )}
@@ -382,13 +407,15 @@ export default function Post() {
                 <div style={styles.banner}>
                   <SocialMediaLinks />
                   {/* 300x250 Ad */}
-                  <Box mt="xl">
-                    <div id="div-gpt-ad-1728872758865-0" style={{ minWidth: '300px', minHeight: '250px' }}>
-                      <Script id="gpt-display-right-300x250" strategy="afterInteractive">
-                        {"googletag.cmd.push(function() { googletag.display('div-gpt-ad-1728872758865-0'); });"}
-                      </Script>
-                    </div>
-                  </Box>
+                  {!isMobile && hasRightAd && (
+                    <Box mt="xl">
+                      <div id="div-gpt-ad-1728872758865-0" style={{ minWidth: '300px', minHeight: '250px' }}>
+                        <Script id="gpt-display-right-300x250" strategy="afterInteractive">
+                          {"googletag.cmd.push(function() { googletag.display('div-gpt-ad-1728872758865-0'); });"}
+                        </Script>
+                      </div>
+                    </Box>
+                  )}
                 </div>
               </Grid.Col>
             )}
@@ -407,25 +434,29 @@ export default function Post() {
           </div>
         </Container>
         <br />
-        <Center style={{ minHeight: '90px', marginBottom: '1rem' }}>
-          <div id="div-gpt-ad-1728872238496-0" style={{ minWidth: '728px', minHeight: '90px' }}>
-            <Script id="gpt-display-middle-728x90" strategy="afterInteractive">
-              {"googletag.cmd.push(function() { googletag.display('div-gpt-ad-1728872238496-0'); });"}
-            </Script>
-          </div>
-        </Center>
+        {hasTopAd && (
+          <Center style={{ minHeight: '90px', marginBottom: '1rem' }}>
+            <div id="div-gpt-ad-1728872238496-0" style={{ minWidth: '728px', minHeight: '90px' }}>
+              <Script id="gpt-display-middle-728x90" strategy="afterInteractive">
+                {"googletag.cmd.push(function() { googletag.display('div-gpt-ad-1728872238496-0'); });"}
+              </Script>
+            </div>
+          </Center>
+        )}
         <br />
         <br />
         <PostlistBlog />
         <br />
         {/* Bottom 728x90 Ad */}
-        <Center style={{ minHeight: '90px', marginTop: '1rem' }}>
-          <div id="div-gpt-ad-1728872258333-0" style={{ minWidth: '728px', minHeight: '90px' }}>
-            <Script id="gpt-display-bottom-728x90" strategy="afterInteractive">
-              {"googletag.cmd.push(function() { googletag.display('div-gpt-ad-1728872258333-0'); });"}
-            </Script>
-          </div>
-        </Center>
+        {hasBottomAd && (
+          <Center style={{ minHeight: '90px', marginTop: '1rem' }}>
+            <div id="div-gpt-ad-1728872258333-0" style={{ minWidth: '728px', minHeight: '90px' }}>
+              <Script id="gpt-display-bottom-728x90" strategy="afterInteractive">
+                {"googletag.cmd.push(function() { googletag.display('div-gpt-ad-1728872258333-0'); });"}
+              </Script>
+            </div>
+          </Center>
+        )}
         <br />
         <br />
         <Footer />
