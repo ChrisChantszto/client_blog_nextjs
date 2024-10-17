@@ -40,7 +40,7 @@ export default function Post() {
   const [category, setCategory] = useState<string>("");
   const sentinelRef = useRef(null);
   const isMobile = useMediaQuery('(max-width: 768px)');
-  const [footerVisible, setFooterVisible] = useState(true);
+  const [footerVisible, setFooterVisible] = useState(false);
 
   const [hasTopAd, setHasTopAd] = useState(true);
   const [hasMiddleAd, setHasMiddleAd] = useState(true);
@@ -460,6 +460,7 @@ export default function Post() {
             </div>
           </Center>
         )}
+        <br />
         <br />
         <br />
         <Footer />
