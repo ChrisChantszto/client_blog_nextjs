@@ -31,7 +31,7 @@ export default function Home() {
       }
     }
   };
-  
+
   useEffect(() => {
     const timer = setTimeout(() => {
       checkAdContent('div-gpt-ad-1728872023126-0', setHasTopAd);
@@ -69,10 +69,7 @@ export default function Home() {
       padding="md"
       style={{ backgroundColor: '#F5F5F5' }}
     >
-      <Head>
-        <title>Your Website Title</title>
-        <meta name="description" content="Your website description" />
-      </Head>
+      
 
       {/* Google Ad Manager Header Tag */}
       <Script
