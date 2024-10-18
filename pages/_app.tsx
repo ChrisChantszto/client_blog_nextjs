@@ -3,9 +3,9 @@ import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import { MantineProvider } from '@mantine/core';
 import Script from 'next/script';
-import { theme } from '../theme';
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
+import { theme } from '../theme';
 
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
@@ -36,7 +36,7 @@ export default function App({ Component, pageProps }: AppProps) {
       {/* Google Analytics */}
       <Script
         strategy="afterInteractive"
-        src={`https://www.googletagmanager.com/gtag/js?id=G-CSTVD5J5CD`}
+        src="https://www.googletagmanager.com/gtag/js?id=G-CSTVD5J5CD"
       />
       <Script
         id="google-analytics"
@@ -51,6 +51,10 @@ export default function App({ Component, pageProps }: AppProps) {
             });
           `,
         }}
+      />
+      <Script
+        strategy="afterInteractive"
+        src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"
       />
       <Component {...pageProps} />
     </MantineProvider>

@@ -1,17 +1,17 @@
 import { useEffect, useRef, useState } from 'react';
 import { AppShell, Center, Burger } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
+import Script from 'next/script';
+import { IconBrandFacebook, IconBrandInstagram, IconBrandYoutube } from '@tabler/icons-react';
 import HeaderMegaMenu from '@/components/Header/Header';
 import PhotoCarousel from '@/components/PhotoCarousel/PhotoCarousel';
 import Footer from '@/components/Footer/Footer';
 import Discount from '@/components/Discount/Discount';
 import Instagram from '@/components/Instagram/Instagram';
-import Script from 'next/script';
 import FoodPostlist from '@/components/Postlist/FoodPostlist';
 import FoodCard from '@/components/Cardlist/FoodCard';
 import FoodBanner from '@/components/Categories/FoodBanner';
 import FoodCampaignBlog from '@/components/Campaignblog/FoodCampaignblog';
-import { IconBrandFacebook, IconBrandInstagram, IconBrandYoutube } from '@tabler/icons-react';
 import Youtube from '@/components/Youtube/Youtube';
 
 export default function Food() {
@@ -33,7 +33,7 @@ export default function Food() {
       }
     }
   };
-  
+
   useEffect(() => {
     const timer = setTimeout(() => {
       checkAdContent('div-gpt-ad-1728872531921-0', setHasTopAd);
@@ -41,7 +41,7 @@ export default function Food() {
       checkAdContent('div-gpt-ad-1728872550749-0', setHasMiddleAd2);
       checkAdContent('div-gpt-ad-1728876526423-0', setHasBottomAd);
     }, 1000); // Adjust the timeout as needed
-    
+
     return () => clearTimeout(timer);
   }, []);
 
@@ -71,10 +71,6 @@ export default function Food() {
       padding="md"
       style={{ backgroundColor: '#F5F5F5' }}
     >
-      <Script
-        strategy="afterInteractive"
-        src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"
-      />
 
       <Script id="gpt-init-desktop" strategy="afterInteractive">
         {`
@@ -167,7 +163,7 @@ export default function Food() {
         <br />
         <br />
         <br />
-        <br />     
+        <br />
         <br />
         <br />
         <br />
