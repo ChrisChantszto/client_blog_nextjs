@@ -98,7 +98,7 @@ export default function TravelIn() {
         <HeaderMegaMenu />
       </AppShell.Header>
       <AppShell.Main>
-      {hasTopAd && (
+ 
         <Center style={{ minHeight: '250px', marginTop: '1rem' }}>
           <div id="div-gpt-ad-1728872531921-0" style={{ minWidth: '970px', minHeight: '250px' }}>
             <Script id="gpt-display-top-970x250" strategy="afterInteractive">
@@ -106,7 +106,7 @@ export default function TravelIn() {
             </Script>
           </div>
         </Center>
-      )}
+
         <br />
         <br />
         <TravelInBanner />
