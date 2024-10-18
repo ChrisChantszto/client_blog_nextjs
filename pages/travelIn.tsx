@@ -84,8 +84,7 @@ export default function TravelIn() {
             googletag.defineSlot('/22000485675/ros_desktop_970x250', [970, 250], 'div-gpt-ad-1728872550749-0').setTargeting('position', ['middle']).addService(googletag.pubads());
             googletag.pubads().enableSingleRequest();
             googletag.pubads().collapseEmptyDivs();
-            googletag.pubads().setTargeting('site', ['']).setTargeting('environment', ['desktop']).setTargeting('section', ['category']).setTargeting('content_category', ['travel', 'bay area']);
-            googletag.enableServices();
+            googletag.pubads().setTargeting('site', ['playeateasy.com']).setTargeting('environment', ['desktop']).setTargeting('section', ['category']).setTargeting('content_category', ['travel', 'bay area']);            googletag.enableServices();
           });
         `}
       </Script>
