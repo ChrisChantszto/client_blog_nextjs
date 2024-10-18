@@ -73,7 +73,7 @@ export default function TravelIn() {
       style={{ backgroundColor: '#F5F5F5' }}
     >
 
-      <Script id="gpt-init-desktop" strategy="afterInteractive">
+      <Script id="gpt-init-desktop">
         {`
           window.googletag = window.googletag || {cmd: []};
           googletag.cmd.push(function() {
@@ -180,7 +180,7 @@ export default function TravelIn() {
             transform: 'translate(-2.5%, -10%)',
             textShadow: '0px 0px 8px rgba(0, 0, 0, 0.6)', // Text shadow for better readability
           }}>
-            立即追蹤我們緊貼最新資訊！
+            立即追蹤我們緊貼最新資訊！！
           </div>
           <div style={{ position: 'absolute', bottom: '10%', left: '80%', gap: '2.5rem' }}>
             <a href="https://www.facebook.com/playeateasy/" target="_blank" rel="noopener noreferrer">
