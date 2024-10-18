@@ -329,7 +329,7 @@ export default function Post() {
               googletag.defineSlot('/22000485675/ros_mobile_320x100', [320, 100], 'div-gpt-ad-1728873125827-0').setTargeting('position', ['footer']).addService(googletag.pubads());
               googletag.pubads().enableSingleRequest();
               googletag.pubads().collapseEmptyDivs();
-              googletag.pubads().setTargeting('environment', ['mobile']).setTargeting('section', ['content']).setTargeting('content_category', ${formattedCategories});
+              googletag.pubads().setTargeting('site', ['playeateasy.com']).setTargeting('environment', ['mobile']).setTargeting('section', ['content']).setTargeting('content_category', ${formattedCategories});
               googletag.enableServices();
               googletag.display('div-gpt-ad-1728872887172-0');
               googletag.display('div-gpt-ad-1728872905980-0');
@@ -349,7 +349,7 @@ export default function Post() {
               googletag.defineSlot('/22000485675/ros_desktop_300x250', [300, 250], 'div-gpt-ad-1728872758865-0').setTargeting('position', ['right']).addService(googletag.pubads());
               googletag.pubads().enableSingleRequest();
               googletag.pubads().collapseEmptyDivs();
-              googletag.pubads().setTargeting('environment', ['desktop']).setTargeting('section', ['content']).setTargeting('content_category', ${formattedCategories});
+              googletag.pubads().setTargeting('site', ['playeateasy.com']).setTargeting('environment', ['desktop']).setTargeting('section', ['content']).setTargeting('content_category', ${formattedCategories});
               googletag.enableServices();
               googletag.display('div-gpt-ad-1728872238496-0');
               googletag.display('div-gpt-ad-1728872258333-0');

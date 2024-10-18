@@ -86,7 +86,7 @@ export default function Home() {
             googletag.defineSlot('/22000485675/ros_desktop_970x250', [970, 250], 'div-gpt-ad-1728872475614-0').setTargeting('position', ['middle']).addService(googletag.pubads());
             googletag.pubads().enableSingleRequest(); 
             googletag.pubads().collapseEmptyDivs();
-            googletag.pubads().setTargeting('environment', ['desktop']).setTargeting('section', ['homepage']);
+            googletag.pubads().setTargeting('site', ['playeateasy.com']).setTargeting('environment', ['desktop']).setTargeting('section', ['homepage']);
             googletag.enableServices();
           });
         `}
