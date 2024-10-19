@@ -94,11 +94,18 @@ export default function TravelIn() {
       </AppShell.Header>
       <AppShell.Main>
 
-        <Center style={{ minHeight: '250px', marginTop: '1rem' }}>
+        {/* <Center style={{ minHeight: '250px', marginTop: '1rem' }}>
           <div id="div-gpt-ad-1728872531921-0" style={{ minWidth: '970px', minHeight: '250px' }}>
             <Script id="gpt-display-top-970x250" strategy="afterInteractive">
               {"googletag.cmd.push(function() { googletag.display('div-gpt-ad-1728872531921-0'); });"}
             </Script>
+          </div>
+        </Center>
+        */}
+
+        <Center style={{ minHeight: '250px', marginTop: '1rem' }}>
+          <div id="div-gpt-ad-1728872531921-0" style={{ minWidth: '970px', minHeight: '250px' }}>
+            <img src="https://tpc.googlesyndication.com/simgad/228387351466439815" border="0" width="970" height="250" alt="" class="img_ad" />
           </div>
         </Center>
 
@@ -108,7 +115,7 @@ export default function TravelIn() {
         <br />
         <TravelInCard />
         <br />
-        {hasMiddleAd1 && (
+        {/* {hasMiddleAd1 && (
           <Center style={{ minHeight: '90px', marginTop: '1rem' }}>
             <div id="div-gpt-ad-1728872282390-0" style={{ minWidth: '728px', minHeight: '90px' }}>
               <Script id="gpt-display-top-728x90" strategy="afterInteractive">
@@ -116,7 +123,8 @@ export default function TravelIn() {
               </Script>
             </div>
           </Center>
-        )}
+        )} */}
+        
         <br />
         <br />
         <TravelInPostlist />
@@ -124,7 +132,7 @@ export default function TravelIn() {
         <br />
         <br />
         <br />
-        {hasMiddleAd2 && (
+        {/* {hasMiddleAd2 && (
           <Center style={{ minHeight: '250px', marginTop: '1rem' }}>
             <div id="div-gpt-ad-1728872550749-0" style={{ minWidth: '970px', minHeight: '250px' }}>
               <Script id="gpt-display-middle-970x250" strategy="afterInteractive">
@@ -133,6 +141,13 @@ export default function TravelIn() {
             </div>
           </Center>
         )}
+        */ }
+
+          <Center style={{ minHeight: '250px', marginTop: '1rem' }}>
+            <div id="div-gpt-ad-1728872550749-0" style={{ minWidth: '970px', minHeight: '250px' }}>
+              <img src="https://tpc.googlesyndication.com/simgad/228387351466439815" border="0" width="970" height="250" alt="" class="img_ad" />
+            </div>
+          </Center>
         <br />
         <br />
 
