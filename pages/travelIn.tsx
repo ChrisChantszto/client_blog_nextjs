@@ -1,8 +1,6 @@
-import { useEffect, useRef, useState, useCallback } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { AppShell, Center, Burger, Container } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import { isMobile } from 'react-device-detect';
-import Image from 'next/image';
 import Script from 'next/script';
 import { IconBrandFacebook, IconBrandInstagram, IconBrandYoutube } from '@tabler/icons-react';
 import HeaderMegaMenu from '@/components/Header/Header';
@@ -16,9 +14,6 @@ import TravelInBanner from '@/components/Categories/TravelInBanner';
 import TravelInCard from '@/components/Cardlist/TravelInCard';
 import TravelInPostlist from '@/components/Postlist/TravelInPostlist';
 import TravelCarousel from '@/components/TravelCarousel/TravelCarousel';
-
-import desktopPaymeBannerImage from '@/public/images/Payme_Banner-970x250.jpg';
-import mobilePaymeBannerImage from '@/public/images/Payme_Banner_300x250.jpg';
 
 export default function TravelIn() {
   const [opened, { toggle }] = useDisclosure();
@@ -76,43 +71,25 @@ export default function TravelIn() {
     };
   }, []);
 
-  const renderTempPaymeAd = useCallback((position: string) => {
-    const imageSrc = isMobile ? mobilePaymeBannerImage.src : desktopPaymeBannerImage.src;
-    const imageWidth = isMobile ? 300 : 970;
-    const imageHeight = isMobile ? 250 : 250;
-
-    let redirectUrl = '';
-
-    if (isMobile) {
-      if (position === 'top') {
-        redirectUrl = 'https://bit.ly/3Yvws1I';
-      } else {
-        redirectUrl = 'https://bit.ly/3NxAXm7';
-      }
-    } else if (position === 'mid') {
-        redirectUrl = 'https://bit.ly/406PpsQ';
-      } else {
-        redirectUrl = 'https://bit.ly/3A3ypsU';
-      }
-
-    return (
-      <Center>
-        <a
-          target="_blank"
-          href={redirectUrl}
-          rel="noreferrer"
-        >
-            <Image
-              src={imageSrc}
-              width={imageWidth}
-              height={imageHeight}
-              alt=""
-              className="img_ad"
-            />
-        </a>
-      </Center>
-    );
-  }, [isMobile]);
+  const tempPaymeAd = (
+    <Center>
+      <a
+        target="_blank"
+        href="https://googleads.g.doubleclick.net/pcs/click?xai=AKAOjsu0Emm-aDlRTzuGzl5xVaOcW2OqFHNZ4-tVf4dca9LJFHuboTt1Bd1Mj9J6c6qxshU36SNw1BGHQLQWhFrbqBVq4tXBGEdkx3GCTY4JS1Sp2hwCVfJvXbJuIj7synqUrz81iBqk6B7R4SdtwNuWtQeYqxbKTBmGZJ9VsKpoISXP7pfxchEXkGg7qXOKwqb-vdK8DKusH9_RENeHbIB9omuuEhTOPKWQ-vI1txFtWVXNBOBimhkkkEheucSro7yIBo3htefiV0S68xjt6rnEJWoKIqpXCY-zMckl-ezb_QiREalIW5AU7uMKmD9MkcLu2jzLdf7oVTdQjzp7wtGSLGPCIPdik7BdOwhBEVWdG98yYZipnwvFpmA6gBI3KT25Tf6tnVYT&sai=AMfl-YQsgBvmE-X_fqQTyt-lrkYVzypWdGVrevX5qgVwc8f5t39cSsMiQdHVHW0bZrx6Tv4siINJSFiQpkGd2JAMB5MNjvSTInufo8DrPjHhhth5hxQpbbPuNsW4H_Ewy8yaxFunjw&sig=Cg0ArKJSzBwNq9SjP2zU&fbs_aeid=%5Bgw_fbsaeid%5D&adurl=https://payme.notey.com/post/22200388/%25E6%2596%25BC%25E4%25B8%25AD%25E5%259C%258B%25E5%2585%25A7%25E5%259C%25B0%25E6%25B6%2588%25E8%25B2%25BB%25E5%258F%25AF%25E8%25B3%25BA%25E5%258F%2596%25E9%25AB%2598%25E9%2581%2594%25E6%25B8%25AF%25E5%25B9%25A332%25E5%2585%2583%25E5%259B%259E%25E8%25B4%2588%25E7%258D%258E%25E8%25B3%259E%25EF%25BC%2581.html&nm=15&nx=835&ny=-52&mb=1&clkt=196"
+        rel="noreferrer">
+        <div style={{ minWidth: '970px', minHeight: '250px' }}>
+          <img
+            src="https://tpc.googlesyndication.com/simgad/228387351466439815"
+            border="0"
+            width="970"
+            height="250"
+            alt=""
+            className="img_ad"
+          />
+        </div>
+      </a>
+    </Center>
+  );
 
   return (
     <AppShell header={{ height: 60 }} padding="md" style={{ backgroundColor: '#F5F5F5' }}>
@@ -153,7 +130,7 @@ export default function TravelIn() {
         </Center> */}
         {
           // Temp ad
-          renderTempPaymeAd('top')
+          tempPaymeAd
         }
         <br />
         <br />
@@ -194,7 +171,7 @@ export default function TravelIn() {
           </Center> */}
         {
           // Temp ad
-          renderTempPaymeAd('mid')
+          tempPaymeAd
         }
         <br />
         <br />
