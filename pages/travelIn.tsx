@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
 import { AppShell, Center, Burger, Container } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import { isMobile } from 'react-device-detect';
 import Image from 'next/image';
 import Script from 'next/script';
 import { IconBrandFacebook, IconBrandInstagram, IconBrandYoutube } from '@tabler/icons-react';
@@ -19,6 +18,8 @@ import TravelCarousel from '@/components/TravelCarousel/TravelCarousel';
 
 import desktopPaymeBannerImage from '@/public/images/Payme_Banner-970x250.jpg';
 import mobilePaymeBannerImage from '@/public/images/Payme_Banner_300x250.jpg';
+
+import { isMobile } from '../utils/device';
 
 export default function TravelIn() {
   const [opened, { toggle }] = useDisclosure();
@@ -76,32 +77,32 @@ export default function TravelIn() {
     };
   }, []);
 
-  const renderTempPaymeAd = useCallback((position: string) => {
-    const imageSrc = isMobile ? mobilePaymeBannerImage.src : desktopPaymeBannerImage.src;
-    const imageWidth = isMobile ? 300 : 970;
-    const imageHeight = isMobile ? 250 : 250;
+  const renderTempPaymeAd = useCallback(
+    (position: string) => {
+      const userAgent = navigator.userAgent.toLowerCase();
+      const mobileCheck = isMobile(userAgent);
 
-    let redirectUrl = '';
+      const imageSrc = mobileCheck ? mobilePaymeBannerImage.src : desktopPaymeBannerImage.src;
+      const imageWidth = mobileCheck ? 300 : 970;
+      const imageHeight = mobileCheck ? 250 : 250;
 
-    if (isMobile) {
-      if (position === 'top') {
-        redirectUrl = 'https://bit.ly/3Yvws1I';
-      } else {
-        redirectUrl = 'https://bit.ly/3NxAXm7';
-      }
-    } else if (position === 'mid') {
-        redirectUrl = 'https://bit.ly/406PpsQ';
-      } else {
-        redirectUrl = 'https://bit.ly/3A3ypsU';
-      }
+      let redirectUrl = '';
 
-    return (
-      <Center>
-        <a
-          target="_blank"
-          href={redirectUrl}
-          rel="noreferrer"
-        >
+      if (mobileCheck) {
+        if (position === 'top') {
+          redirectUrl = 'https://bit.ly/3Yvws1I';
+        } else {
+          redirectUrl = 'https://bit.ly/3NxAXm7';
+        }
+      } else if (position === 'mid') {
+          redirectUrl = 'https://bit.ly/406PpsQ';
+        } else {
+          redirectUrl = 'https://bit.ly/3A3ypsU';
+        }
+
+      return (
+        <Center>
+          <a target="_blank" href={redirectUrl} rel="noreferrer">
             <Image
               src={imageSrc}
               width={imageWidth}
@@ -109,10 +110,12 @@ export default function TravelIn() {
               alt=""
               className="img_ad"
             />
-        </a>
-      </Center>
-    );
-  }, [isMobile]);
+          </a>
+        </Center>
+      );
+    },
+    [isMobile]
+  );
 
   return (
     <AppShell header={{ height: 60 }} padding="md" style={{ backgroundColor: '#F5F5F5' }}>
