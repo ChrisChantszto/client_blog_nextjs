@@ -30,6 +30,7 @@ export default function TravelIn() {
   const [hasMiddleAd1, setHasMiddleAd1] = useState(true);
   const [hasMiddleAd2, setHasMiddleAd2] = useState(true);
   const [hasBottomAd, setHasBottomAd] = useState(true);
+  const [userAgent, setUserAgent] = useState('');
 
   const checkAdContent = (adId, setHasAd) => {
     const adElement = document.getElementById(adId);
@@ -77,9 +78,12 @@ export default function TravelIn() {
     };
   }, []);
 
+  useEffect(() => {
+    setUserAgent(navigator?.userAgent.toLowerCase());
+  }, []);
+
   const renderTempPaymeAd = useCallback(
     (position: string) => {
-      const userAgent = navigator.userAgent.toLowerCase();
       const mobileCheck = isMobile(userAgent);
 
       const imageSrc = mobileCheck ? mobilePaymeBannerImage.src : desktopPaymeBannerImage.src;
@@ -114,7 +118,7 @@ export default function TravelIn() {
         </Center>
       );
     },
-    [isMobile]
+    [isMobile, userAgent]
   );
 
   return (
